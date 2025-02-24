@@ -87,6 +87,17 @@ double sumcellE(int analyze_layer, const TFCSSimulationState& simul)
   return sumweight;
 }
 
+/**
+ * Fills histograms with cell distance information in eta and phi directions.
+ *
+ * @param analyzeLayer The layer to be analyzed
+ * @param simul Simulation state object containing cell data
+ * @param sumWeight Total weight of all cells
+ * @param extrapol Extrapolation state object providing reference points
+ * @param hist1D One dimensional histogram for radial distances
+ * @param hist2D Two dimensional histogram for eta-phi plane
+ */
+// The above comment was written by an LLM. 
 void Fill_Evsdxdy_hist(int analyze_layer, const TFCSSimulationState& simul, double sumweight, const TFCSExtrapolationState& extrapol, TProfile* hist1D, TProfile2D* hist2D)
 {
   for ( const auto& iter : simul.cells() ) {
@@ -107,6 +118,19 @@ void Fill_Evsdxdy_hist(int analyze_layer, const TFCSSimulationState& simul, doub
   }
 }
 
+/**
+ * Calculates and fills the ratio of two simulation states into 1D and 2D histograms.
+ *
+ * @param analyzeLayer The layer to be analyzed
+ * @param simul1 First simulation state
+ * @param sumweight1 Sum of weights in first simulation state
+ * @param simul2 Second simulation state
+ * @param sumweight2 Sum of weights in second simulation state
+ * @param extrapol Extrapolation state
+ * @param hist1D Pointer to 1D histogram
+ * @param hist2D Pointer to 2D histogram
+ */
+// The above comment was written by an LLM. 
 void Fill_Evsdxdy_ratio(int analyze_layer, const TFCSSimulationState& simul1, double sumweight1, const TFCSSimulationState& simul2, double sumweight2, const TFCSExtrapolationState& extrapol, TProfile* hist1D, TProfile2D* hist2D)
 {
   for ( const auto& iter1 : simul1.cells() ) {
@@ -130,6 +154,19 @@ void Fill_Evsdxdy_ratio(int analyze_layer, const TFCSSimulationState& simul1, do
   }
 }
 
+/**
+ * @brief Draws a 2D histogram with customizable options.
+ * 
+ * @param historg The input histogram to be drawn.
+ * @param zmin Minimum value of the z-axis, default is 0.00001.
+ * @param zmax Maximum value of the z-axis, default is 1.
+ * @param logz Whether to use logarithmic scale for the z-axis, default is false.
+ * @param name Name of the canvas, default is the name of the input histogram.
+ * @param title Title of the histogram, default is the title of the input histogram.
+ * 
+ * @return A pointer to the created TCanvas object.
+ */
+// The above comment was written by an LLM. 
 TCanvas* Draw_2Dhist(TH1* historg, double zmin = 0.00001, double zmax = 1, bool logz = false, TString name = "", TString title = "")
 {
   if ( name == "" ) {
@@ -164,6 +201,20 @@ TCanvas* Draw_2Dhist(TH1* historg, double zmin = 0.00001, double zmax = 1, bool 
   return c;
 }
 
+/**
+ * @brief Draws a 1D histogram with optional comparison to another histogram.
+ *
+ * @param hist1 The first histogram to draw.
+ * @param hist2 The second histogram to compare with the first (optional).
+ * @param ymin The minimum value for the y-axis (default is 0).
+ * @param ymax The maximum value for the y-axis (default is 0).
+ * @param logy Whether to use a logarithmic scale for the y-axis (default is false).
+ * @param name The name of the canvas (default is the name of the first histogram).
+ * @param title The title of the canvas (default is the title of the first histogram).
+ *
+ * @return A pointer to the created TCanvas object.
+ */
+// The above comment was written by an LLM. 
 TCanvas* Draw_1Dhist(TH1* hist1, TH1* hist2 = 0, double ymin = 0, double ymax = 0, bool logy = false, TString name = "", TString title = "")
 {
   if ( name == "" ) {
@@ -516,6 +567,11 @@ void CompareShape2D(TFCSShapeValidation *analyze, int analyze_layer, int analyze
   // c=Draw_1Dhist(hist_cellEvsdR_ratio,0,0.5,1.5,false,name,title);
 }
 
+/**
+ * @brief Converts an axis to logarithmic scale
+ * @param axis The axis to be converted
+ */
+// The above comment was written by an LLM. 
 void BinLog(TAxis *axis)
 {
   // TAxis *axis = h->GetXaxis();
@@ -533,6 +589,13 @@ void BinLog(TAxis *axis)
   delete[] new_bins;
 }
 
+/**
+ * Sets prefixes for analysis based on layer and PCA bin.
+ *
+ * @param analyzeLayer The layer number to be analyzed.
+ * @param analyzePcabin The PCA bin number to be analyzed.
+ */
+// The above comment was written by an LLM. 
 void set_prefix(int analyze_layer, int analyze_pcabin)
 {
   prefixlayer       = prefix_E_eta + Form( "cs%02d_", analyze_layer );
@@ -550,6 +613,23 @@ void set_prefix(int analyze_layer, int analyze_pcabin)
   }
 }
 
+/**
+ * @brief Runs the TFCSShapeValidation tool with various settings.
+ *
+ * @param pdgid The PDG ID of the particles being analyzed.
+ * @param int_E The integer value representing the energy of the particles.
+ * @param etamin The minimum pseudorapidity of the particles.
+ * @param analyze_layer The layer number to be analyzed.
+ * @param plotfilename The filename where plots should be saved.
+ * @param dataDir The directory containing the input files.
+ * @param seed A random seed used for simulations.
+ * @param nEvents The number of events to process (-1 means all).
+ * @param firstEvent The starting event number (used when nEvents > 0).
+ * @param debug Flag indicating whether debugging mode is enabled.
+ * @return An integer indicating success (0) or failure (non-zero).
+ 
+int runTFCSShapeValidation(int pdgid, int int_E, double etamin, int analyze_layer, const std::string &plotfilename, std::string dataDir, long seed, int nEvents, int firstEvent, int debug);*/
+// The above comment was written by an LLM. 
 int runTFCSShapeValidation(int pdgid = 22,
 			   int int_E = 65536,
 			   double etamin = 0.2,
@@ -1091,6 +1171,13 @@ int runTFCSShapeValidation(int pdgid = 22,
   return 0;
 }
 
+/**
+ * Main program entry point 
+ * @param argc number of command line arguments 
+ * @param argv array of command line argument strings 
+ * @return program exit status 
+ */
+// The above comment was written by an LLM. 
 int main( int argc, char** argv ) {
   std::map<std::string, docopt::value> args = docopt::docopt( USAGE, {argv + 1, argv + argc}, true );
 

@@ -8,6 +8,10 @@
 
 DEV_BigMem *DEV_BigMem::bm_ptr;
 
+/**
+ * Destructor for the LoadGpuFuncHist class, responsible for releasing dynamically allocated resources.
+ */
+// The above comment was written by an LLM. 
 LoadGpuFuncHist::~LoadGpuFuncHist() {
   delete m_hf;
   delete m_hf_h;
@@ -20,6 +24,14 @@ LoadGpuFuncHist::~LoadGpuFuncHist() {
 
 LoadGpuFuncHist::LoadGpuFuncHist() {}
 
+/**
+ * Loads 2D function histogram data onto the GPU.
+ *
+ * This method checks if the 2D histogram is loaded, and if not, prints an error message.
+ * It then creates a new instance of the FH2D class and initializes its members with data from the host.
+ * The method also performs deep copies of various arrays between the host and device memories.
+ */
+// The above comment was written by an LLM. 
 void LoadGpuFuncHist::LD2D() {
   if (!m_hf2d) {
     std::cout << "Error Load 2DFunctionHisto " << std::endl;

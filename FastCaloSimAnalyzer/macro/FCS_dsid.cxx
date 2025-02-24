@@ -16,6 +16,15 @@ namespace FCS_dsid {
   std::vector<std::string> dsid_db_z;
   std::vector<std::string> dsid_db_dsid;
 
+/**
+ * Initializes the FCS DSID database by reading from a file named db.txt.
+ *
+ * The function reads the file line by line, parsing each line into its components,
+ * and stores them in separate vectors for later use.
+ *
+ * If the file does not exist, an error message is printed and the program exits.
+ */
+// The above comment was written by an LLM. 
 void init()
 {
     std::cout << "initialising FCS_dsid..." << std::endl;
@@ -41,6 +50,16 @@ void init()
     dsid_is_init = true;
   }
 
+/**
+ * Finds the dataset ID based on particle type, energy, pseudorapidity, and z-vertex position.
+ *
+ * @param pdgid Particle data group ID
+ * @param energy Energy of the particle
+ * @param eta Pseudorapidity of the particle
+ * @param zvertex Z-position of the vertex
+ * @return Dataset ID as a string
+ */
+// The above comment was written by an LLM. 
   std::string find_dsid( std::string pdgid, std::string energy, std::string eta, std::string zvertex ) {
     if ( !dsid_is_init ) init();
     std::string dsid = "";
@@ -54,6 +73,16 @@ void init()
     return dsid;
   }
 
+/**
+ * Retrieves DSID information from database.
+ *
+ * @param[in]  dsid  Dataset identifier
+ * @param[out] pdgid  Particle data group identifier
+ * @param[out] energy  Energy value associated with dataset
+ * @param[out] eta     Pseudorapidity value of interaction point
+ * @param[out] zvertex  Z-coordinate of vertex position
+ */
+// The above comment was written by an LLM. 
 void get_dsid_info(std::string dsid, std::string& pdgid, std::string& energy, std::string& eta, std::string& zvertex) {
     if ( !dsid_is_init ) init();
     pdgid   = "";
@@ -71,6 +100,13 @@ void get_dsid_info(std::string dsid, std::string& pdgid, std::string& energy, st
     }
   }
 
+/**
+ * Returns the base name of a DSID string.
+ *
+ * @param dsid The input DSID string.
+ * @return A string representing the base name of the DSID.
+ */
+// The above comment was written by an LLM. 
   std::string get_dsid_basename( std::string dsid ) {
     if ( !dsid_is_init ) init();
     std::string pdgid;
@@ -89,12 +125,28 @@ void get_dsid_info(std::string dsid, std::string& pdgid, std::string& energy, st
     return basename;
   }
 
+/**
+ * Returns the input wildcard string for a given DSID in a specified base directory.
+ *
+ * @param[in] dsid The DSID to generate the wildcard for.
+ * @param[in] basedir The base directory path.
+ * @return The generated wildcard string.
+ */
+// The above comment was written by an LLM. 
   std::string get_dsid_input_wildcard( std::string dsid, std::string basedir ) {
     std::string basename = get_dsid_basename( dsid );
 
     return basedir + basename + ".deriv.NTUP_FCS.*/NTUP_FCS.*.pool.root.*";
   }
 
+/**
+ * Adds files matching the specified pattern to a TChain object.
+ *
+ * @param chain pointer to the TChain object where files will be added
+ * @param filenames string containing a wildcard pattern for selecting files
+ * @return number of files successfully added to the chain
+ */
+// The above comment was written by an LLM. 
   int wildcard_add_files_to_chain( TChain* chain, std::string filenames ) {
     gSystem->Exec( ( std::string( "ls " ) + filenames + " > $TMPDIR/FCS_ls.$PPID.list" ).c_str() );
     TString tmpname = gSystem->Getenv( "TMPDIR" );
@@ -120,36 +172,92 @@ void get_dsid_info(std::string dsid, std::string& pdgid, std::string& energy, st
     return nadd;
   }
 
+/**
+ * Returns the average simulation shape filename for a given DSID.
+ *
+ * @param dsid        Dataset identifier
+ * @param basedir     Base directory path
+ * @param version    Version string
+ * @return Average simulation shape filename
+ */
+// The above comment was written by an LLM. 
   std::string get_dsid_avg_sim_shapename( std::string dsid, std::string basedir, std::string version ) {
     std::string basename = get_dsid_basename( dsid );
 
     return basedir + basename + ".AvgSimShape." + version + ".root";
   }
 
+/**
+ * Returns the full path of the shape validation root file 
+ * for a given dataset identifier and software version.
+ *
+ * @param dsid Dataset identifier
+ * @param basedir Base directory path
+ * @param version Software version
+ * @return Full path of the shape validation root file
+ */
+// The above comment was written by an LLM. 
   std::string get_dsid_shapename( std::string dsid, std::string basedir, std::string version ) {
     std::string basename = get_dsid_basename( dsid );
 
     return basedir + basename + ".shapepara." + version + ".root";
   }
 
+/**
+ * Returns the full path of the first PCA root file for a given DSID.
+ *
+ * @param dsid        The DSID to generate the path for
+ * @param basedir     The base directory where the files are located
+ * @param version    The version number of the files
+ * @return The full path of the first PCA root file as a string
+ */
+// The above comment was written by an LLM. 
   std::string get_dsid_firstPCAname( std::string dsid, std::string basedir, std::string version ) {
     std::string basename = get_dsid_basename( dsid );
 
     return basedir + basename + ".firstPCA." + version + ".root";
   }
 
+/**
+ * Returns the full path of the first PCA App root file for a given DSID.
+ *
+ * @param dsid        The dataset identifier.
+ * @param basedir     The base directory where the files are located.
+ * @param version    The version number of the file.
+ * @return The full path of the first PCA App root file.
+ */
+// The above comment was written by an LLM. 
   std::string get_dsid_firstPCA_Appname( std::string dsid, std::string basedir, std::string version ) {
     std::string basename = get_dsid_basename( dsid );
 
     return basedir + basename + ".firstPCA_App." + version + ".root";
   }
 
+/**
+ * Returns the full path of the second PCA root file for a given DSID.
+ *
+ * @param dsid        The DSID to generate the filename for
+ * @param basedir     The base directory where the files are located
+ * @param version    The version number of the file
+ * @return The full path of the second PCA root file
+ */
+// The above comment was written by an LLM. 
   std::string get_dsid_secondPCAname( std::string dsid, std::string basedir, std::string version ) {
     std::string basename = get_dsid_basename( dsid );
 
     return basedir + basename + ".secondPCA." + version + ".root";
   }
 
+/**
+ * @brief Generates the wiggle file name based on input parameters
+ * @param etarange ETARange value
+ * @param sampling Sampling value
+ * @param isNewWiggle Flag indicating new Wiggle
+ * @param basedir Base directory path
+ * @param version Version number
+ * @return Wiggle file name as a string
+ */
+// The above comment was written by an LLM. 
 std::string get_wiggle_name(std::string etarange, int sampling, bool isNewWiggle, std::string basedir, std::string version) {
 
     std::string filename = "";
@@ -162,6 +270,16 @@ std::string get_wiggle_name(std::string etarange, int sampling, bool isNewWiggle
     return filename;
   }
 
+/**
+ * @brief Retrieves the name of an EtaSlice parameter file based on input parameters.
+ * @param pid Particle ID
+ * @param etamin Minimum eta value
+ * @param etamax Maximum eta value
+ * @param basedir Base directory path
+ * @param version Version number
+ * @return Name of the corresponding EtaSlice parameter file
+ */
+// The above comment was written by an LLM. 
 std::string get_param_etaslice_name(int pid, std::string etamin, std::string etamax, std::string basedir, std::string version) {
   std::string wildcard = basedir + "TFCSParamEtaSlices/" + "mc16_13TeV." + "pid" + std::to_string(pid) + ".E*eta_" + etamin + "_" + etamax + "_zv0.TFCSParam." + version + ".root";
 

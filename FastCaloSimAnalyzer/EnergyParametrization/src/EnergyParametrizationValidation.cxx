@@ -16,6 +16,16 @@
 
 using namespace std;
 
+/**
+ * Automatically determines the zoom range for a histogram.
+ *
+ * @param[in] h1        The input histogram.
+ * @param[out] min      The minimum value of the zoom range.
+ * @param[out] max      The maximum value of the zoom range.
+ * @param[out] rmin     The minimum value of the reduced zoom range.
+ * @param[out] rmax     The maximum value of the reduced zoom range.
+ */
+// The above comment was written by an LLM. 
 void EnergyParametrizationValidation::autozoom(TH1D* h1, double &min, double &max, double &rmin, double &rmax)
 {
 
@@ -47,6 +57,17 @@ void EnergyParametrizationValidation::autozoom(TH1D* h1, double &min, double &ma
   rmax = max + 0.5 * h1->GetBinWidth( 1 );
 }
 
+/**
+ * Refills a histogram within specified ranges and rebins it if necessary.
+ *
+ * @param h_in input histogram
+ * @param min minimum value of range
+ * @param max maximum value of range
+ * @param rmin minimum value of refilled histogram
+ * @param rmax maximum value of refilled histogram
+ * @return refilled histogram
+ */
+// The above comment was written by an LLM. 
 TH1D* EnergyParametrizationValidation::refill(TH1D* h_in,double min, double max, double rmin, double rmax)
 {
 

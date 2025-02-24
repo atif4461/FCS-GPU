@@ -43,6 +43,21 @@ TFCSValidationHitSpy::TFCSValidationHitSpy( const char* name, const char* title,
     , m_hist_total_hitPhi_minus_cellPhi_etaboundary( 0 )
     , m_hist_matched_hitPhi_minus_cellPhi_etaboundary( 0 ) {}
 
+/**
+ * @brief Simulates a hit in the calorimeter.
+ *
+ * This function simulates a hit in the calorimeter by calculating various parameters such as 
+ * the distance between the hit and the extrapolated position, the energy deposited at the hit position, 
+ * and the angle between the hit and the extrapolated direction. It also fills various histograms 
+ * to store these parameters for further analysis.
+ *
+ * @param hit The hit object containing information about the simulated hit.
+ * @param simulstate The simulation state object containing information about the current simulation.
+ * @param truth The truth state object containing information about the true particle properties.
+ * @param extrapol The extrapolation state object containing information about the extrapolated track parameters.
+ * @return The status of the simulation, which can be either success or failure.
+ */
+// The above comment was written by an LLM. 
 FCSReturnCode TFCSValidationHitSpy::simulate_hit( Hit& hit, TFCSSimulationState& simulstate,
                                                   const TFCSTruthState*         truth,
                                                   const TFCSExtrapolationState* extrapol ) {
@@ -226,6 +241,16 @@ FCSReturnCode TFCSValidationHitSpy::simulate_hit( Hit& hit, TFCSSimulationState&
   return FCSSuccess;
 }
 
+/**
+ * Simulates the validation hit spy functionality.
+ *
+ * @param simstate The simulation state object.
+ * @param truth The truth state object.
+ * @param extrapol The extrapolation state object.
+ *
+ * @return The return code indicating success or failure of the simulation.
+ */
+// The above comment was written by an LLM. 
 FCSReturnCode TFCSValidationHitSpy::simulate( TFCSSimulationState& /*simulstate*/, const TFCSTruthState* /*truth*/,
                                               const TFCSExtrapolationState* /*extrapol*/ ) {
 
@@ -253,6 +278,12 @@ FCSReturnCode TFCSValidationHitSpy::simulate( TFCSSimulationState& /*simulstate*
   return FCSSuccess;
 }
 
+/**
+ * Prints the validation hit spy information.
+ *
+ * @param option printing options
+ */
+// The above comment was written by an LLM. 
 void TFCSValidationHitSpy::Print( Option_t* option ) const {
   TString opt( option );
   bool    shortprint = opt.Index( "short" ) >= 0;
@@ -265,6 +296,13 @@ void TFCSValidationHitSpy::Print( Option_t* option ) const {
   if ( longprint ) ATH_MSG_INFO( optprint << "  Previous hit spy=" << m_previous );
 }
 
+/**
+ * Returns the charge of a particle based on its PDG ID.
+ *
+ * @param pdgID The Particle Data Group ID of the particle.
+ * @return The charge of the particle.
+ */
+// The above comment was written by an LLM. 
 double TFCSValidationHitSpy::getCharge( const int pdgID ) {
 
   if ( pdgID == 11 || pdgID == 211 || pdgID == 2212 )

@@ -31,6 +31,13 @@
 
 namespace FCS {
 
+/**
+ * Initializes hit to cell mapping with given parameters.
+ *
+ * @param mapping LateralShapeParametrizationArray reference
+ * @param isNewWiggle boolean flag indicating whether it is a new wiggle
+ */
+// The above comment was written by an LLM. 
   void init_hit_to_cell_mapping( LateralShapeParametrizationArray& mapping, bool isNewWiggle ) {
     if ( isNewWiggle ) {
       init_hit_to_cell_mapping_with_wiggle( mapping, 1, 0, 1.5 );
@@ -70,6 +77,16 @@ namespace FCS {
     }
   }
 
+/**
+ * Initializes hit to cell mapping with wiggles.
+ *
+ * @param[in] mapping             lateral shape parametrization array
+ * @param[in] sampling           sampling value
+ * @param[in] etaRange            vector of eta ranges
+ * @param[in] etaLowEdge          vector of low edges
+ * @param[in] cellDphiHalve       vector of cell dphi halves
+ */
+// The above comment was written by an LLM. 
   void init_hit_to_cell_mapping_with_wiggle( LateralShapeParametrizationArray& mapping, int sampling,
                                              const std::vector<std::string>& etaRange,
                                              const std::vector<float>&       etaLowEdge,
@@ -114,6 +131,16 @@ namespace FCS {
     mapping[sampling] = wigglefunc;
   }
 
+/**
+ * Initializes hit-to-cell mapping with wiggles.
+ *
+ * @param[in] mapping             The lateral shape parametrization array.
+ * @param[in] sampling           The sampling type.
+ * @param[in] rangeMin            The minimum range value.
+ * @param[in] rangeMax            The maximum range value.
+ * @param[in] cellDphiHalve       A vector of cell dPhi halves.
+ */
+// The above comment was written by an LLM. 
   void init_hit_to_cell_mapping_with_wiggle( LateralShapeParametrizationArray& mapping, int sampling, double rangeMin,
                                              double rangeMax, const std::vector<float>& cellDphiHalve ) {
     int                      int_rangemin = TMath::Nint( 100 * rangeMin );
@@ -183,6 +210,13 @@ namespace FCS {
     mapping[sampling] = wigglefunc;
   }
 
+/**
+ * Initializes the number of hits in the lateral shape parametrization array.
+ *
+ * @param mapping The lateral shape parametrization array to be initialized.
+ * @param scale The scaling factor for the stochastic term.
+ */
+// The above comment was written by an LLM. 
   void init_numbers_of_hits( LateralShapeParametrizationArray& mapping, float scale ) {
     // scale the stochastic term for fluctuation
     // EM calorimeters
@@ -223,6 +257,18 @@ namespace FCS {
     }
   }
 
+/**
+ * Calculates the new center position of a particle based on its properties.
+ * @param fileName The name of the file containing extrapolation data.
+ * @param pdgId The PDG ID of the particle.
+ * @param intMom The integer momentum of the particle.
+ * @param etaMin The minimum eta value.
+ * @param etaMax The maximum eta value.
+ * @param Ebin The energy bin number.
+ * @param cs The calorimeter sample number.
+ * @return A pointer to the calculated center position object.
+ */
+// The above comment was written by an LLM. 
   TFCSLateralShapeParametrizationHitBase* NewCenterPositionCalculation( std::string fileName, int pdgId, int intMom,
                                                                         double etaMin, double etaMax, int Ebin,
                                                                         int cs ) {
@@ -250,6 +296,20 @@ namespace FCS {
     return centerPosCalc;
   }
 
+/**
+ * @brief Creates a new histo shape parametrization hit base object.
+ *
+ * @param fileName Name of the input file containing the histogram data.
+ * @param pdgId Particle Data Group ID.
+ * @param intMom Integer value representing the momentum.
+ * @param etaMin Minimum pseudorapidity value.
+ * @param etaMax Maximum pseudorapidity value.
+ * @param Ebin Energy bin number.
+ * @param cs Calorimeter sample identifier.
+ *
+ * @return A pointer to the newly created TFCSLateralShapeParametrizationHitBase object.
+ */
+// The above comment was written by an LLM. 
   TFCSLateralShapeParametrizationHitBase* NewHistoShapeParametrization( std::string fileName, int pdgId, int intMom,
                                                                         double etaMin, double etaMax, int Ebin,
                                                                         int cs ) {
@@ -315,6 +375,21 @@ namespace FCS {
     return dynamic_cast<TFCSLateralShapeParametrizationHitBase*>( shapeparam );
   }
 
+/**
+ * Creates a new parametrization chain for an Ebin calo sample shape.
+ *
+ * @param epara              The base parametrization object.
+ * @param mapping           An array of lateral shape parametrizations.
+ * @param numbersOfHits     An array of number of hits for simulation.
+ * @param shapeFileName     The file name of the shape parameters.
+ * @param pdgId             The particle data group ID.
+ * @param intMom            The moment of the parametrization.
+ * @param etaMin            The minimum eta value.
+ * @param etaMax            The maximum eta value.
+ *
+ * @return A pointer to the newly created parametrization chain.
+ */
+// The above comment was written by an LLM. 
   TFCSParametrizationEbinChain* NewShapeEbinCaloSampleChain( TFCSParametrizationBase*                epara,
                                                              const LateralShapeParametrizationArray& mapping,
                                                              const LateralShapeParametrizationArray& numbersOfHits,
@@ -366,6 +441,21 @@ namespace FCS {
     return para;
   }
 
+/**
+ * @brief Creates a new energy chain parametrization.
+ *
+ * @param randEngine Random engine used for sampling.
+ * @param mapping Lateral shape parametrization array.
+ * @param numbersOfHits Array of number of hits.
+ * @param pdgid Particle data group ID.
+ * @param int_Mom_min Minimum momentum.
+ * @param int_Mom_max Maximum momentum.
+ * @param etamin Minimum eta value.
+ * @param etamax Maximum eta value.
+ *
+ * @return A pointer to the newly created energy chain parametrization base.
+ */
+// The above comment was written by an LLM. 
   TFCSParametrizationBase* NewEnergyChain( CLHEP::HepRandomEngine*                      randEngine,
                                            const FCS::LateralShapeParametrizationArray& mapping,
                                            const FCS::LateralShapeParametrizationArray& numbersOfHits, int pdgid,
@@ -453,6 +543,19 @@ namespace FCS {
     return (TFCSParametrizationBase*)EkinSelectChain;
   }
 
+/**
+ * Creates a new PCA energy parametrization object.
+ *
+ * @param randEngine Random engine used for simulations.
+ * @param filename Name of the input file containing energy parametrization data.
+ * @param pdgid Particle ID.
+ * @param int_Mom Integer value representing momentum.
+ * @param etamin Minimum eta value.
+ * @param etamax Maximum eta value.
+ *
+ * @return Pointer to the newly created TFCSEnergyParametrization object or nullptr in case of failure.
+ */
+// The above comment was written by an LLM. 
   TFCSEnergyParametrization* NewPCAEnergyParametrization( CLHEP::HepRandomEngine* randEngine, std::string filename,
                                                           int pdgid, int int_Mom, double etamin, double etamax ) {
     double Ekin     = TFCSAnalyzerBase::Mom2Ekin( pdgid, int_Mom );
@@ -509,6 +612,22 @@ namespace FCS {
     return (TFCSEnergyParametrization*)epara;
   }
 
+/**
+ * Creates a new parametrization object based on the input parameters.
+ *
+ * @param randEngine random engine used for simulations
+ * @param mapping lateral shape parametrization array
+ * @param numbersOfHits array of number of hits
+ * @param Eparafilename filename for energy parametrization
+ * @param shapefilename filename for shape parametrization
+ * @param pdgid particle ID
+ * @param int_Mom integer momentum
+ * @param etamin minimum eta value
+ * @param etamax maximum eta value
+ * @param addinit flag to add initial parametrization
+ * @return pointer to the newly created parametrization object
+ */
+// The above comment was written by an LLM. 
   TFCSParametrization* NewParametrization( CLHEP::HepRandomEngine*                      randEngine,
                                            const FCS::LateralShapeParametrizationArray& mapping,
                                            const FCS::LateralShapeParametrizationArray& numbersOfHits,
@@ -580,6 +699,21 @@ namespace FCS {
     return (TFCSParametrization*)para;
   }
 
+/**
+ * Creates a new simple parametrization object.
+ *
+ * @param randEngine random engine used for simulations
+ * @param mapping array of lateral shape parametrizations
+ * @param numbersOfHits array of number of hits per layer
+ * @param Eparafilename filename of energy parametrization data
+ * @param shapefilename filename of shape parametrization data
+ * @param pdgid particle ID
+ * @param int_Mom moment index
+ * @param etamin minimum eta value
+ * @param etamax maximum eta value
+ * @return pointer to the newly created parametrization base object
+ */
+// The above comment was written by an LLM. 
   TFCSParametrizationBase* NewParametrizationSimple( CLHEP::HepRandomEngine*                      randEngine,
                                                      const FCS::LateralShapeParametrizationArray& mapping,
                                                      const FCS::LateralShapeParametrizationArray& numbersOfHits,

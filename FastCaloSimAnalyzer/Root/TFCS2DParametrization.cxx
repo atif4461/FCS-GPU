@@ -17,6 +17,13 @@
 
 TFCS2DParametrization::TFCS2DParametrization() { m_debug = 0; }
 
+/**
+ * Constructor for the class 
+ * @param tree pointer to the input TTree object
+ * @param outputfile string specifying the output file name
+ * @param vlayer vector of integers representing layer information
+ */
+// The above comment was written by an LLM. 
 TFCS2DParametrization::TFCS2DParametrization( TTree* tree, std::string outputfile, std::vector<int> vlayer ) {
 
   m_debug      = 0;
@@ -27,6 +34,13 @@ TFCS2DParametrization::TFCS2DParametrization( TTree* tree, std::string outputfil
 
 TFCS2DParametrization::~TFCS2DParametrization() {}
 
+/**
+ * Creates shape histograms for 2D parametrization.
+ *
+ * @param cutoff  The cutoff value for histogram creation.
+ * @param opt     Optional string parameter.
+ */
+// The above comment was written by an LLM. 
 void TFCS2DParametrization::CreateShapeHistograms( double cutoff, std::string opt ) {
 
   std::vector<int> v_layer     = m_vlayer;
@@ -68,6 +82,16 @@ void TFCS2DParametrization::CreateShapeHistograms( double cutoff, std::string op
   fout->Close();
 }
 
+/**
+ * @brief Plots the shape in polar coordinates.
+ *
+ * This function generates plots of the shape in polar coordinates for each layer and PCA component.
+ * It creates a directory for the output plots, opens the input shape file, and iterates over each layer and PCA component.
+ * For each combination, it retrieves the corresponding histogram, plots it using PlotPolar, and saves the plot as a PDF file.
+ *
+ * @return None
+ */
+// The above comment was written by an LLM. 
 void TFCS2DParametrization::PlotShapePolar() {
 
   std::vector<int> v_layer       = m_vlayer;
@@ -118,6 +142,17 @@ void TFCS2DParametrization::PlotShapePolar() {
   fshape->Close();
 }
 
+/**
+ * @brief Returns a 2D histogram representing the parametrization of the input data.
+ * 
+ * @param h_radius Input 1D histogram of radius values.
+ * @param layer Layer number for which the parametrization is calculated.
+ * @param pca Principal component analysis option.
+ * @param opt Binning option, either "equal_energy" or "default".
+ * 
+ * @return A 2D histogram with the parametrized data.
+ */
+// The above comment was written by an LLM. 
 TH2F* TFCS2DParametrization::GetParametrization( TH1F* h_radius, int layer, int pca, std::string opt ) {
 
   std::vector<double> v_xbins;
@@ -159,6 +194,12 @@ TH2F* TFCS2DParametrization::GetParametrization( TH1F* h_radius, int layer, int 
   return h_r_alpha;
 }
 
+/**
+ * Creates binning for 2D parametrization based on input histogram.
+ *
+ * @return Vector of doubles representing bin edges.
+ */
+// The above comment was written by an LLM. 
 std::vector<double> TFCS2DParametrization::CreateBinning( TH1F* h ) {
 
   std::vector<double> v_xbins;
@@ -185,6 +226,14 @@ std::vector<double> TFCS2DParametrization::CreateBinning( TH1F* h ) {
   return v_xbins;
 }
 
+/**
+ * Creates equal energy binning for a given histogram.
+ *
+ * @param h input histogram
+ * @param nbins number of bins
+ * @return vector of bin edges with equal energy content
+ */
+// The above comment was written by an LLM. 
 std::vector<double> TFCS2DParametrization::CreateEqualEnergyBinning( TH1F* h, int nbins ) {
 
   std::vector<double> xbins;
@@ -224,6 +273,17 @@ std::vector<double> TFCS2DParametrization::CreateEqualEnergyBinning( TH1F* h, in
   return xbins;
 }
 
+/**
+ * @brief Returns a histogram with hits or energy for a given variable, layer, PCA, cutoff, and option.
+ *
+ * @param var The variable to be used in the histogram.
+ * @param layer The layer number.
+ * @param pca The PCA number.
+ * @param cutoff The cutoff value.
+ * @param opt The option to choose between 'energy' and 'hit'.
+ * @return A pointer to the resulting histogram.
+ */
+// The above comment was written by an LLM. 
 TH1F* TFCS2DParametrization::GetHisto( std::string var, int layer, int pca, double cutoff, std::string opt ) {
 
   // return a histogram with hits (to calculate bin boundary) or energy
@@ -272,6 +332,14 @@ TH1F* TFCS2DParametrization::GetHisto( std::string var, int layer, int pca, doub
   return h_radius;
 }
 
+/**
+ * Returns the number of bins in the histogram after applying merging rules.
+ *
+ * @param h     input histogram
+ * @param layer layer number
+ * @return number of bins
+ */
+// The above comment was written by an LLM. 
 int TFCS2DParametrization::GetNbins( TH1F* h, int layer ) {
   int nbins = 50;
 

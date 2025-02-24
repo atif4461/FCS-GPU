@@ -33,6 +33,9 @@ TreeReader::TreeReader()
   m_entries      = -1;
 }
 
+/**
+ * Destructor to release allocated resources by clearing formula map.*/
+// The above comment was written by an LLM. 
 TreeReader::~TreeReader()
 {
   m_formulae.clear();

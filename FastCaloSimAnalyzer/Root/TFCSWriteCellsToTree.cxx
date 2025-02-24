@@ -20,6 +20,12 @@ TFCSWriteCellsToTree::TFCSWriteCellsToTree( const char* name, const char* title,
   init_tree( tree );
 }
 
+/**
+ * Initializes the tree with the given TTree object and sets up its branches.
+ *
+ * @param tree The TTree object to be initialized.
+ */
+// The above comment was written by an LLM. 
 void TFCSWriteCellsToTree::init_tree( TTree* tree ) {
   m_tree = tree;
 
@@ -38,6 +44,13 @@ void TFCSWriteCellsToTree::init_tree( TTree* tree ) {
   }
 }
 
+/**
+ * Simulates writing of cells to a tree in the simulation state.
+ *
+ * @param simulstate The current simulation state.
+ * @return The status code of the operation.
+ */
+// The above comment was written by an LLM. 
 FCSReturnCode TFCSWriteCellsToTree::simulate( TFCSSimulationState& simulstate, const TFCSTruthState* /*truth*/,
                                               const TFCSExtrapolationState* /*extrapol*/ ) {
   if ( !m_tree ) return FCSFatal;
@@ -67,6 +80,12 @@ FCSReturnCode TFCSWriteCellsToTree::simulate( TFCSSimulationState& simulstate, c
   return FCSSuccess;
 }
 
+/**
+ * Prints the contents of the object with optional detailed output.
+ *
+ * @param option  string specifying print options
+ */
+// The above comment was written by an LLM. 
 void TFCSWriteCellsToTree::Print( Option_t* option ) const {
   TString opt( option );
   bool    shortprint = opt.Index( "short" ) >= 0;

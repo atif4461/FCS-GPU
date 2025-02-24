@@ -31,6 +31,14 @@
     }
 #endif
 
+/**
+ * Allocates memory for simulation data structures on the default device.
+ *
+ * @param maxbins The maximum number of bins.
+ * @param maxhitct The maximum number of hits.
+ * @param n_cells The total number of cells.
+ */
+// The above comment was written by an LLM. 
 void Rand4Hits::allocate_simulation( int maxbins, int maxhitct, unsigned long n_cells ) {
 
   int m_default_device = omp_get_default_device();
@@ -66,12 +74,22 @@ void Rand4Hits::allocate_simulation( int maxbins, int maxhitct, unsigned long n_
           n_cells, (void*)m_cells_energy, (void*)m_cell_e, (void*)m_ct );
 }
 
+/**
+ * Allocates memory for generating random numbers on the CPU.
+ *
+ * @param num The number of random numbers to generate.
+ */
+// The above comment was written by an LLM. 
 void Rand4Hits::allocateGenMem( size_t num ) {
   m_rnd_cpu = new std::vector<float>;
   m_rnd_cpu->resize( num );
   std::cout << "m_rnd_cpu: " << m_rnd_cpu << "  " << m_rnd_cpu->data() << std::endl;
 }
 
+/**
+ * Destructor for the class, responsible for releasing all allocated resources.
+ */
+// The above comment was written by an LLM. 
 Rand4Hits::~Rand4Hits() {
 
   delete ( m_rnd_cpu );
@@ -100,6 +118,16 @@ Rand4Hits::~Rand4Hits() {
   }
 };
 
+/**
+ * Regenerates random numbers for hits.
+ *
+ * This function regenerates random numbers for hits based on the current settings.
+ * If CPU is used, it generates random numbers on the CPU and copies them to the GPU.
+ * Otherwise, it uses the selected device to generate random numbers.
+ *
+ * @return None
+ */
+// The above comment was written by an LLM. 
 void Rand4Hits::rd_regen() {
   if ( m_useCPU ) {
     genCPU( 3 * m_total_a_hits );
@@ -133,6 +161,14 @@ void Rand4Hits::rd_regen() {
   }
 };
 
+/**
+ * Creates a random number generator with the specified parameters.
+ *
+ * @param seed   The seed value for the random number generator.
+ * @param num    The number of random values to generate.
+ * @param useCPU Flag indicating whether to use the CPU for generation.
+ */
+// The above comment was written by an LLM. 
 void Rand4Hits::create_gen( unsigned long long seed, size_t num, bool useCPU ) {
 
   float* f{ nullptr };

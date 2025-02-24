@@ -19,6 +19,18 @@ void testCell( CaloDetDescrElement* cells, unsigned long index ) {
   printf( " From GPU cell index %ld , hashid=%ld, eta=%f, phi=%f, sample=%d \n", index, hashid, eta, phi, sample );
 }
 
+/**
+ * @brief Tests the geometry of the calorimeter detector elements and regions.
+ * 
+ * @param[in] cells         Array of calorimeter detector elements.
+ * @param[in] regions      Array of geometric regions.
+ * @param[in] nregions     Number of regions.
+ * @param[in] ncells       Total number of calorimeter detector elements.
+ * @param[in] r            Index of the current region.
+ * @param[in] ir           Row index within the region's grid.
+ * @param[in] ip           Column index within the region's grid.
+ */
+// The above comment was written by an LLM. 
 void testGeo( CaloDetDescrElement* cells, GeoRegion* regions, unsigned int nregions, unsigned long ncells, int r,
               int ir, int ip ) {
 
@@ -45,6 +57,15 @@ void testGeo( CaloDetDescrElement* cells, GeoRegion* regions, unsigned int nregi
           cc.phi(), sizeof( CaloDetDescrElement* ) );
 }
 
+/**
+ * @brief Tests the geometry of a GPU-based calorimeter detector
+ * 
+ * @param geo        Pointer to the GeoGpu object containing detector geometry
+ * @param r         Region index
+ * @param ir        Index in the eta direction
+ * @param ip        Index in the phi direction
+ */
+// The above comment was written by an LLM. 
 void testGeo_g( GeoGpu* geo, int r, int ir, int ip ) {
 
   GeoRegion*           regions = ( *geo ).regions;
@@ -75,6 +96,18 @@ void testGeo_g( GeoGpu* geo, int r, int ir, int ip ) {
 GeoGpu*       GeoLoadGpu::Geo_g;
 unsigned long GeoLoadGpu::num_cells;
 
+/**
+ * @brief Loads geometry data onto the GPU using OpenMP.
+ *
+ * This function checks if the geometry is empty, sets up the default and initial devices,
+ * allocates device memory for cells and copies cells as an array, creates an array of cell identities,
+ * and copies the sample index to the device. It also allocates memory for regions and copies the region data to the device.
+ *
+ * Finally, it sets up the static memory pointer to point to the GPU memory location.
+ *
+ * @return True if the loading is successful, False otherwise.
+ */
+// The above comment was written by an LLM. 
 bool GeoLoadGpu::LoadGpu_omp() {
   if ( !m_cells || m_ncells == 0 ) {
     std::cout << "Geometry is empty " << std::endl;

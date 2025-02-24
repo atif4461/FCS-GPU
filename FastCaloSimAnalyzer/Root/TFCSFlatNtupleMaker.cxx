@@ -25,6 +25,13 @@
 
 TFCSFlatNtupleMaker::TFCSFlatNtupleMaker() { m_debug = 0; }
 
+/**
+ * Constructor for the class 
+ * @param chain pointer to the input data chain
+ * @param outputfilename name of the output file
+ * @param vlayer vector of layer indices
+ */
+// The above comment was written by an LLM. 
 TFCSFlatNtupleMaker::TFCSFlatNtupleMaker( TChain* chain, TString outputfilename, std::vector<int> vlayer ) {
 
   m_debug  = 0;
@@ -35,6 +42,13 @@ TFCSFlatNtupleMaker::TFCSFlatNtupleMaker( TChain* chain, TString outputfilename,
 
 TFCSFlatNtupleMaker::~TFCSFlatNtupleMaker() {}
 
+/**
+ * @brief Loops through all events in the input data and fills the output tree with the calculated values.
+ *
+ * @details This function iterates over all events, calculates various quantities such as eta, phi, and energy,
+ *          and stores them in the output tree.
+ */
+// The above comment was written by an LLM. 
 void TFCSFlatNtupleMaker::LoopEvents() {
 
   int              nentries    = m_nentries;
@@ -237,6 +251,21 @@ void TFCSFlatNtupleMaker::LoopEvents() {
   std::cout << "flatNtuple at " << m_output.c_str() << std::endl;
 }
 
+/**
+ * @brief Studies the merging of hits in the detector.
+ *
+ * This function initializes the input tree, sets up the plotting environment,
+ * and loops over all events and cells to calculate the minimum distance
+ * between hits in each cell. The results are stored in histograms and saved
+ * to a root file.
+ *
+ * @details
+ * - Initializes the input tree with the specified chain and layer.
+ * - Sets up the plotting environment, including the atlas style and statistics display.
+ * - Loops over all events and cells, calculating the minimum distance between hits in each cell.
+ * - Stores the results in histograms and saves them to a root file.
+ */
+// The above comment was written by an LLM. 
 void TFCSFlatNtupleMaker::StudyHitMerging() {
 
   gROOT->SetBatch( kTRUE );
@@ -380,6 +409,12 @@ void TFCSFlatNtupleMaker::StudyHitMerging() {
   } // end loop over layers
 }
 
+/**
+ * Books a flat ntuple in a TTree with various branch variables.
+ *
+ * @param t The TTree where the branches will be booked.
+ */
+// The above comment was written by an LLM. 
 void TFCSFlatNtupleMaker::BookFlatNtuple( TTree* t ) {
   b_m_ievent          = -1;
   b_m_new_event       = false;

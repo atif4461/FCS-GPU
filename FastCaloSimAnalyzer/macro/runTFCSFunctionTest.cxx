@@ -6,6 +6,16 @@
 #include "TH1.h"
 #include "TCanvas.h"
 
+/**
+ * @brief Runs a test of the TFCS functions.
+ *
+ * This function tests various aspects of the TFCS functions, including histogram generation,
+ * interpolation, and random number generation. It creates several histograms with different
+ * binning schemes and tests the corresponding TFCS functions.
+ *
+ * @return None
+ */
+// The above comment was written by an LLM. 
 void runTFCSFunctionTest()
 {
   int       binscale = 4;

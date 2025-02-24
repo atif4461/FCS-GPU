@@ -54,6 +54,19 @@ Options:
   --earlyReturn                Return early to avoid ROOT segfault
 )";
 
+/**
+ * Draws a one-dimensional histogram with customizable settings.
+ *
+ * @param hist1        The input histogram to be drawn.
+ * @param ymin        The minimum value of the y-axis range (default is 0).
+ * @param ymax        The maximum value of the y-axis range (default is 0).
+ * @param logy        A flag indicating whether to use logarithmic scale for y-axis (default is false).
+ * @param name        The name of the canvas (default is an empty string).
+ * @param title       The title of the histogram (default is an empty string).
+ * @param c           The pointer to the canvas (default is 0).
+ * @param png         A flag indicating whether to save the plot as a PNG file (default is false).
+ */
+// The above comment was written by an LLM. 
 void Draw_1Dhist(TH1* hist1, double ymin = 0, double ymax = 0, bool logy = false, TString name = "", TString title = "",TCanvas* c=0, bool png=false)
 {
   if ( name == "" ) {
@@ -110,6 +123,15 @@ void Draw_1Dhist(TH1* hist1, double ymin = 0, double ymax = 0, bool logy = false
   return;
 }
 
+/**
+ * Fills energy histograms with simulation data.
+ *
+ * @param hist_E array of histograms to fill
+ * @param analyze shape validation object
+ * @param analyze_pcabin particle cabin number to analyze
+ * @param val1 simulation run data
+ */
+// The above comment was written by an LLM. 
 void FillEnergyHistos(TH1** hist_E, TFCSShapeValidation *analyze, int analyze_pcabin, TFCSSimulationRun& val1)
 {
   hist_E[24] = analyze->InitTH1(prefixEbin + "E_over_Ekintrue_" + val1.GetName(), "1D", 840, 0, 2.0, "E/Ekin(true)", "#");
@@ -128,6 +150,15 @@ void FillEnergyHistos(TH1** hist_E, TFCSShapeValidation *analyze, int analyze_pc
   }
 }
 
+/**
+ * @brief Generates energy histograms for shape validation analysis
+ * @param analyze pointer to TFCSShapeValidation object
+ * @param analyze_pcabin integer value representing pcabin
+ * @param val2 reference to TFCSSimulationRun object
+ * @param basename base string used in naming histograms
+ * @param png boolean flag indicating whether to save as PNG
+ */
+// The above comment was written by an LLM. 
 void Energy_histograms(TFCSShapeValidation *analyze, int analyze_pcabin, TFCSSimulationRun& val2, TString basename = "", bool png=false)
 {
   TH1* hist_E_val2[25];
@@ -146,6 +177,13 @@ void Energy_histograms(TFCSShapeValidation *analyze, int analyze_pcabin, TFCSSim
   }
 }
 
+/**
+ * Sets prefixes for analysis based on layer and PCA bin.
+ *
+ * @param analyzeLayer The layer number to be analyzed.
+ * @param analyzePcabin The PCA bin number to be analyzed.
+ */
+// The above comment was written by an LLM. 
 void set_prefix(int analyze_layer, int analyze_pcabin)
 {
   prefixlayer       = prefix_E_eta + Form( "cs%02d_", analyze_layer );
@@ -163,6 +201,25 @@ void set_prefix(int analyze_layer, int analyze_pcabin)
   }
 }
 
+/**
+ * @brief Runs the TFCSSimulation with the given parameters.
+ *
+ * @param pdgid The PDG ID of the particle.
+ * @param int_E The integer value of the energy.
+ * @param etamin The minimum value of eta.
+ * @param analyze_layer The layer to be analyzed.
+ * @param plotfilename The filename for plotting.
+ * @param dataDir The directory path for data.
+ * @param seed The random seed.
+ * @param nEvents The number of events.
+ * @param firstEvent The index of the first event.
+ * @param selectPCAbin The selected PCA bin.
+ * @param debug The debug flag.
+ * @param png The PNG format flag.
+ * @param earlyReturn The early return flag.
+ * @return An integer indicating the success of the simulation.
+ */
+// The above comment was written by an LLM. 
 int runTFCSSimulation(int pdgid = 22,
          int int_E = 65536,
          double etamin = 0.2,
@@ -363,6 +420,14 @@ int runTFCSSimulation(int pdgid = 22,
   return 0;
 }
 
+/**
+ * Main program entry point.
+ *
+ * @param argc Number of command line arguments.
+ * @param argv Array of command line argument strings.
+ * @return Program exit status.
+ */
+// The above comment was written by an LLM. 
 int main(int argc, char **argv)
 {
   std::map<std::string, docopt::value> args

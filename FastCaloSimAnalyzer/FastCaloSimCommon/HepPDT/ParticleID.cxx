@@ -11,6 +11,12 @@
 namespace HepPDT
 {
 
+/**
+ * Constructor initializing particle charge based on PDG ID.
+ *
+ * @param pdgID Particle Data Group identifier
+ */
+// The above comment was written by an LLM. 
 ParticleID::ParticleID(const int pdgID)
 {
     if ( pdgID == 11 || pdgID == 211 || pdgID == 2212 )

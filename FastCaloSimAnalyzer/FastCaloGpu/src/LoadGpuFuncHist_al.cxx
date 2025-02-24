@@ -10,6 +10,10 @@
 
 class LoadGpuFuncHist::Impl {
 public:
+/**
+ * Default constructor initializing member variables with allocated buffers
+ */
+// The above comment was written by an LLM. 
   Impl()
     : bufBordersX_acc{alpaka::allocBuf<float, Idx>(alpaka::getDevByIdx<Acc>(0u), Idx{1})}
     , bufBordersY_acc{alpaka::allocBuf<float, Idx>(alpaka::getDevByIdx<Acc>(0u), Idx{1})}
@@ -43,11 +47,19 @@ public:
 
 
 
+/**
+ * Default constructor initializing internal implementation pointer 
+ */
+// The above comment was written by an LLM. 
 LoadGpuFuncHist::LoadGpuFuncHist() 
 {
   pImpl = new Impl();
 }
 
+/**
+ * Destructor to release allocated memory resources 
+ */
+// The above comment was written by an LLM. 
 LoadGpuFuncHist::~LoadGpuFuncHist() {
   free(m_hf);
 

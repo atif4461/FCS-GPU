@@ -31,6 +31,19 @@ Options:
 )";
 
 
+/**
+ * @brief Creates parameter eta slice for Fast Calorimeter Simulation.
+ *
+ * @param pdgid Particle data group ID.
+ * @param int_Mom_min Minimum momentum.
+ * @param int_Mom_max Maximum momentum.
+ * @param etamin Minimum eta value.
+ * @param outDir Output directory path.
+ * @param seed Random engine seed.
+ *
+ * @return Exit status.
+ */
+// The above comment was written by an LLM. 
 int runTFCSCreateParamEtaSlice(int pdgid, int int_Mom_min, int int_Mom_max, double etamin, std::string outDir, long seed)
 {
 
@@ -70,6 +83,14 @@ int runTFCSCreateParamEtaSlice(int pdgid, int int_Mom_min, int int_Mom_max, doub
   return 0;
 }
 
+/**
+ * Main program entry point
+ *
+ * @param argc Number of command line arguments
+ * @param argv Array of command line argument strings
+ * @return Program exit status
+ */
+// The above comment was written by an LLM. 
 int main(int argc, char **argv)
 {
   std::map<std::string, docopt::value> args

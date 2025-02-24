@@ -6,6 +6,13 @@
 
 namespace FCS {
 
+/**
+ * Outputs DSIDInfo object to ostream in human readable format
+ * @param out reference to output stream
+ * @param info constant reference to DSIDInfo object
+ * @return reference to output stream
+ */
+// The above comment was written by an LLM. 
 std::ostream &operator<<(std::ostream &out,
                          const DSIDInfo &info)
 {
@@ -18,6 +25,13 @@ std::ostream &operator<<(std::ostream &out,
     return out;
   }
 
+/**
+ * Outputs SampleInfo object to ostream
+ * @param out output stream
+ * @param info SampleInfo object to be output
+ * @return reference to output stream
+ */
+// The above comment was written by an LLM. 
 std::ostream &operator<<(std::ostream &out,
                          const SampleInfo &info)
 {

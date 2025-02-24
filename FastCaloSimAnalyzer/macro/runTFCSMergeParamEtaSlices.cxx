@@ -30,6 +30,18 @@ Options:
 )";
 
 
+/**
+ * @brief Runs TFCS merge param PDG IDETA slices.
+ *
+ * @param pdgid Particle data group ID
+ * @param int_Emin Minimum energy
+ * @param int_Emax Maximum energy
+ * @param etamin Minimum eta value
+ * @param etamax Maximum eta value
+ * @param outDir Output directory
+ * @return TFCSParametrizationBase pointer
+ */
+// The above comment was written by an LLM. 
 TFCSParametrizationBase* runTFCSMergeParamPDGIDEtaSlices(int pdgid, int int_Emin, int int_Emax, double etamin, double etamax, std::string outDir,TString /*bigParamFileName*/)
 {
   double Emin = int_Emin;
@@ -83,6 +95,19 @@ TFCSParametrizationBase* runTFCSMergeParamPDGIDEtaSlices(int pdgid, int int_Emin
   return (TFCSParametrizationBase*)EtaSelectChain;
 }
 
+/**
+ * @brief Runs TFCS merge parameter eta slices.
+ *
+ * @param int_Emin Minimum energy value.
+ * @param int_Emax Maximum energy value.
+ * @param etamin Minimum eta value.
+ * @param etamax Maximum eta value.
+ * @param outDir Output directory path.
+ * @param bigParamFileName Name of the big parameter file.
+ *
+ * @return Integer indicating success or failure.
+ */
+// The above comment was written by an LLM. 
 int runTFCSMergeParamEtaSlices(int int_Emin, int int_Emax, double etamin, double etamax, std::string outDir,std::string bigParamFileName)
 {
   TFCSParametrizationBase* para_photon = runTFCSMergeParamPDGIDEtaSlices(22, int_Emin, int_Emax, etamin, etamax, outDir, bigParamFileName);
@@ -162,6 +187,14 @@ int runTFCSMergeParamEtaSlices(int int_Emin, int int_Emax, double etamin, double
   return 0;
 }
 
+/**
+ * Main program entry point.
+ *
+ * @param argc Number of command line arguments
+ * @param argv Array of command line argument strings
+ * @return Program exit status
+ */
+// The above comment was written by an LLM. 
 int main(int argc, char **argv)
 {
   std::map<std::string, docopt::value> args

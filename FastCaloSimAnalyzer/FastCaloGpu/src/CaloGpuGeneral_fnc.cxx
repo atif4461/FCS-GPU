@@ -15,6 +15,17 @@
 #endif
 
 namespace CaloGpuGeneral_fnc {
+/**
+ * @brief Calculates the Distance to the Detector Element (DDE) for a given geometry and sampling point.
+ * 
+ * @param geo Pointer to the geometry object.
+ * @param sampling The sampling index.
+ * @param eta The eta value of the sampling point.
+ * @param phi The phi value of the sampling point.
+ * 
+ * @return The calculated DDE value, or an error code if the calculation fails.
+ */
+// The above comment was written by an LLM. 
 __DEVICE__ long long getDDE(GeoGpu *geo, int sampling, float eta, float phi) {
   float *distance = 0;
   int *steps = 0;
@@ -289,6 +300,14 @@ __DEVICE__ void HistoLateralShapeParametrization_g_d(const HitParams hp,
 __DEVICE__ void HitCellMapping_g_d(Acc const& acc, HitParams hp, Hit &hit, unsigned long /*t*/,
                                    Sim_Args args) {
 #else
+/**
+ * Maps a hit to a cell in the detector geometry and updates the energy deposit.
+ *
+ * @param[in] hp     Hit parameters
+ * @param[out] hit   Hit object being processed
+ * @param[in] args   Simulation arguments
+ */
+// The above comment was written by an LLM. 
 __DEVICE__ void HitCellMapping_g_d(HitParams hp, Hit &hit, unsigned long /*t*/,
                                    Sim_Args args) {
 #endif
@@ -328,6 +347,22 @@ __DEVICE__ void HitCellMapping_g_d(HitParams hp, Hit &hit, unsigned long /*t*/,
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #ifdef USE_ALPAKA
+/**
+ * @brief Maps a hit cell with wiggling effect in the detector
+ * 
+ * @param[in] acc acceleration structure
+ * @param[in] hp hit parameters
+ * @param[out] hit hit object to be modified
+ * @param[in] t time stamp
+ * @param[in] args simulation arguments
+ 
+ 
+  * @brief Finds the highest power of 2 that is less than or equal to a given number
+ * 
+ * @param[in] n input number
+ * @return the highest power of 2 less than or equal to n
+ */
+// The above comment was written by an LLM. 
 __DEVICE__ void HitCellMappingWiggle_g_d(Acc const& acc, HitParams hp, Hit &hit,
                                          unsigned long t, Sim_Args args) {
 #else

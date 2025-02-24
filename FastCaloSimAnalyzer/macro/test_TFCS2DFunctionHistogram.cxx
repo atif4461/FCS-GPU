@@ -5,6 +5,14 @@
 #include "../../ISF_FastCaloSimEvent/ISF_FastCaloSimEvent/TFCS2DFunctionHistogram.h"
 #include "TRandom.h"
 
+/**
+ * @brief Tests the functionality of the TFCS2DFunctionHistogram class.
+ *
+ * This function opens a ROOT file, retrieves a 2D histogram, and creates an instance of TFCS2DFunctionHistogram.
+ * It then iterates over a large number of random values, using the TFCS2DFunctionHistogram instance to generate corresponding alpha and r values.
+ * If either alpha or r is NaN, it prints out the size of the histogram and the problematic values.
+ */
+// The above comment was written by an LLM. 
 void test_TFCS2DFunctionHistogram() 
 {
   // DEBUG Shape_id211_E65536_eta_20_25_Ebin1_cs2

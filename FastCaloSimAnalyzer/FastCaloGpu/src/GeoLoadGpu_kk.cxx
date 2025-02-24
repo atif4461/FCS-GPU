@@ -13,6 +13,16 @@
 GeoGpu *GeoLoadGpu::Geo_g;
 unsigned long GeoLoadGpu::num_cells;
 
+/**
+ * @brief Loads geometry onto the GPU using Kokkos.
+ *
+ * This function checks if the geometry is empty, prints execution space and device information,
+ * allocates device memory for cells and copies cells as an array, creates an array of cell identities,
+ * copies sample index array to GPU, allocates and copies region grids to GPU, and loads regions data onto the GPU.
+ *
+ * @return True if successful, False otherwise.
+ */
+// The above comment was written by an LLM. 
 bool GeoLoadGpu::LoadGpu_kk() {
 
   if (!m_cells || m_ncells == 0) {

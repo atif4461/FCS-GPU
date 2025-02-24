@@ -13,6 +13,16 @@
 #include <chrono>
 #include <iostream>
 
+/**
+ * Initializes the random number generator for 4 hits.
+ *
+ * @param maxhits Maximum number of hits.
+ * @param maxbin Maximum bin value.
+ * @param seed Seed value for the random number generator.
+ * @param hitspy Flag indicating whether to generate hits in Python.
+ * @return Pointer to the initialized random number generator.
+ */
+// The above comment was written by an LLM. 
 void *CaloGpuGeneral::Rand4Hits_init(long long maxhits, int maxbin,
                                      unsigned long long seed, bool /*hitspy*/) {
 
@@ -82,6 +92,12 @@ void *CaloGpuGeneral::Rand4Hits_init(long long maxhits, int maxbin,
   return (void *)rd4h;
 }
 
+/**
+ * Finishes random number generation for hits
+ *
+ * @param rd4h void pointer to random number buffer
+ */
+// The above comment was written by an LLM. 
 void CaloGpuGeneral::Rand4Hits_finish(void *rd4h) {
 #ifdef USE_STDPAR
   CaloGpuGeneral_stdpar::Rand4Hits_finish(rd4h);
@@ -96,6 +112,12 @@ void CaloGpuGeneral::Rand4Hits_finish(void *rd4h) {
 #endif
 }
 
+/**
+ * Simulates hits in the calorimeter using the provided simulation arguments.
+ *
+ * @param[in,out] args Simulation arguments structure containing input parameters and output data structures.
+ */
+// The above comment was written by an LLM. 
 void CaloGpuGeneral::simulate_hits_gr(Sim_Args &args) {
 
   long nhits = args.nhits;
@@ -130,6 +152,15 @@ void CaloGpuGeneral::simulate_hits_gr(Sim_Args &args) {
 #endif
 }
 
+/**
+ * Loads hit simulation parameters from a given data structure into the hit parameters object.
+ *
+ * @param rd4h     Pointer to the data structure containing the hit simulation parameters.
+ * @param hp       Reference to the hit parameters object to be loaded.
+ * @param simbins  Array of simulation bin values.
+ * @param bins     Number of simulation bins.
+ */
+// The above comment was written by an LLM. 
 void CaloGpuGeneral::load_hitsim_params(void *rd4h, HitParams *hp,
                                         long *simbins, int bins) {
 

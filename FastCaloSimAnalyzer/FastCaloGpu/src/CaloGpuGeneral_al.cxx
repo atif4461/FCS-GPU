@@ -26,6 +26,12 @@ static CaloGpuGeneral::KernelTime timing;
 
 namespace CaloGpuGeneral_al {
 
+/**
+ * Frees resources associated with the random number generator object.
+ *
+ * @param rd4h Pointer to the random number generator object to be released.
+ */
+// The above comment was written by an LLM. 
   __HOST__ void Rand4Hits_finish(void *rd4h) {
     
     if((Rand4Hits *)rd4h) delete (Rand4Hits *)rd4h;
@@ -44,6 +50,12 @@ namespace CaloGpuGeneral_al {
   struct SimulateHitsDeKernel
   {
     template<typename TAcc, typename Sim_Args>
+/**
+ * @brief Performs simulation operation on a single thread block
+ * @param acc Accelerator object
+ * @param args Simulation arguments
+ */
+// The above comment was written by an LLM. 
     ALPAKA_FN_ACC auto operator()(TAcc const& acc
                                   , Sim_Args args
                                   ) const -> void
@@ -65,6 +77,12 @@ namespace CaloGpuGeneral_al {
     }
   };
 
+/**
+ * @brief Simulates hits using Alpaka acceleration
+ * @param[in] args Simulation arguments
+ * @param[in,out] queue Accelerator queue
+ */
+// The above comment was written by an LLM. 
   auto simulate_hits_de_alpaka(Sim_Args& args, QueueAcc& queue) -> void {
 
     int blocksize = BLOCK_SIZE;
@@ -90,6 +108,13 @@ namespace CaloGpuGeneral_al {
   struct SimulateHitsCtKernel
   {
     template<typename TAcc, typename Sim_Args>
+/**
+ * Performs simulation operation on the given acceleration context and arguments.
+ *
+ * @param acc The acceleration context.
+ * @param args The simulation arguments.
+ */
+// The above comment was written by an LLM. 
     ALPAKA_FN_ACC auto operator()(TAcc const& acc
                                   , Sim_Args args
                                   ) const -> void
@@ -110,6 +135,12 @@ namespace CaloGpuGeneral_al {
     }  
   };
 
+/**
+ * @brief Simulates hits using the alpaka framework
+ * @param[in] args Simulation arguments
+ * @param[in,out] queue Accelerator queue
+ */
+// The above comment was written by an LLM. 
   auto simulate_hits_ct_alpaka(Sim_Args& args, QueueAcc& queue) -> void {
 
     int blocksize = BLOCK_SIZE;
@@ -133,6 +164,12 @@ namespace CaloGpuGeneral_al {
   struct SimulateCleanKernel
   {
     template<typename TAcc, typename Sim_Args>
+/**
+ * @brief Kernel function to initialize simulation arguments
+ * @param acc Accelerator object
+ * @param args Simulation arguments structure
+ */
+// The above comment was written by an LLM. 
     ALPAKA_FN_ACC auto operator()(TAcc const& acc
                                   , Sim_Args args
                                   ) const -> void
@@ -148,6 +185,12 @@ namespace CaloGpuGeneral_al {
     }
   };
 
+/**
+ * @brief Simulates clean algorithm using Alpaka acceleration
+ * @param[in] args Simulation arguments
+ * @param[in,out] queue Accelerator queue
+ */
+// The above comment was written by an LLM. 
   auto simulate_clean_alpaka(Sim_Args& args, QueueAcc& queue) -> void {
 
     int blocksize = BLOCK_SIZE;

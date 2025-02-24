@@ -23,6 +23,14 @@ string prefixall;
 
 
 
+/**
+ * @brief Creates a 2D histogram from a given input histogram with an applied energy cutoff.
+ *
+ * @param h Input histogram
+ * @param energy_cutoff Energy threshold value
+ * @return Pointer to the newly created 2D histogram
+ */
+// The above comment was written by an LLM. 
 TH2* Create2DHistogram(TH2* h, float energy_cutoff)
 {
 
@@ -58,6 +66,13 @@ TH2* Create2DHistogram(TH2* h, float energy_cutoff)
   return h2;
 }
 
+/**
+ * Creates a polar plot from a given 2D histogram and saves it as an image file.
+ *
+ * @param h        input 2D histogram
+ * @param outDir   output directory path
+ */
+// The above comment was written by an LLM. 
 void CreatePolarPlot(TH2F* h, std::string outDir)
 {
 
@@ -79,6 +94,62 @@ void CreatePolarPlot(TH2F* h, std::string outDir)
   delete c;
 }
 
+/**
+ * @brief Runs the TFCS Max Hit RZ analysis.
+ *
+ * @param dsid Data set ID.
+ * @param sampleData Path to the sample data file.
+ * @param topDir Top directory for output files.
+ * @param version Version string.
+ * @param energy_cutoff Energy cutoff value.
+ * @param isPhisymmetry Flag indicating whether to apply phi symmetry.
+ * @param topPlotDir Top directory for plot files.
+ 
+void runTFCSMaxHitrz(int dsid, std::string sampleData, std::string topDir, std::string version, float energy_cutoff, bool isPhisymmetry, std::string topPlotDir) 
+ * @brief Creates a new instance of the TFCSMakeFirstPCA class.
+ *
+ * @param inputChain Input chain.
+ * @param filename Output file name.
+ 
+TFCSMakeFirstPCA::TFCSMakeFirstPCA(TChain* inputChain, const char* filename)
+ * @brief Applies the first PCA.
+ *
+ * @param inputChain Input chain.
+ * @param filename Output file name.
+ 
+TFCSApplyFirstPCA::TFCSApplyFirstPCA(const char* filename)
+ * @brief Initializes the TH2 histogram.
+ *
+ * @param histname Histogram name.
+ * @param title Histogram title.
+ * @param nbinsx Number of x bins.
+ * @param xmin Minimum x value.
+ * @param xmax Maximum x value.
+ * @param nbinsy Number of y bins.
+ * @param ymin Minimum y value.
+ * @param ymax Maximum y value.
+ * @return Initialized TH2 histogram.
+ 
+TH2* InitTH2(const char* histname, const char* title, Int_t nbinsx, Float_t xmin, Float_t xmax, Int_t nbinsy, Float_t ymin, Float_t ymax)
+ * @brief Creates a 2D histogram from another histogram with an energy cutoff.
+ *
+ * @param hist Input histogram.
+ * @param energyCutoff Energy cutoff value.
+ * @return Created 2D histogram.
+ 
+TH2F* Create2DHistogram(TH2* hist, Float_t energyCutoff)
+ * @brief Creates a polar plot from a 2D histogram.
+ *
+ * @param hist Input histogram.
+ * @param plotDir Plot directory.
+ 
+void CreatePolarPlot(TH2F* hist, const char* plotDir)
+ * @brief Loops over events for a given PCA bin.
+ *
+ * @param pcabin PCA bin number.
+ 
+void LoopEvents(Int_t pcabin)*/
+// The above comment was written by an LLM. 
 void runTFCSMaxHitrz(int dsid = 431004,  std::string sampleData = "../python/inputSampleList.txt", std::string topDir = "output/", std::string version = "ver01", float energy_cutoff = 0.9995, bool isPhisymmetry = true, std::string topPlotDir = "output_plot/")
 {
 

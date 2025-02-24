@@ -30,6 +30,11 @@ using namespace std;
 
 TFCSAnalyzerBase::TFCSAnalyzerBase() {}
 
+/**
+ * Destructor for the class 
+ * Releases all dynamically allocated memory to prevent memory leaks
+ */
+// The above comment was written by an LLM. 
 TFCSAnalyzerBase::~TFCSAnalyzerBase() {
 
   if ( m_cellVector ) delete m_cellVector;
@@ -56,6 +61,19 @@ TFCSAnalyzerBase::~TFCSAnalyzerBase() {
   if ( m_TTC_IDCaloBoundary_z ) delete m_TTC_IDCaloBoundary_z;
 }
 
+/**
+ * Initializes a one dimensional histogram with specified properties.
+ *
+ * @param[in] histname Name of the histogram
+ * @param[in] histtype Type of the histogram
+ * @param[in] nbins Number of bins in the histogram
+ * @param[in] low Lower edge of the histogram
+ * @param[in] high Upper edge of the histogram
+ * @param[in] xtitle Title of the X axis
+ * @param[in] ytitle Title of the Y axis
+ * @return Pointer to the initialized histogram
+ */
+// The above comment was written by an LLM. 
 TH1F* TFCSAnalyzerBase::InitTH1( std::string histname, std::string histtype, int nbins, float low, float high,
                                  std::string xtitle, std::string ytitle ) {
 
@@ -74,6 +92,22 @@ TH1F* TFCSAnalyzerBase::InitTH1( std::string histname, std::string histtype, int
   return hist;
 }
 
+/**
+ * Initializes a 2D histogram with specified parameters.
+ *
+ * @param[in] histname Name of the histogram
+ * @param[in] histtype Type of the histogram
+ * @param[in] nbinsx Number of bins in the x-axis
+ * @param[in] lowx Lower limit of the x-axis
+ * @param[in] highx Upper limit of the x-axis
+ * @param[in] nbinsy Number of bins in the y-axis
+ * @param[in] lowy Lower limit of the y-axis
+ * @param[in] highy Upper limit of the y-axis
+ * @param[in] xtitle Title of the x-axis
+ * @param[in] ytitle Title of the y-axis
+ * @return Pointer to the initialized 2D histogram
+ */
+// The above comment was written by an LLM. 
 TH2F* TFCSAnalyzerBase::InitTH2( std::string histname, std::string histtype, int nbinsx, float lowx, float highx,
                                  int nbinsy, float lowy, float highy, std::string xtitle, std::string ytitle ) {
 
@@ -92,6 +126,21 @@ TH2F* TFCSAnalyzerBase::InitTH2( std::string histname, std::string histtype, int
   return hist;
 }
 
+/**
+ * Initializes a one dimensional TProfile object.
+ *
+ * @param[in] histname        Name of the histogram.
+ * @param[in] histtype       Type of the histogram.
+ * @param[in] nbinsx         Number of bins in the x-axis.
+ * @param[in] lowx           Lower limit of the x-axis range.
+ * @param[in] highx          Upper limit of the x-axis range.
+ * @param[in] xtitle         Title of the x-axis.
+ * @param[in] ytitle         Title of the y-axis.
+ * @param[in] profiletype   Type of the profile.
+ *
+ * @return A pointer to the initialized TProfile object.
+ */
+// The above comment was written by an LLM. 
 TProfile* TFCSAnalyzerBase::InitTProfile1D( std::string histname, std::string histtype, int nbinsx, float lowx,
                                             float highx, std::string xtitle, std::string ytitle,
                                             std::string profiletype ) {
@@ -111,6 +160,24 @@ TProfile* TFCSAnalyzerBase::InitTProfile1D( std::string histname, std::string hi
   return hist;
 }
 
+/**
+ * Initializes a 2D profile histogram with specified parameters.
+ *
+ * @param[in] histname        Name of the histogram
+ * @param[in] histtype       Type of the histogram
+ * @param[in] nbinsx         Number of bins in the x-axis
+ * @param[in] lowx           Lower limit of the x-axis range
+ * @param[in] highx          Upper limit of the x-axis range
+ * @param[in] nbinsy         Number of bins in the y-axis
+ * @param[in] lowy           Lower limit of the y-axis range
+ * @param[in] highy          Upper limit of the y-axis range
+ * @param[in] xtitle         Title of the x-axis
+ * @param[in] ytitle         Title of the y-axis
+ * @param[in] profiletype   Type of the profile
+ *
+ * @return Pointer to the initialized 2D profile histogram
+ */
+// The above comment was written by an LLM. 
 TProfile2D* TFCSAnalyzerBase::InitTProfile2D( std::string histname, std::string histtype, int nbinsx, float lowx,
                                               float highx, int nbinsy, float lowy, float highy, std::string xtitle,
                                               std::string ytitle, std::string profiletype ) {
@@ -131,6 +198,14 @@ TProfile2D* TFCSAnalyzerBase::InitTProfile2D( std::string histname, std::string 
   return hist;
 }
 
+/**
+ * Fills a histogram with a given value and weight ensuring the value is within the histogram bounds.
+ *
+ * @param h      the histogram to fill
+ * @param value  the value to fill the histogram with
+ * @param weight the weight of the filled value
+ */
+// The above comment was written by an LLM. 
 void TFCSAnalyzerBase::Fill( TH1* h, float value, float weight ) {
   TAxis* x           = h->GetXaxis();
   int    nbins       = x->GetNbins();
@@ -144,6 +219,15 @@ void TFCSAnalyzerBase::Fill( TH1* h, float value, float weight ) {
   h->Fill( thisvalue, weight );
 }
 
+/**
+ * Fills a 2D histogram with a given value and weight
+ * 
+ * @param h        the 2D histogram to fill
+ * @param valuex   the x value to fill
+ * @param valuey   the y value to fill
+ * @param weight  the weight of the fill operation
+ */
+// The above comment was written by an LLM. 
 void TFCSAnalyzerBase::Fill( TH2* h, float valuex, float valuey, float weight ) {
   TAxis* x            = h->GetXaxis();
   int    nbinsx       = x->GetNbins();
@@ -168,6 +252,16 @@ void TFCSAnalyzerBase::Fill( TH2* h, float valuex, float valuey, float weight ) 
   h->Fill( thisvaluex, thisvaluey, weight );
 }
 
+/**
+ * Fills a profile histogram with a given x value, y value, and weight.
+ * The x value is adjusted to be within the range of the histogram's x axis.
+ *
+ * @param h        the profile histogram to fill
+ * @param valuex   the x value to fill at
+ * @param valuey   the y value to fill with
+ * @param weight  the weight of the fill operation
+ */
+// The above comment was written by an LLM. 
 void TFCSAnalyzerBase::Fill( TProfile* h, float valuex, float valuey, float weight ) {
   TAxis* x            = h->GetXaxis();
   int    nbinsx       = x->GetNbins();
@@ -182,6 +276,16 @@ void TFCSAnalyzerBase::Fill( TProfile* h, float valuex, float valuey, float weig
   h->Fill( thisvaluex, valuey, weight );
 }
 
+/**
+ * Fills a 2D profile histogram with a given set of values and weight
+ * 
+ * @param h        pointer to the 2D profile histogram to be filled
+ * @param valuex   x-value at which the histogram is to be filled
+ * @param valuey   y-value at which the histogram is to be filled
+ * @param valuez   z-value to be used in filling the histogram
+ * @param weight  weight to be applied when filling the histogram
+ */
+// The above comment was written by an LLM. 
 void TFCSAnalyzerBase::Fill( TProfile2D* h, float valuex, float valuey, float valuez, float weight ) {
   TAxis* x            = h->GetXaxis();
   int    nbinsx       = x->GetNbins();
@@ -206,6 +310,16 @@ void TFCSAnalyzerBase::Fill( TProfile2D* h, float valuex, float valuey, float va
   h->Fill( thisvaluex, thisvaluey, valuez, weight );
 }
 
+/**
+ * Automatically determines the zoom range for a histogram.
+ *
+ * @param[in] h1        The input histogram.
+ * @param[out] min      The minimum value of the zoom range.
+ * @param[out] max      The maximum value of the zoom range.
+ * @param[out] rmin     The minimum value of the reduced zoom range.
+ * @param[out] rmax     The maximum value of the reduced zoom range.
+ */
+// The above comment was written by an LLM. 
 void TFCSAnalyzerBase::autozoom( TH1* h1, double& min, double& max, double& rmin, double& rmax ) {
 
   double min1, max1;
@@ -232,6 +346,17 @@ void TFCSAnalyzerBase::autozoom( TH1* h1, double& min, double& max, double& rmin
   rmax = max + 0.5 * h1->GetBinWidth( 1 );
 }
 
+/**
+ * Refills a histogram with a specified range and number of bins.
+ *
+ * @param h_in input histogram
+ * @param min minimum value of the range
+ * @param max maximum value of the range
+ * @param rmin minimum value of the refilled histogram
+ * @param rmax maximum value of the refilled histogram
+ * @return refilled histogram
+ */
+// The above comment was written by an LLM. 
 TH1D* TFCSAnalyzerBase::refill( TH1* h_in, double min, double max, double rmin, double rmax ) {
 
   // int debug=0;
@@ -289,6 +414,17 @@ TH1D* TFCSAnalyzerBase::refill( TH1* h_in, double min, double max, double rmin, 
   return h_out;
 }
 
+/**
+ * @brief Retrieves a histogram from a TTree and draws it according to specified parameters
+ * @param hist Pointer to the histogram object that will be filled
+ * @param tree The input TTree containing data to draw
+ * @param var Name of the variable in the TTree to plot
+ * @param cut String representing the cutting condition for the data
+ * @param nbins Number of bins for the resulting histogram
+ * @param xmin Minimum value on the x-axis for the histogram
+ * @param xmax Maximum value on the x-axis for the histogram
+ */
+// The above comment was written by an LLM. 
 void TFCSAnalyzerBase::GetTH1TTreeDraw( TH1F*& hist, TTree* tree, std::string var, std::string* cut, int nbins,
                                         double xmin, double xmax ) {
 
@@ -307,6 +443,20 @@ void TFCSAnalyzerBase::GetTH1TTreeDraw( TH1F*& hist, TTree* tree, std::string va
   delete histo;
 }
 
+/**
+ * @brief Retrieves a 2D histogram from a TTree and applies a specified cut.
+ * @param hist Pointer to the output 2D histogram.
+ * @param tree Input TTree containing data.
+ * @param var Name of the variable to plot.
+ * @param cut Array of strings representing cuts to apply.
+ * @param nbinsx Number of bins in the x dimension.
+ * @param xmin Minimum value of the x axis.
+ * @param xmax Maximum value of the x axis.
+ * @param nbinsy Number of bins in the y dimension.
+ * @param ymin Minimum value of the y axis.
+ * @param ymax Maximum value of the y axis.
+ */
+// The above comment was written by an LLM. 
 void TFCSAnalyzerBase::GetTH2TTreeDraw( TH2F*& hist, TTree* tree, std::string var, std::string* cut, int nbinsx,
                                         double xmin, double xmax, int nbinsy, double ymin, double ymax ) {
 
@@ -325,6 +475,19 @@ void TFCSAnalyzerBase::GetTH2TTreeDraw( TH2F*& hist, TTree* tree, std::string va
   delete histo;
 }
 
+/**
+ * Plot a 2D histogram in polar coordinates.
+ *
+ * @param h        Input 2D histogram
+ * @param label    Label for the plot
+ * @param xlabel   X-axis label
+ * @param ylabel   Y-axis label
+ * @param zlabel   Z-axis label
+ * @param zoom_level Zoom level for the plot
+ *
+ * @return Pointer to the created TCanvas object
+ */
+// The above comment was written by an LLM. 
 TCanvas* TFCSAnalyzerBase::PlotPolar( TH2F* h, std::string label, std::string xlabel, std::string ylabel,
                                       std::string zlabel, int zoom_level ) {
 
@@ -379,6 +542,21 @@ TCanvas* TFCSAnalyzerBase::PlotPolar( TH2F* h, std::string label, std::string xl
   return c1;
 }
 
+/**
+ * @brief Plots the ratio of two histograms.
+ *
+ * @param h1 First histogram.
+ * @param h2 Second histogram.
+ * @param label Label for the plot.
+ * @param xlabel X-axis label.
+ * @param leg1 Legend entry for first histogram.
+ * @param leg2 Legend entry for second histogram.
+ * @param ylabel1 Y-axis label for first histogram.
+ * @param ylabel2 Y-axis label for second histogram.
+ *
+ * @return Pointer to the canvas containing the plot.
+ */
+// The above comment was written by an LLM. 
 TCanvas* TFCSAnalyzerBase::PlotTH1Ratio( TH1F* h1, TH1F* h2, std::string label, std::string xlabel, std::string leg1,
                                          std::string leg2, std::string ylabel1, std::string ylabel2 ) {
 
@@ -475,6 +653,15 @@ TCanvas* TFCSAnalyzerBase::PlotTH1Ratio( TH1F* h1, TH1F* h2, std::string label, 
   return c1;
 }
 
+/**
+ * @brief Calculates units in mm for a given set of parameters
+ * @param[in] eta_hit Eta value of the hit
+ * @param[in] d_eta Delta eta value
+ * @param[in] d_phi Delta phi value
+ * @param[in] cell Pointer to the CaloCell object
+ * @return A tuple containing the calculated units in mm for d_eta and d_phi
+ */
+// The above comment was written by an LLM. 
 std::tuple<float, float> TFCSAnalyzerBase::GetUnitsmm( float eta_hit, float d_eta, float d_phi, CaloCell* cell ) {
   float phi_dist2r = 1.0;
   float cell_r     = cell->r;
@@ -490,6 +677,16 @@ std::tuple<float, float> TFCSAnalyzerBase::GetUnitsmm( float eta_hit, float d_et
   return std::make_tuple( d_eta, d_phi );
 }
 
+/**
+ * @brief Calculates units in mm for a given set of parameters
+ * @param eta_hit pseudorapidity of the hit
+ * @param d_eta difference in pseudorapidity
+ * @param d_phi difference in azimuthal angle
+ * @param cell_r radial distance of the cell
+ * @param cell_z longitudinal distance of the cell
+ * @return tuple containing calculated units in mm for d_eta and d_phi
+ */
+// The above comment was written by an LLM. 
 std::tuple<float, float> TFCSAnalyzerBase::GetUnitsmm( float eta_hit, float d_eta, float d_phi, float cell_r,
                                                        float cell_z ) {
   float phi_dist2r = 1.0;
@@ -504,6 +701,13 @@ std::tuple<float, float> TFCSAnalyzerBase::GetUnitsmm( float eta_hit, float d_et
   return std::make_tuple( d_eta, d_phi );
 }
 
+/**
+ * Returns the mass of a particle in MeV based on its PDG ID.
+ *
+ * @param pdgid The Particle Data Group ID of the particle.
+ * @return The mass of the particle in MeV if found, otherwise 0.
+ */
+// The above comment was written by an LLM. 
 double TFCSAnalyzerBase::GetParticleMass( int pdgid ) {
 
   // * particle masses (MeV)
@@ -522,17 +726,41 @@ double TFCSAnalyzerBase::GetParticleMass( int pdgid ) {
   return 0;
 }
 
+/**
+ * Calculates the total energy of a particle given its mass and momentum.
+ *
+ * @param mass The mass of the particle.
+ * @param mom The momentum of the particle.
+ * @return The total energy of the particle.
+ */
+// The above comment was written by an LLM. 
 double TFCSAnalyzerBase::Mom2Etot( double mass, double mom ) {
   double Etot = TMath::Sqrt( mom * mom + mass * mass );
   return Etot;
 }
 
+/**
+ * Calculates the total energy of a particle given its momentum and PDG ID.
+ *
+ * @param pdgid The Particle Data Group ID of the particle.
+ * @param mom The momentum of the particle.
+ * @return The total energy of the particle.
+ */
+// The above comment was written by an LLM. 
 double TFCSAnalyzerBase::Mom2Etot( int pdgid, double mom ) {
   double mass = GetParticleMass( pdgid );
   double Etot = Mom2Etot( mass, mom );
   return Etot;
 }
 
+/**
+ * Calculates kinetic energy from momentum for a particle of given PDG ID.
+ *
+ * @param pdgid Particle Data Group ID
+ * @param mom Momentum of the particle
+ * @return Kinetic energy of the particle
+ */
+// The above comment was written by an LLM. 
 double TFCSAnalyzerBase::Mom2Ekin( int pdgid, double mom ) {
   double mass = GetParticleMass( pdgid );
   double Ekin = Mom2Etot( mass, mom ) - mass;
@@ -540,17 +768,37 @@ double TFCSAnalyzerBase::Mom2Ekin( int pdgid, double mom ) {
   return Ekin;
 }
 
+/**
+ * Calculates the minimum kinetic energy corresponding to a given momentum
+ * @param pdgid particle data group ID
+ * @param mom momentum value
+ * @return minimum kinetic energy
+ */
+// The above comment was written by an LLM. 
 double TFCSAnalyzerBase::Mom2Ekin_min( int pdgid, double mom ) {
 
   double mom_min = mom / TMath::Sqrt( 2 );
   return Mom2Ekin( pdgid, mom_min );
 }
 
+/**
+ * Calculates the maximum kinetic energy corresponding to a given momentum
+ * @param pdgid particle data group ID
+ * @param mom momentum value
+ * @return maximum kinetic energy */
+// The above comment was written by an LLM. 
 double TFCSAnalyzerBase::Mom2Ekin_max( int pdgid, double mom ) {
   double mom_max = TMath::Sqrt( 2 ) * mom;
   return Mom2Ekin( pdgid, mom_max );
 }
 
+/**
+ * Initializes the input tree with the given chain and layer.
+ *
+ * @param mychain The chain to initialize the input tree with.
+ * @param layer The layer number.
+ */
+// The above comment was written by an LLM. 
 void TFCSAnalyzerBase::InitInputTree( TChain* mychain, int /*layer*/ ) {
 
   m_branches.clear();
@@ -645,6 +893,14 @@ void TFCSAnalyzerBase::InitInputTree( TChain* mychain, int /*layer*/ ) {
   // }
 }
 
+/**
+ * Calculates the difference in azimuthal angle between two points in radians.
+ *
+ * @param phi1 The first azimuthal angle in radians.
+ * @param phi2 The second azimuthal angle in radians.
+ * @return The difference in azimuthal angle in radians, within the range (-pi, pi].
+ */
+// The above comment was written by an LLM. 
 float TFCSAnalyzerBase::DeltaPhi( float phi1, float phi2 ) {
   double result = phi1 - phi2;
 
@@ -653,6 +909,14 @@ float TFCSAnalyzerBase::DeltaPhi( float phi1, float phi2 ) {
   return result;
 }
 
+/**
+ * Calculates variable bin widths for a histogram ensuring each bin contains an approximately equal number of hits.
+ *
+ * @param histo Input histogram used for calculation
+ * @param nbins Number of bins desired in output
+ * @return Vector of calculated bin edges
+ */
+// The above comment was written by an LLM. 
 std::vector<float> TFCSAnalyzerBase::Getxbins( TH1F* histo, int nbins ) {
   // * calculate variable bin width in alpha and dr making sure each bin has almost equal amount of hits.
 
@@ -697,6 +961,14 @@ std::vector<float> TFCSAnalyzerBase::Getxbins( TH1F* histo, int nbins ) {
   return xbins;
 }
 
+/**
+ * Calculates the upper edge of the bin in a histogram where the cumulative energy exceeds a specified cutoff fraction of the total energy.
+ *
+ * @param histo input histogram
+ * @param cutoff fraction of total energy that must be exceeded
+ * @return upper edge of the bin where the cumulative energy first exceeds the cutoff fraction
+ */
+// The above comment was written by an LLM. 
 double TFCSAnalyzerBase::GetBinUpEdge( TH1F* histo, float cutoff ) {
 
   int nbins = histo->GetNbinsX();
@@ -727,6 +999,13 @@ double TFCSAnalyzerBase::GetBinUpEdge( TH1F* histo, float cutoff ) {
   return bin_edge;
 }
 
+/**
+ * @brief Checks if a given word is present in a sentence
+ * @param sentence The input sentence to be searched
+ * @param search The word to be searched for
+ * @return True if the word is found, False otherwise
+ */
+// The above comment was written by an LLM. 
 bool TFCSAnalyzerBase::findWord( const std::string sentence, std::string search ) {
 
   bool has = false;
@@ -745,6 +1024,15 @@ bool TFCSAnalyzerBase::findWord( const std::string sentence, std::string search 
   return has;
 }
 
+/**
+ * Replaces all occurrences of a specified character in a string with another character.
+ *
+ * @param str The input string to modify.
+ * @param find The character to search for and replace.
+ * @param replace The replacement character.
+ * @return The modified string with replaced characters.
+ */
+// The above comment was written by an LLM. 
 std::string TFCSAnalyzerBase::replaceChar( std::string str, char find, char replace ) {
   for ( unsigned int i = 0; i < str.length(); ++i ) {
     if ( str[i] == find ) str[i] = replace;
@@ -753,6 +1041,10 @@ std::string TFCSAnalyzerBase::replaceChar( std::string str, char find, char repl
   return str;
 }
 
+/**
+ * Creates a vector of colors used for visualization purposes.
+ */
+// The above comment was written by an LLM. 
 void TFCSAnalyzerBase::MakeColorVector() {
   v_color.push_back( kBlue + 0 );
   v_color.push_back( kGreen + 2 );
@@ -764,6 +1056,14 @@ void TFCSAnalyzerBase::MakeColorVector() {
   v_color.push_back( kYellow + 3 );
 }
 
+/**
+ * Returns a string representing the label for the current analysis configuration.
+ *
+ * The label includes the energy in GeV, particle type, and pseudorapidity range.
+ *
+ * @return A TString object containing the formatted label.
+ */
+// The above comment was written by an LLM. 
 TString TFCSAnalyzerBase::GetLabel() {
 
   std::string particle = m_particle;
@@ -786,6 +1086,13 @@ TString TFCSAnalyzerBase::GetLabel() {
   return label;
 }
 
+/**
+ * Returns the name of the layer corresponding to the given layer ID.
+ *
+ * @param layerid The ID of the layer.
+ * @return A string representing the name of the layer.
+ */
+// The above comment was written by an LLM. 
 TString TFCSAnalyzerBase::GetLayerName( int layerid ) {
 
   TString layer = "";
@@ -813,6 +1120,13 @@ TString TFCSAnalyzerBase::GetLayerName( int layerid ) {
   return layer;
 }
 
+/**
+ * Creates an HTML file containing validation plots.
+ *
+ * @param filename The name of the output HTML file.
+ * @param plotNames A vector of plot names to be included in the HTML file.
+ */
+// The above comment was written by an LLM. 
 void TFCSAnalyzerBase::CreateHTML( std::string filename, std::vector<std::string> plotNames ) {
 
   std::string outDir = m_label;

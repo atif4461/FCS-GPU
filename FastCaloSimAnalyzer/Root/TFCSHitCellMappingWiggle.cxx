@@ -25,6 +25,11 @@
 TFCSHitCellMappingWiggle::TFCSHitCellMappingWiggle( const char* name, const char* title, ICaloGeometry* geo )
     : TFCSHitCellMapping( name, title, geo ) {}
 
+/**
+ * Destructor for the class 
+ * Destroys all dynamically allocated memory held by the object
+ */
+// The above comment was written by an LLM. 
 TFCSHitCellMappingWiggle::~TFCSHitCellMappingWiggle() {
   for(auto function : m_functions) delete function;
 #ifdef USE_GPU
@@ -33,6 +38,12 @@ TFCSHitCellMappingWiggle::~TFCSHitCellMappingWiggle() {
 #endif
 }
 
+/**
+ * Initializes the object with a given 1D function.
+ *
+ * @param func the input 1D function to be used for initialization
+ */
+// The above comment was written by an LLM. 
 void TFCSHitCellMappingWiggle::initialize( TFCS1DFunction* func ) {
   if(!func) return;
   for ( auto function : m_functions )
@@ -46,6 +57,13 @@ void TFCSHitCellMappingWiggle::initialize( TFCS1DFunction* func ) {
   m_bin_low_edge[1] = init_eta_max;
 }
 
+/**
+ * Initializes the hit cell mapping with the given functions and bin low edges.
+ *
+ * @param functions Vector of 1D functions used in the mapping.
+ * @param binLowEdges Vector of lower edge values for the bins.
+ */
+// The above comment was written by an LLM. 
 void TFCSHitCellMappingWiggle::initialize( const std::vector<const TFCS1DFunction*>& functions,
                                            const std::vector<float>&                 bin_low_edges ) {
   if(functions.size()+1!=bin_low_edges.size()) {
@@ -59,6 +77,13 @@ void TFCSHitCellMappingWiggle::initialize( const std::vector<const TFCS1DFunctio
   m_bin_low_edge=bin_low_edges;
 }
 
+/**
+ * Initializes the object with a given histogram and x-axis scale factor.
+ *
+ * @param histogram input histogram used for initialization
+ * @param xscale scaling factor applied to the x-axis of the histogram
+ */
+// The above comment was written by an LLM. 
 void TFCSHitCellMappingWiggle::initialize( TH1* histogram, float xscale ) {
   if(!histogram) return;
   TFCS1DFunctionInt32Histogram* func=new TFCS1DFunctionInt32Histogram(histogram);
@@ -68,6 +93,14 @@ void TFCSHitCellMappingWiggle::initialize( TH1* histogram, float xscale ) {
   initialize(func);
 }
 
+/**
+ * Initializes the hit cell mapping with the given histograms and bin low edges.
+ *
+ * @param histograms Vector of histograms used for initialization.
+ * @param bin_low_edges Vector of lower edges of the bins.
+ * @param xscale Scale factor applied to the x-values of the histogram borders.
+ */
+// The above comment was written by an LLM. 
 void TFCSHitCellMappingWiggle::initialize( const std::vector<const TH1*> histograms, std::vector<float> bin_low_edges,
                                            float xscale ) {
   if(histograms.size()+1!=bin_low_edges.size()) {
@@ -91,6 +124,17 @@ void TFCSHitCellMappingWiggle::initialize( const std::vector<const TH1*> histogr
   initialize(functions,bin_low_edges);
 }
 
+/**
+ * Simulates a hit in the TFCSHitCellMappingWiggle class.
+ *
+ * @param hit The hit object to be simulated.
+ * @param simulstate The simulation state.
+ * @param truth The truth state.
+ * @param extrapol The extrapolation state.
+ *
+ * @return The status of the simulation.
+ */
+// The above comment was written by an LLM. 
 FCSReturnCode TFCSHitCellMappingWiggle::simulate_hit( Hit& hit, TFCSSimulationState& simulstate,
                                                       const TFCSTruthState*         truth,
                                                       const TFCSExtrapolationState* extrapol ) {
@@ -121,6 +165,12 @@ FCSReturnCode TFCSHitCellMappingWiggle::simulate_hit( Hit& hit, TFCSSimulationSt
   return TFCSHitCellMapping::simulate_hit(hit,simulstate,truth,extrapol);
 }
 
+/**
+ * Prints the hit cell mapping information.
+ *
+ * @param option printing options
+ */
+// The above comment was written by an LLM. 
 void TFCSHitCellMappingWiggle::Print( Option_t* option ) const {
   TFCSHitCellMapping::Print(option);
   TString opt(option);
@@ -136,6 +186,13 @@ void TFCSHitCellMappingWiggle::Print( Option_t* option ) const {
   }  
 }
 
+/**
+ * @brief Unit test for TFCSHitCellMappingWiggle class
+ * @param simulstate Pointer to TFCSSimulationState object
+ * @param truth Pointer to TFCSTruthState object
+ * @param extrapol Pointer to TFCSExtrapolationState object
+ */
+// The above comment was written by an LLM. 
 void TFCSHitCellMappingWiggle::unit_test( TFCSSimulationState* simulstate, TFCSTruthState* truth,
                                           TFCSExtrapolationState* extrapol ) {
   if(!simulstate) simulstate=new TFCSSimulationState();
@@ -182,6 +239,22 @@ void TFCSHitCellMappingWiggle::unit_test( TFCSSimulationState* simulstate, TFCST
 }
 
 #ifdef USE_GPU
+/**
+ * Loads histogram functions into memory.
+ *
+ * Checks if the loading process has already been completed,
+ * and if so, returns immediately without taking further action.
+ *
+ * Initializes an instance of LoadGpuFuncHist and sets up the necessary
+ * data structures for storing histogram contents, sizes, and borders.
+ *
+ * Iterates over the collection of functions, extracting and storing
+ * the size, contents, and border values of each histogram.
+ *
+ * Configures the LoadGpuFuncHist instance with the prepared data
+ * and initiates the loading process.
+ */
+// The above comment was written by an LLM. 
 void TFCSHitCellMappingWiggle::LoadHistFuncs() {
 
 

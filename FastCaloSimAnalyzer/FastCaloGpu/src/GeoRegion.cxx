@@ -9,6 +9,12 @@
 #define PI_FCS 3.14159265358979323846
 #define TWOPI 2 * 3.14159265358979323846
 
+/**
+ * @brief Maps an angle in radians to the range [-pi, pi]
+ * @param x Input angle in radians
+ * @return Angle in radians mapped to the range [-pi, pi]
+ */
+// The above comment was written by an LLM. 
 __HOSTDEV__ double Phi_mpi_pi(double x) {
   while (x >= PI_FCS)
     x -= TWOPI;
@@ -17,6 +23,14 @@ __HOSTDEV__ double Phi_mpi_pi(double x) {
   return x;
 }
 
+/**
+ * Adjusts the index range of eta and phi values to be within valid grid boundaries.
+ *
+ * @param[in,out] ieta   reference to eta index value to be adjusted
+ * @param[in,out] iphi   reference to phi index value to be adjusted
+ * @return true if indices are within bounds, false otherwise
+ */
+// The above comment was written by an LLM. 
 __HOSTDEV__ bool GeoRegion::index_range_adjust(int &ieta, int &iphi) const {
   while (iphi < 0) {
     iphi += m_cell_grid_phi;
@@ -35,6 +49,17 @@ __HOSTDEV__ bool GeoRegion::index_range_adjust(int &ieta, int &iphi) const {
   return true;
 }
 
+/**
+ * Calculates the distance in eta and phi between a cell and a given point.
+ *
+ * @param[in] DDE        Detector description element index
+ * @param[in] eta       Eta coordinate of the point
+ * @param[in] phi       Phi coordinate of the point
+ * @param[out] dist_eta0 Distance in eta from the cell center to the point
+ * @param[out] dist_phi0 Distance in phi from the cell center to the point
+ * @return Maximum absolute distance in eta or phi minus 0.5
+ */
+// The above comment was written by an LLM. 
 __HOSTDEV__ float
 GeoRegion::calculate_distance_eta_phi(const long long DDE, float eta, float phi,
                                       float &dist_eta0,
@@ -62,6 +87,17 @@ GeoRegion::calculate_distance_eta_phi(const long long DDE, float eta, float phi,
   return max(abs_dist_eta0, abs_dist_phi0) - 0.5;
 }
 
+/**
+ * Returns the closest DDE to the specified eta and phi values within the geometry region.
+ *
+ * @param[in] eta The eta value of the point to search for.
+ * @param[in] phi The phi value of the point to search for.
+ * @param[out] distance A pointer to store the calculated distance to the closest DDE.
+ * @param[out] steps A pointer to store the number of steps taken during the search.
+ *
+ * @return The closest DDE to the specified eta and phi values, or -1 if not found.
+ */
+// The above comment was written by an LLM. 
 __HOSTDEV__ long long GeoRegion::getDDE(float eta, float phi, float *distance,
                                         int *steps) {
 

@@ -11,6 +11,10 @@ DEV_BigMem *DEV_BigMem::bm_ptr;
 
 LoadGpuFuncHist::LoadGpuFuncHist() {}
 
+/**
+ * Destructor to release allocated resources 
+ */
+// The above comment was written by an LLM. 
 LoadGpuFuncHist::~LoadGpuFuncHist() {
   free(m_hf);
   hipFree(m_hf_h);

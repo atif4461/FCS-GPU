@@ -18,6 +18,13 @@ TFCSEnergyParametrizationPCABinCalculator::TFCSEnergyParametrizationPCABinCalcul
   m_PCAbin        = -1;
 }
 
+/**
+ * Simulates energy parametrization PCA bin calculation.
+ *
+ * @param simulstate Simulation state object
+ * @return FCSReturnCode indicating success or failure of simulation
+ */
+// The above comment was written by an LLM. 
 FCSReturnCode TFCSEnergyParametrizationPCABinCalculator::simulate(TFCSSimulationState& simulstate, const TFCSTruthState* /*truth*/, const TFCSExtrapolationState* /*extrapol*/)
 {
 

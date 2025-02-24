@@ -33,6 +33,10 @@ TFCSValidationEnergyAndHits::TFCSValidationEnergyAndHits( const char* name, cons
     , m_deltaEtaAveragedPerEvent( 0. )
     , m_eventCounter( 0 ) {}
 
+/**
+ * Constructor for the class initializing member variables with default values
+ */
+// The above comment was written by an LLM. 
 TFCSValidationEnergyAndHits::TFCSValidationEnergyAndHits( TFCSLateralShapeParametrizationHitBase* hitsim )
     : TFCSLateralShapeParametrizationHitChain( hitsim )
     , m_geo( nullptr )
@@ -47,6 +51,12 @@ TFCSValidationEnergyAndHits::TFCSValidationEnergyAndHits( TFCSLateralShapeParame
     , m_deltaEtaAveragedPerEvent( 0. )
     , m_eventCounter( 0 ) {}
 
+/**
+ * Sets the geometry for the validation energy and hits calculation.
+ *
+ * @param geo The calorimeter geometry object to be used in calculations.
+ */
+// The above comment was written by an LLM. 
 void TFCSValidationEnergyAndHits::set_geometry( ICaloGeometry* geo ) {
   m_geo = geo;
   TFCSLateralShapeParametrizationHitChain::set_geometry( geo );
@@ -54,6 +64,12 @@ void TFCSValidationEnergyAndHits::set_geometry( ICaloGeometry* geo ) {
 
 void TFCSValidationEnergyAndHits::add_histo( TH1* hist ) { m_histos.push_back( hist ); }
 
+/**
+ * Returns the total number of hits in the simulation state.
+ *
+ * @return The total number of hits.
+ */
+// The above comment was written by an LLM. 
 int TFCSValidationEnergyAndHits::get_number_of_hits( TFCSSimulationState& /*simulstate*/,
                                                      const TFCSTruthState* /*truth*/,
                                                      const TFCSExtrapolationState* /*extrapol*/ ) const {
@@ -67,6 +83,16 @@ int TFCSValidationEnergyAndHits::get_number_of_hits( TFCSSimulationState& /*simu
   return nhits;
 }
 
+/**
+ * @brief Simulates the energy and hits for the given simulation state, truth state, and extrapolation state.
+ *
+ * @param simulstate The simulation state to be used for the simulation.
+ * @param truth The truth state to be used for the simulation.
+ * @param extrapol The extrapolation state to be used for the simulation.
+ *
+ * @return The status of the simulation.
+ */
+// The above comment was written by an LLM. 
 FCSReturnCode TFCSValidationEnergyAndHits::simulate( TFCSSimulationState& simulstate, const TFCSTruthState* truth,
                                                      const TFCSExtrapolationState* extrapol ) {
   if ( !analysis() ) return FCSFatal;
@@ -200,6 +226,12 @@ FCSReturnCode TFCSValidationEnergyAndHits::simulate( TFCSSimulationState& simuls
   return FCSSuccess;
 }
 
+/**
+ * Prints validation energy and hits information according to the specified options.
+ *
+ * @param option  printing options
+ */
+// The above comment was written by an LLM. 
 void TFCSValidationEnergyAndHits::Print( Option_t* option ) const {
   TString opt( option );
   bool    shortprint = opt.Index( "short" ) >= 0;

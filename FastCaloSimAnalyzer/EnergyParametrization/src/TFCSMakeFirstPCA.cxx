@@ -28,6 +28,11 @@ using namespace std;
 
 #define LAYERMAX 24
 
+/**
+ * Constructor for the class 
+ * Initializes default parameters for the object
+ */
+// The above comment was written by an LLM. 
 TFCSMakeFirstPCA::TFCSMakeFirstPCA() {
   // default parameters:
   m_use_absolute_layercut = 0;
@@ -42,6 +47,12 @@ TFCSMakeFirstPCA::TFCSMakeFirstPCA() {
   m_chain       = 0;
 }
 
+/**
+ * Constructor for TFCSMakeFirstPCA class 
+ * Initializes object with input chain and output filename
+ * Sets default values for various member variables
+ */
+// The above comment was written by an LLM. 
 TFCSMakeFirstPCA::TFCSMakeFirstPCA( TChain* chain, string outfilename ) {
   // default parameters:
   m_use_absolute_layercut = 0;
@@ -60,6 +71,12 @@ void TFCSMakeFirstPCA::set_cumulativehistobins( int bins ) { m_numberfinebins = 
 
 void TFCSMakeFirstPCA::set_edepositcut( double cut ) { m_edepositcut = cut; }
 
+/**
+ * Sets the eta cut range for the first principal component analysis.
+ * @param cut_low The lower bound of the eta cut range.
+ * @param cut_high The upper bound of the eta cut range.
+ */
+// The above comment was written by an LLM. 
 void TFCSMakeFirstPCA::set_etacut( double cut_low, double cut_high ) {
   m_cut_eta_low  = cut_low;
   m_cut_eta_high = cut_high;
@@ -249,6 +266,14 @@ vector<TH1D*> TFCSMakeFirstPCA::get_cumul_histos( vector<string> layer_totE_name
   return cumul;
 }
 
+/**
+ * Returns a vector of relevant layers based on the input tree and energy cut.
+ *
+ * @param read_inputTree The input tree containing the data.
+ * @param ecut The energy cut value.
+ * @return A vector of integers representing the relevant layers.
+ */
+// The above comment was written by an LLM. 
 vector<int> TFCSMakeFirstPCA::get_relevantlayers( TreeReader* read_inputTree, double ecut ) {
 
   cout << "in TFCSMakeFirstPCA::get_relevantlayers" << endl;
@@ -350,6 +375,18 @@ vector<int> TFCSMakeFirstPCA::get_relevantlayers( TreeReader* read_inputTree, do
   return layer_number;
 }
 
+/**
+ * @brief Retrieves histograms from a tree for the specified layers.
+ *
+ * This function iterates over events in the input tree, applies an eta cut if required,
+ * and extracts energy values for the specified layers. It then creates and fills
+ * histograms with these energies, applying rescaling if necessary.
+ *
+ * @param layer_number Vector of layer numbers to retrieve histograms for.
+ * @param read_inputTree Input tree containing event data.
+ * @return Vector of pointers to TH1D histograms, one for each layer plus a total energy histogram.
+ */
+// The above comment was written by an LLM. 
 vector<TH1D*> TFCSMakeFirstPCA::get_G4_histos_from_tree( vector<int> layer_number, TreeReader* read_inputTree ) {
 
   cout << "in TFCSMakeFirstPCA::get_G4_histos_from_tree" << endl;
@@ -455,6 +492,14 @@ vector<TH1D*> TFCSMakeFirstPCA::get_G4_histos_from_tree( vector<int> layer_numbe
   return h_data;
 }
 
+/**
+ * Calculates the cumulative value at a given point in a histogram.
+ *
+ * @param x The point at which to calculate the cumulative value.
+ * @param h The input histogram.
+ * @return The cumulative value at the specified point.
+ */
+// The above comment was written by an LLM. 
 double TFCSMakeFirstPCA::get_cumulant( double x, TH1D* h ) {
 
   int bin = h->FindBin( x );

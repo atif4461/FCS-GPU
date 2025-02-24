@@ -11,6 +11,13 @@
 
 #define kok_randgen_t Kokkos::Random_XorShift64_Pool<>
 
+/**
+ * Allocates memory for simulation data structures.
+ *
+ * @param maxhitct Maximum number of hits per cell
+ * @param n_cells Total number of cells in the simulation
+ */
+// The above comment was written by an LLM. 
 void Rand4Hits::allocate_simulation(int /*maxbins*/, int maxhitct,
                                     unsigned long n_cells) {
 

@@ -39,6 +39,18 @@ Options:
 )";
 
 
+/**
+ * @brief Runs the TFCS average shape simulation.
+ *
+ * @param pdgid The PDG ID of the particle.
+ * @param int_E The integer value of the energy.
+ * @param etamin The minimum eta value.
+ * @param etamax The maximum eta value.
+ * @param seed The random seed.
+ * @param production Whether this is a production run.
+ * @return An integer indicating success or failure.
+ */
+// The above comment was written by an LLM. 
 int runTFCSAverageShape(int pdgid = 22,int int_E = 65536,double etamin = 0.2,double etamax = 0.25, long seed = 42, bool production = false)
 {
   FCS::LateralShapeParametrizationArray hit_to_cell_mapping = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -216,6 +228,24 @@ int runTFCSAverageShape(int pdgid = 22,int int_E = 65536,double etamin = 0.2,dou
   return 0;
 }
 
+/**
+ * Main program entry point.
+ *
+ * @param argc Number of command line arguments.
+ * @param argv Array of command line argument strings.
+ * @return Program exit status.
+  
+ * Runs TFCS average shape validation with specified parameters.
+ *
+ * @param pdgId Particle data group identifier.
+ * @param energy Energy value.
+ * @param etamin Minimum eta value.
+ * @param etamax Maximum eta value.
+ * @param seed Random number generator seed.
+ * @param production Flag indicating production mode.
+ * @return Result of running TFCS average shape validation.
+ */
+// The above comment was written by an LLM. 
 int main(int argc, char **argv)
 {
   std::map<std::string, docopt::value> args

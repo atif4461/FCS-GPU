@@ -267,6 +267,13 @@ bool CaloGeometryFromFile::LoadFCalGeometryFromFiles( const std::array<std::stri
   return this->checkFCalGeometryConsistency();
 }
 
+/**
+ * Draws an FCal graph from cell coordinates stored in a sampling map.
+ *
+ * @param isam sampling identifier
+ * @param color line color of the graph
+ */
+// The above comment was written by an LLM. 
 void CaloGeometryFromFile::DrawFCalGraph( int isam, int color ) {
 
   std::stringstream ss;
@@ -296,6 +303,14 @@ void CaloGeometryFromFile::DrawFCalGraph( int isam, int color ) {
   graph->Draw( "AP" );
 }
 
+/**
+ * Calculates the minimum and maximum radial distances of FCal channels.
+ *
+ * This function iterates over all FCal channels in the channel map,
+ * calculates their radial distance from the origin, and updates the
+ * minimum and maximum radial distances for each module.
+ */
+// The above comment was written by an LLM. 
 void CaloGeometryFromFile::calculateFCalRminRmax() {
 
   m_FCal_rmin.resize( 3, FLT_MAX );
@@ -312,6 +327,15 @@ void CaloGeometryFromFile::calculateFCalRminRmax() {
     }
 }
 
+/**
+ * Checks the consistency of the FCal geometry from a file.
+ *
+ * This function verifies that the channel map and geometric description
+ * elements match in terms of cell positions and dimensions.
+ *
+ * @return True if the geometry is consistent, false otherwise.
+ */
+// The above comment was written by an LLM. 
 bool CaloGeometryFromFile::checkFCalGeometryConsistency() {
 
   unsigned long long phi_index, eta_index;

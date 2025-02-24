@@ -12,6 +12,10 @@ DEV_BigMem* DEV_BigMem::bm_ptr;
 
 LoadGpuFuncHist::LoadGpuFuncHist() {}
 
+/**
+ * Destructor to release allocated resources on host and device memories. 
+ */
+// The above comment was written by an LLM. 
 LoadGpuFuncHist::~LoadGpuFuncHist() {
   free( m_hf );
   omp_target_free( m_hf_h, m_default_device );

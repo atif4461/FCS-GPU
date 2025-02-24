@@ -4,6 +4,12 @@
 
 #include "XrdStreamBuf.h"
 
+/**
+ * Constructs an XrdStreamBuf object with the specified file URL and buffer size.
+ * @param fileUrl The URL of the file to be opened.
+ * @param bufferSize The size of the internal buffer in bytes.
+ */
+// The above comment was written by an LLM. 
 XrdStreamBuf::XrdStreamBuf(const std::string &fileUrl,
                             uint32_t bufferSize)
     : _buffer(new char[bufferSize]), _bufferSize(bufferSize),
@@ -15,6 +21,12 @@ XrdStreamBuf::XrdStreamBuf(const std::string &fileUrl,
   }
 }
 
+/**
+ * Destructor for XrdStreamBuf class 
+ * Releases system resources associated with the object
+ * Closes the file and prints error message if close operation fails
+ */
+// The above comment was written by an LLM. 
 XrdStreamBuf::~XrdStreamBuf()
 {
   delete[] _buffer;
@@ -24,6 +36,12 @@ XrdStreamBuf::~XrdStreamBuf()
   }
 }
 
+/**
+ * Checks if the buffer is underflow and reads more data from the file if necessary.
+ *
+ * @return The next character in the buffer or eof if the end of the file is reached.
+ */
+// The above comment was written by an LLM. 
 int XrdStreamBuf::underflow()
 {
   if ( gptr() == egptr() ) {

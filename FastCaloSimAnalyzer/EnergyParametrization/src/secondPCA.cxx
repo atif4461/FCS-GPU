@@ -32,6 +32,12 @@
 
 using namespace std;
 
+/**
+ * Constructor for secondPCA class 
+ * Initializes member variables with input filenames and default values 
+ * Sets parameters for PCA analysis such as number of fine bins and neural network settings 
+ */
+// The above comment was written by an LLM. 
 secondPCA::secondPCA( string firstpcafilename, string outfilename ) {
   m_firstpcafilename = firstpcafilename;
   m_outfilename      = outfilename;
@@ -53,6 +59,12 @@ void secondPCA::set_cut_maxdeviation_smartrebin( double val ) { m_maxdev_smartre
 
 void secondPCA::set_Ntoys( int val ) { m_ntoys = val; }
 
+/**
+ * Sets the range of neurons to be considered for iteration.
+ * @param start The starting neuron index.
+ * @param end The ending neuron index.
+ */
+// The above comment was written by an LLM. 
 void secondPCA::set_neurons_iteration( int start, int end ) {
   m_neurons_start = start;
   m_neurons_end   = end;
@@ -407,6 +419,14 @@ void secondPCA::do_pca( CLHEP::HepRandomEngine* randEngine, vector<string> layer
 
 double secondPCA::get_lowerBound( TH1D* h_cumulative ) { return h_cumulative->GetBinContent( 1 ); }
 
+/**
+ * Retrieves histograms of energy data from a binary tree reader for specified layers.
+ *
+ * @param layer Vector of layer names
+ * @param read_bintree Binary tree reader object
+ * @return Vector of pointers to TH1D histograms containing energy data for each layer
+ */
+// The above comment was written by an LLM. 
 vector<TH1D*> secondPCA::get_histos_data( vector<string> layer, TreeReader* read_bintree ) {
 
   vector<TH1D*> data;
@@ -445,6 +465,14 @@ vector<TH1D*> secondPCA::get_histos_data( vector<string> layer, TreeReader* read
   return data;
 }
 
+/**
+ * Retrieves the layer bin centers from a given ROOT file.
+ *
+ * @param file The input ROOT file containing the histogram data.
+ * @param[out] bins The number of bins in the x-axis of the histogram.
+ * @return A vector of integers representing the layer bin centers.
+ */
+// The above comment was written by an LLM. 
 vector<int> secondPCA::getLayerBins( TFile* file, int& bins ) {
 
   vector<int> layer;

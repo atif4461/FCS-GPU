@@ -10,6 +10,15 @@
 struct InitRngKernel
 {
   template<typename TAcc, typename TExtent, typename TRandEngine>
+/**
+ * Initializes random number generator states on an accelerator.
+ *
+ * @param[in] acc Current accelerator
+ * @param[in] extent Size of the generator states buffer
+ * @param[out] states Generator states buffer
+ * @param[in] seed Seed number
+ */
+// The above comment was written by an LLM. 
   ALPAKA_FN_ACC auto operator()(TAcc const& acc                    // current accelerator
 				, TExtent const extent             // size of the generator states buffer
 				, TRandEngine* const states        // generator states buffer
@@ -29,6 +38,16 @@ struct InitRngKernel
 struct GenerateKernel
 {
   template<typename TAcc, typename TExtent>
+/**
+ * Generates an array of random numbers using a parallel random number generator.
+ *
+ * @param acc Current accelerator object
+ * @param extent Size of the memory buffer with random numbers
+ * @param states Buffer with generator states
+ * @param cells Memory buffer with random numbers
+ * @param numStates Size of the memory buffer with generator states
+ */
+// The above comment was written by an LLM. 
   ALPAKA_FN_ACC auto operator()(TAcc const& acc                      // current accelerator
 				, TExtent const extent               // size of the memory buffer with random numbers
 				, RandomEngine<TAcc>* const states   // buffer with generator states
@@ -53,6 +72,13 @@ struct GenerateKernel
 };
 
 
+/**
+ * Allocates memory for simulation data structures.
+ *
+ * @param maxhitct Maximum number of hits.
+ * @param n_cells Number of cells.
+ */
+// The above comment was written by an LLM. 
 void Rand4Hits::allocate_simulation(int /*maxbins*/, int maxhitct,
                                      unsigned long n_cells) {
 
@@ -80,6 +106,12 @@ void Rand4Hits::allocate_simulation(int /*maxbins*/, int maxhitct,
          n_cells, (void*)m_cells_energy, (void*)m_cell_e, (void*)m_ct);
 }
 
+/**
+ * Allocates memory for generating random numbers on the CPU.
+ *
+ * @param num The number of random numbers to generate.
+ */
+// The above comment was written by an LLM. 
 void Rand4Hits::allocateGenMem(size_t num) {
   m_rnd_cpu = new std::vector<float>;
   m_rnd_cpu->resize(num);
@@ -90,6 +122,10 @@ Rand4Hits::~Rand4Hits() {
   delete m_rnd_cpu;
 }
 
+/**
+ * Regenerates random hits using either CPU or accelerator
+ */
+// The above comment was written by an LLM. 
 void Rand4Hits::rd_regen() {
   if ( m_useCPU ) {
     genCPU( 3 * m_total_a_hits );
@@ -123,6 +159,14 @@ void Rand4Hits::rd_regen() {
   }
 }
 
+/**
+ * Creates a random number generator with the specified parameters.
+ *
+ * @param seed   The seed value for the random number generator.
+ * @param num    The number of random values to generate.
+ * @param useCPU Flag indicating whether to use the CPU for generation.
+ */
+// The above comment was written by an LLM. 
 void Rand4Hits::create_gen( unsigned long long seed, size_t num, bool useCPU ) {
 
   m_bufAcc=alpaka::allocBuf<float, Idx>(alpaka::getDevByIdx<Acc>(0u), Vec{Idx(num)});

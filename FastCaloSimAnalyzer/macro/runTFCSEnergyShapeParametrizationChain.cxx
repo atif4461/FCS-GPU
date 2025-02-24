@@ -6,6 +6,16 @@
 #include "runTFCS2DParametrizationHistogram.cxx"
 
 
+/**
+ * @brief Runs the TFCS energy shape parametrization chain.
+ *
+ * @param pdgid Particle data group ID (default: 22).
+ * @param Emin Minimum energy (default: 64).
+ * @param Emax Maximum energy (default: 4194304).
+ * @param etamin Minimum eta value (default: 0).
+ * @param etamax Maximum eta value (default: 5).
+ */
+// The above comment was written by an LLM. 
 void runTFCSEnergyShapeParametrizationChain(int pdgid = 22, int Emin = 64, int Emax = 4194304, double etamin = 0, double etamax = 5.)
 {
 

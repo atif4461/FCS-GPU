@@ -35,6 +35,19 @@
 #include "TFCSSampleDiscovery.h"
 
 
+/**
+ * @brief Zooms in on a histogram within specified ranges.
+ *
+ * This function takes an input histogram and returns a new histogram that is zoomed in
+ * on the range defined by the minimum and maximum values of the input histogram.
+ *
+ * The output histogram has the same title as the input histogram but with "_zoom"
+ * appended to its name. The x and y axis titles are also copied from the input histogram.
+ *
+ * @param h_in Input histogram to be zoomed in on.
+ * @return A new histogram that is zoomed in on the specified range.
+ */
+// The above comment was written by an LLM. 
 TH1F* zoomHisto(TH1* h_in)
 {
 
@@ -67,6 +80,14 @@ TH1F* zoomHisto(TH1* h_in)
 }
 
 
+/**
+ * Creates a 2D histogram from a given input histogram with an applied energy cutoff.
+ *
+ * @param h             Input histogram
+ * @param energy_cutoff Energy cutoff value
+ * @return              Newly created 2D histogram
+ */
+// The above comment was written by an LLM. 
 TH2* Create2DHistogram(TH2* h, float energy_cutoff)
 {
 
@@ -104,6 +125,13 @@ TH2* Create2DHistogram(TH2* h, float energy_cutoff)
   return h2;
 }
 
+/**
+ * Creates a polar plot from a given 2D histogram and saves it as an image file.
+ *
+ * @param h        input 2D histogram
+ * @param outDir   output directory path
+ */
+// The above comment was written by an LLM. 
 void CreatePolarPlot(TH2F* h, std::string outDir)
 {
 
@@ -126,6 +154,27 @@ void CreatePolarPlot(TH2F* h, std::string outDir)
 }
 
 
+/**
+ * @brief Runs the TFCS 2D parameterization histogram.
+ *
+ * @param dsid Data set ID.
+ * @param dsid_zv0 Data set ID for z-vertex studies.
+ * @param sampleData Sample data string.
+ * @param topDir Top directory path.
+ * @param version Version string.
+ * @param energy_cutoff Energy cutoff value.
+ * @param topPlotDir Top plot directory path.
+ * @param do2DParam Flag to perform 2D parameterization.
+ * @param isPhiSymmetry Flag for phi symmetry.
+ * @param doMeanRz Flag to calculate mean Rz.
+ * @param useMeanRz Flag to use pre-calculated mean Rz values.
+ * @param doZVertexStudies Flag to perform z-vertex studies.
+ * @param seed Random seed value.
+ * @param nEvents Number of events to process.
+ * @param firstEvent First event number.
+ * @param debug Debug flag.
+ */
+// The above comment was written by an LLM. 
 void runTFCS2DParametrizationHistogram(int dsid,
                                        int dsid_zv0,
                                        std::string sampleData,
@@ -586,6 +635,94 @@ Options:
 
 
 
+/**
+ * @brief Main entry point of the program.
+ *
+ * @param argc Number of command line arguments.
+ * @param argv Array of command line argument strings.
+ * @return Program exit status.
+ 
+ 
+  * @brief Checks if --dsid option is provided and converts it to long.
+ *
+ * @throws std::invalid_argument If --dsid option is not provided or cannot be converted to long.
+ 
+ 
+  * @brief Checks if --dsid_zv0 option is provided and converts it to long.
+ *
+ * @throws std::invalid_argument If --dsid_zv0 option is not provided or cannot be converted to long.
+ 
+ 
+  * @brief Checks if --sampleData option is provided and retrieves its value as string.
+ *
+ * @throws std::invalid_argument If --sampleData option is not provided.
+ 
+ 
+  * @brief Checks if --topDir option is provided and retrieves its value as string.
+ *
+ * @throws std::invalid_argument If --topDir option is not provided.
+ 
+ 
+  * @brief Checks if --version option is provided and retrieves its value as string.
+ *
+ * @throws std::invalid_argument If --version option is not provided.
+ 
+ 
+  * @brief Checks if --energy_cutoff option is provided and converts it to float.
+ *
+ * @throws std::invalid_argument If --energy_cutoff option is not provided or cannot be converted to float.
+ 
+ 
+  * @brief Checks if --topPlotDir option is provided and retrieves its value as string.
+ *
+ * @throws std::invalid_argument If --topPlotDir option is not provided.
+ 
+ 
+  * @brief Checks if --do2DParam option is provided and converts it to long.
+ *
+ * @throws std::invalid_argument If --do2DParam option is not provided or cannot be converted to long.
+ 
+ 
+  * @brief Checks if --isPhiSymmetry option is provided and converts it to long.
+ *
+ * @throws std::invalid_argument If --isPhiSymmetry option is not provided or cannot be converted to long.
+ 
+ 
+  * @brief Checks if --doMeanRz option is provided and converts it to long.
+ *
+ * @throws std::invalid_argument If --doMeanRz option is not provided or cannot be converted to long.
+ 
+ 
+  * @brief Checks if --useMeanRz option is provided and converts it to long.
+ *
+ * @throws std::invalid_argument If --useMeanRz option is not provided or cannot be converted to long.
+ 
+ 
+  * @brief Checks if --doZVertexStudies option is provided and converts it to long.
+ *
+ * @throws std::invalid_argument If --doZVertexStudies option is not provided or cannot be converted to long.
+ 
+ 
+  * @brief Checks if --seed option is provided and converts it to long.
+ *
+ * @throws std::invalid_argument If --seed option is not provided or cannot be converted to long.
+ 
+ 
+  * @brief Checks if --nEvents option is provided and converts it to long.
+ *
+ * @throws std::invalid_argument If --nEvents option is not provided or cannot be converted to long.
+ 
+ 
+  * @brief Checks if --firstEvent option is provided and converts it to long.
+ *
+ * @throws std::invalid_argument If --firstEvent option is not provided or cannot be converted to long.
+ 
+ 
+  * @brief Checks if --debug option is provided and converts it to long.
+ *
+ * @throws std::invalid_argument If --debug option is not provided or cannot be converted to long.
+ */
+// The above comment was written by an LLM. 
 int main(int argc, char **argv)
 {
   

@@ -21,6 +21,10 @@ using namespace CaloGpuGeneral_fnc;
 
 namespace CaloGpuGeneral_stdpar {
 
+/**
+ * Tests the atomic add operation on an integer variable using parallel execution.
+ */
+// The above comment was written by an LLM. 
 void test_atomicAdd_int() {
   std::cout << "---------- test_atomic<int>_add -------------\n";
   std::atomic<int> *ii = new std::atomic<int>{ 0 };

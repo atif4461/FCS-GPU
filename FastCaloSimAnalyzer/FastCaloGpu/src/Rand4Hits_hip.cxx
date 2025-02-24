@@ -34,6 +34,14 @@
 #endif
 
 #ifndef USE_STDPAR
+/**
+ * Allocates memory for simulation data structures.
+ *
+ * @param maxbins Maximum number of bins.
+ * @param maxhitct Maximum number of hits.
+ * @param n_cells Number of cells.
+ */
+// The above comment was written by an LLM. 
 void Rand4Hits::allocate_simulation(int maxbins, int maxhitct,
                                     unsigned long n_cells) {
 
@@ -72,6 +80,12 @@ void Rand4Hits::allocate_simulation(int maxbins, int maxhitct,
 #endif
 
 #ifndef USE_STDPAR
+/**
+ * Allocates memory for generating random numbers on the CPU.
+ *
+ * @param num The number of random numbers to generate.
+ */
+// The above comment was written by an LLM. 
 void Rand4Hits::allocateGenMem(size_t num) {
   m_rnd_cpu = new std::vector<float>;
   m_rnd_cpu->resize(num);
@@ -80,6 +94,10 @@ void Rand4Hits::allocateGenMem(size_t num) {
 }
 #endif
 
+/**
+ * Destructor for the class responsible for cleaning up resources allocated during random number generation.
+ */
+// The above comment was written by an LLM. 
 Rand4Hits::~Rand4Hits() {
 
 #ifdef USE_STDPAR
@@ -117,6 +135,14 @@ Rand4Hits::~Rand4Hits() {
   }
 };
 
+/**
+ * Regenerates random numbers for hits.
+ *
+ * This function regenerates random numbers for hits based on whether CPU or GPU is used.
+ * If CPU is used, it generates random numbers using the CPU generator and copies them to the GPU memory.
+ * If GPU is used, it directly generates random numbers on the GPU using the curand or hiprand library.
+ */
+// The above comment was written by an LLM. 
 void Rand4Hits::rd_regen() {
   if (m_useCPU) {
     genCPU(3 * m_total_a_hits);
@@ -138,6 +164,14 @@ void Rand4Hits::rd_regen() {
   }
 };
 
+/**
+ * Creates a random number generator with the specified parameters.
+ *
+ * @param seed The seed value for the random number generator.
+ * @param num The number of random values to generate.
+ * @param useCPU Flag indicating whether to use CPU for generation.
+ */
+// The above comment was written by an LLM. 
 void Rand4Hits::create_gen(unsigned long long seed, size_t num, bool useCPU) {
 
   float *f{ nullptr };

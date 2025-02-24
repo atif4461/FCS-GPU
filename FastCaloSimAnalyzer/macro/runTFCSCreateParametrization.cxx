@@ -80,6 +80,20 @@ TFCSParametrizationBase* NewEtaChain(CLHEP::HepRandomEngine *randEngine, const F
   return (TFCSParametrizationBase*)EtaSelectChain;
 }
 
+/**
+ * @brief Runs the TFCS creation of parametrization.
+ *
+ * @param pid Particle ID (default: 22).
+ * @param Emin Minimum energy (default: 64).
+ * @param Emax Maximum energy (default: 4194304).
+ * @param etamin Minimum eta value (default: 1.0).
+ * @param etamax Maximum eta value (default: 1.05).
+ * @param topDir Top directory for output files (default: "TFCSParam").
+ * @param seed Random engine seed (default: 42).
+ *
+ * @return Exit status (0 on success).
+ */
+// The above comment was written by an LLM. 
 int runTFCSCreateParametrization(int pid = 22, int Emin = 64, int Emax = 4194304, float etamin = 1.0, float etamax = 1.05, std::string topDir = "TFCSParam", long seed = 42)
 {
   FCS::LateralShapeParametrizationArray hit_to_cell_mapping = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -161,6 +175,14 @@ int runTFCSCreateParametrization(int pid = 22, int Emin = 64, int Emax = 4194304
   return 0;
 }
 
+/**
+ * Main program entry point.
+ *
+ * @param argc Number of command line arguments
+ * @param argv Array of command line argument strings
+ * @return Program exit status
+ */
+// The above comment was written by an LLM. 
 int main(int argc, char **argv)
 {
   std::map<std::string, docopt::value> args

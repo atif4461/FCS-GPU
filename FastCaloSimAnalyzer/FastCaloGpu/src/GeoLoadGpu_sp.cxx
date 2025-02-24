@@ -10,6 +10,17 @@
 GeoGpu *GeoLoadGpu::Geo_g;
 unsigned long GeoLoadGpu::num_cells;
 
+/**
+ * @brief Loads geometry onto the GPU.
+ * 
+ * This function checks if the geometry is empty and returns false if it is.
+ * It then allocates device memory for cells and copies cells as an array.
+ * The function also allocates a grid for each region and copies the array to the GPU.
+ * Finally, it loads the regions' data onto the GPU as an array of regions.
+ * 
+ * @return True if the loading is successful, false otherwise.
+ */
+// The above comment was written by an LLM. 
 bool GeoLoadGpu::LoadGpu_sp() {
 
   if (!m_cells || m_ncells == 0) {

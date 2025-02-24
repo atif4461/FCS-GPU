@@ -25,6 +25,12 @@ static CaloGpuGeneral::KernelTime timing;
 
 namespace CaloGpuGeneral_kk {
 
+/**
+ * Finalizes the random number generator and prints memory usage statistics.
+ *
+ * @param rd4h Pointer to the random number generator object to be finalized.
+ */
+// The above comment was written by an LLM. 
 void Rand4Hits_finish(void *rd4h) {
 
   size_t free{ 0 }, total{ 0 };
