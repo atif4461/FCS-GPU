@@ -39,6 +39,150 @@ Options:
 )";
 
 
+/**
+ * @brief Runs the TFCS average shape validation.
+ *
+ * @param pdgid Particle data group ID.
+ * @param int_E Integer energy value.
+ * @param etamin Minimum eta value.
+ * @param etamax Maximum eta value.
+ * @param seed Random number generator seed.
+ * @return Exit status of the program.
+ 
+int runTFCSAverageShape(int pdgid, int int_E, double etamin, double etamax, long seed) 
+ * @brief Initializes the hit-to-cell mapping array.
+ *
+ * @param hit_to_cell_mapping Array to be initialized.
+ 
+void FCSinit_hit_to_cell_mapping(FCS::LateralShapeParametrizationArray& hit_to_cell_mapping)
+ * @brief Initializes the numbers of hits array.
+ *
+ * @param numbers_of_hits Array to be initialized.
+ 
+void FCSinit_numbers_of_hits(FCS::LateralShapeParametrizationArray& numbers_of_hits)
+ * @brief Finds the DSID for a given particle and energy.
+ *
+ * @param pdgid Particle data group ID.
+ * @param int_E Integer energy value.
+ * @param etamin Minimum eta value.
+ * @param location Location string.
+ * @return DSID structure containing the found DSID.
+ 
+auto findDSID(int pdgid, int int_E, double etamin, std::string location)
+ * @brief Finds a sample info object for a given DSID.
+ *
+ * @param dsid DSID to search for.
+ * @return Sample info object associated with the DSID.
+ 
+FCS::SampleInfo findSample(int dsid)
+ * @brief Gets the shape name for a given DSID.
+ *
+ * @param dsid DSID to retrieve the shape name for.
+ * @return Shape name as a string.
+ 
+std::string getShapeName(int dsid)
+ * @brief Gets the second PCA name for a given DSID.
+ *
+ * @param dsid DSID to retrieve the second PCA name for.
+ * @return Second PCA name as a string.
+ 
+std::string getSecondPCAName(int dsid)
+ * @brief Gets the first PCA application name for a given DSID.
+ *
+ * @param dsid DSID to retrieve the first PCA application name for.
+ * @return First PCA application name as a string.
+ 
+std::string getFirstPCAAppName(int dsid)
+ * @brief Gets the average simulation shape name for a given DSID.
+ *
+ * @param dsid DSID to retrieve the average simulation shape name for.
+ * @return Average simulation shape name as a string.
+ 
+std::string getAvgSimShapeName(int dsid)
+ * @brief Creates a new shape Ebins calibration chain.
+ *
+ * @param original_Energy Original energy object.
+ * @param hit_to_cell_mapping Hit-to-cell mapping array.
+ * @param numbers_of_hits Numbers of hits array.
+ * @param shapefile Shape file name.
+ * @param pdgid Particle data group ID.
+ * @param int_E Integer energy value.
+ * @param etamin Minimum eta value.
+ * @param etamax Maximum eta value.
+ * @return New shape Ebins calibration chain object.
+ 
+TFCSParametrizationEbinChain* NewShapeEbinCaloSampleChain(TFCSValidationEnergy* original_Energy, FCS::LateralShapeParametrizationArray hit_to_cell_mapping, FCS::LateralShapeParametrizationArray numbers_of_hits, std::string shapefile, int pdgid, int int_E, double etamin, double etamax)
+ * @brief Initializes a TH1 histogram.
+ *
+ * @param name Name of the histogram.
+ * @param title Title of the histogram.
+ * @param nbinsx Number of x-axis bins.
+ * @param xmin Minimum x-value.
+ * @param xmax Maximum x-value.
+ * @param xlabel X-axis label.
+ * @param ylabel Y-axis label.
+ * @return Initialized TH1 histogram object.
+ 
+TH1* InitTH1(std::string name, std::string title, int nbinsx, double xmin, double xmax, std::string xlabel, std::string ylabel)
+ * @brief Adds a friend chain to an existing chain.
+ *
+ * @param chain Existing chain.
+ * @param friend_chain Friend chain to add.
+ 
+void AddFriend(TChain* chain, TChain* friend_chain)
+ * @brief Opens a file.
+ *
+ * @param filename File name to open.
+ * @param mode Open mode.
+ * @return Unique pointer to the opened file.
+ 
+std::unique_ptr<TFile> Open(std::string filename, std::string mode)
+ * @brief Creates a new TTree object.
+ *
+ * @param name Name of the tree.
+ * @param title Title of the tree.
+ * @return New TTree object.
+ 
+TTree* new_TTree(std::string name, std::string title)
+ * @brief Writes cells to a tree.
+ *
+ * @param tree Tree to write to.
+ * @param writer Writer object.
+ 
+void push_back(TTree* tree, TFCSWriteCellsToTree* writer)
+ * @brief Adds an object to a file.
+ *
+ * @param file File to add to.
+ * @param obj Object to add.
+ 
+void Add(TFile* file, TObject* obj)
+ * @brief Prints debug information about a chain.
+ *
+ * @param chain Chain to print information about.
+ 
+void Print(TFCSParametrizationChain* chain)
+ * @brief Loops over events in an analysis.
+ *
+ * @param analyze Analysis object.
+ * @param nevents Number of events to loop over.
+ 
+void LoopEvents(TFCSShapeValidation* analyze, int nevents)
+ * @brief Writes a file.
+ *
+ * @param file File to write.
+ 
+void Write(TFile* file)
+ * @brief Lists the contents of a file.
+ *
+ * @param file File to list contents of.
+ 
+void ls(TFile* file)
+ * @brief Closes a file.
+ *
+ * @param file File to close.
+ 
+void Close(TFile* file)* This comment was generated by meta-llama/Llama-3.3-70B-Instruct:None at temperature 0.5.
+*/ 
 int runTFCSAverageShape(int pdgid = 22,int int_E = 65536,double etamin = 0.2,double etamax = 0.25, long seed = 42, bool production = false)
 {
   FCS::LateralShapeParametrizationArray hit_to_cell_mapping = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -216,6 +360,23 @@ int runTFCSAverageShape(int pdgid = 22,int int_E = 65536,double etamin = 0.2,dou
   return 0;
 }
 
+/**
+ * @brief Main entry point of the program
+ * @param argc Number of command line arguments
+ * @param argv Array of command line argument strings
+ * @return Program exit status
+ 
+ 
+ * @brief Runs the TFCS average shape validation with specified parameters
+ * @param pdgId Particle data group ID
+ * @param E Energy value
+ * @param etamin Minimum eta value
+ * @param etamax Maximum eta value
+ * @param seed Random seed value
+ * @param production Flag indicating production mode
+ * @return Result of running TFCS average shape validation
+ * This comment was generated by meta-llama/Llama-3.3-70B-Instruct:None at temperature 0.5.
+*/ 
 int main(int argc, char **argv)
 {
   std::map<std::string, docopt::value> args
