@@ -18,6 +18,14 @@
 #include <iostream>
 
 
+/**
+
+ * Returns a cumulative histogram of the input histogram.
+ *
+ * @param hist The input histogram.
+ * @return A new cumulative histogram.
+ */
+// The above comment was written by an LLM. 
 TH1* get_cumul(TH1* hist)
 {
   TH1D*  h_cumul = (TH1D*)hist->Clone( "h_cumul" );
@@ -30,6 +38,18 @@ TH1* get_cumul(TH1* hist)
   return h_cumul;
 }
 
+/**
+
+ * @brief Function to generate validation plots from trees
+ * @param firstPCAfilename First PCA filename
+ * @param firstPCA_Appfilename First PCA application filename
+ * @param valifilename Validation input filename
+ * @param valiplotsname Validation output plot filename
+ * @param dsid Dataset identifier
+ * @param do_PCAclosure Flag to perform PCA closure
+  
+void epara_validation_plots_fromtree(TString firstPCAfilename, TString firstPCA_Appfilename, TString valifilename, TString valiplotsname, int dsid, bool do_PCAclosure)*/
+// The above comment was written by an LLM. 
 void epara_validation_plots_fromtree(TString firstPCAfilename, TString firstPCA_Appfilename, TString valifilename, TString valiplotsname, int dsid, bool do_PCAclosure)
 {
   double GeV = 1000.0;
@@ -228,6 +248,17 @@ void epara_validation_plots_fromtree(TString firstPCAfilename, TString firstPCA_
   file_pca1->Close();
 }
 
+/**
+
+ * @brief Produces standard validation plots for epara validation.
+ *
+ * @param firstPCAfilename The filename of the first PCA file.
+ * @param valifilename The filename of the validation input file.
+ * @param valiplotsname The name of the output plot file.
+ * @param dsid The dataset ID.
+ * @param do_PCAclosure Whether to produce PCA closure plots.
+ */
+// The above comment was written by an LLM. 
 void epara_validation_plots(TString firstPCAfilename, TString valifilename, TString valiplotsname, int dsid, bool do_PCAclosure)
 {
 
@@ -414,6 +445,53 @@ void epara_validation_plots(TString firstPCAfilename, TString valifilename, TStr
 }
 
 
+/**
+
+ * @brief Runs the epara analysis with specified parameters.
+ *
+ * @param dsid Data set ID.
+ * @param sampleData Path to the input sample list file.
+ * @param topDir Top directory for output files.
+ * @param npca1 Number of bins for the first PCA.
+ * @param npca2 Number of bins for the second PCA.
+ * @param run_validation Flag to enable validation.
+ * @param version Version string.
+ * @param topPlotDir Directory for plot output files.
+ * @param seed Random seed value.
+ 
+void run_epara(int dsid, std::string sampleData, std::string topDir, int npca1, int npca2, bool run_validation, std::string version, std::string topPlotDir, long seed)
+
+ * @brief Creates a first PCA object and runs it on the input chain.
+ *
+ * @param mychain Input chain.
+ * @param pca1Filename Output file name for the first PCA.
+ 
+void TFCSMakeFirstPCA::run(TChain* mychain, std::string pca1Filename)
+
+ * @brief Applies the first PCA to the input chain.
+ *
+ * @param pca1Filename Input file name for the first PCA.
+ 
+void TFCSApplyFirstPCA::init(std::string pca1Filename)
+
+ * @brief Simulates the second PCA.
+ *
+ * @param pca1AppFilename Input file name for the applied first PCA.
+ * @param pca2Filename Output file name for the second PCA.
+ 
+void secondPCA::run(std::string pca1AppFilename, std::string pca2Filename)
+
+ * @brief Generates validation plots from the trees.
+ *
+ * @param pca1Filename First PCA file name.
+ * @param pca1AppFilename Applied first PCA file name.
+ * @param valiFilename Validation file name.
+ * @param valiPlotsFilename Validation plots file name.
+ * @param dsid Data set ID.
+ * @param do_PCAclosure Flag to enable PCA closure.
+ 
+void epara_validation_plots_fromtree(std::string pca1Filename, std::string pca1AppFilename, std::string valiFilename, std::string valiPlotsFilename, int dsid, bool do_PCAclosure)*/
+// The above comment was written by an LLM. 
 void run_epara(int dsid = 431004, std::string sampleData = "../python/inputSampleList.txt", std::string topDir = "./output_epara/", int npca1 = 5, int npca2 = 1, bool run_validation = true, std::string version = "ver01", std::string topPlotDir = "output_plot_epara/", long seed = 42)
 {
 

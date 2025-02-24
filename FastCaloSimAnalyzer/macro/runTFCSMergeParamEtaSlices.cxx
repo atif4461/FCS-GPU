@@ -30,6 +30,23 @@ Options:
 )";
 
 
+/**
+
+ * @brief Runs the TFCS merge param PDG IDETA slices.
+ *
+ * This function generates a chain of parametrizations for different eta slices
+ * within a specified momentum range. It loads the parametrizations from files,
+ * adds them to the chain, and returns the chain as a TFCSParametrizationBase object.
+ *
+ * @param pdgid The particle ID.
+ * @param int_Emin The minimum momentum.
+ * @param int_Emax The maximum momentum.
+ * @param etamin The minimum absolute eta value.
+ * @param etamax The maximum absolute eta value.
+ * @param outDir The output directory path.
+ * @return A pointer to the TFCSParametrizationBase object representing the chain of parametrizations.
+ */
+// The above comment was written by an LLM. 
 TFCSParametrizationBase* runTFCSMergeParamPDGIDEtaSlices(int pdgid, int int_Emin, int int_Emax, double etamin, double etamax, std::string outDir,TString /*bigParamFileName*/)
 {
   double Emin = int_Emin;
@@ -83,6 +100,24 @@ TFCSParametrizationBase* runTFCSMergeParamPDGIDEtaSlices(int pdgid, int int_Emin
   return (TFCSParametrizationBase*)EtaSelectChain;
 }
 
+/**
+
+ * @brief Runs the TFCS merge parameter eta slices.
+ *
+ * This function merges parameter eta slices for different particle types (photon, electron, pion) 
+ * and creates a full chain of parametrizations. It also measures the memory usage before and after 
+ * reading the full chain from a file.
+ *
+ * @param int_Emin The minimum energy value.
+ * @param int_Emax The maximum energy value.
+ * @param etamin The minimum eta value.
+ * @param etamax The maximum eta value.
+ * @param outDir The output directory.
+ * @param bigParamFileName The name of the big parameter file.
+ *
+ * @return An integer indicating success or failure.
+ */
+// The above comment was written by an LLM. 
 int runTFCSMergeParamEtaSlices(int int_Emin, int int_Emax, double etamin, double etamax, std::string outDir,std::string bigParamFileName)
 {
   TFCSParametrizationBase* para_photon = runTFCSMergeParamPDGIDEtaSlices(22, int_Emin, int_Emax, etamin, etamax, outDir, bigParamFileName);
@@ -162,6 +197,18 @@ int runTFCSMergeParamEtaSlices(int int_Emin, int int_Emax, double etamin, double
   return 0;
 }
 
+/**
+
+ * @brief Main entry point of the program.
+ * 
+ * This function parses command line arguments using docopt and calls the runTFCSMergeParamEtaSlices function.
+ * 
+ * @param argc Number of command line arguments.
+ * @param argv Array of command line argument strings.
+ * 
+ * @return Program exit status.
+ */
+// The above comment was written by an LLM. 
 int main(int argc, char **argv)
 {
   std::map<std::string, docopt::value> args

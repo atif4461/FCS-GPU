@@ -11,6 +11,13 @@ DEV_BigMem *DEV_BigMem::bm_ptr;
 
 LoadGpuFuncHist::LoadGpuFuncHist() {}
 
+/**
+
+ * @brief Destructor for the LoadGpuFuncHist class.
+ * 
+ * Releases dynamically allocated memory for member variables m_hf, m_hf_h, m_hf2d, and m_hf2d_h.
+ */
+// The above comment was written by an LLM. 
 LoadGpuFuncHist::~LoadGpuFuncHist() {
   free(m_hf);
   hipFree(m_hf_h);

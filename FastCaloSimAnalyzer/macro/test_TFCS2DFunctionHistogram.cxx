@@ -5,6 +5,16 @@
 #include "../../ISF_FastCaloSimEvent/ISF_FastCaloSimEvent/TFCS2DFunctionHistogram.h"
 #include "TRandom.h"
 
+/**
+
+ * @brief Tests the functionality of the TFCS2DFunctionHistogram class.
+ *
+ * This function opens a ROOT file containing a histogram, creates an instance of TFCS2DFunctionHistogram,
+ * and performs random number generation using the histogram's inverse transform method.
+ *
+ * @details The function iterates over a large range of numbers, generating random values and checking for NaN results.
+ */
+// The above comment was written by an LLM. 
 void test_TFCS2DFunctionHistogram() 
 {
   // DEBUG Shape_id211_E65536_eta_20_25_Ebin1_cs2

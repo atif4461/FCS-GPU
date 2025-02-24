@@ -18,6 +18,14 @@ TFCSValidationEnergyAndCells::TFCSValidationEnergyAndCells( const char* name, co
                                                             TFCSAnalyzerBase* analysis )
     : TFCSLateralShapeParametrization( name, title ), m_analysis( analysis ) {}
 
+/**
+
+ * Simulates energy and cells in the validation process.
+ *
+ * @param simulstate The simulation state object to be updated.
+ * @return The return code indicating success or failure of the simulation.
+ */
+// The above comment was written by an LLM. 
 FCSReturnCode TFCSValidationEnergyAndCells::simulate( TFCSSimulationState& simulstate, const TFCSTruthState* /*truth*/,
                                                       const TFCSExtrapolationState* /*extrapol*/ ) {
   if ( !analysis() ) return FCSFatal;
@@ -42,6 +50,11 @@ FCSReturnCode TFCSValidationEnergyAndCells::simulate( TFCSSimulationState& simul
   return FCSSuccess;
 }
 
+/**
+
+ * Prints validation energy and cells information according to the specified options
+ */
+// The above comment was written by an LLM. 
 void TFCSValidationEnergyAndCells::Print( Option_t* option ) const {
   TString opt( option );
   bool    shortprint = opt.Index( "short" ) >= 0;

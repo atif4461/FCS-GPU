@@ -54,6 +54,28 @@ Options:
   --earlyReturn                Return early to avoid ROOT segfault
 )";
 
+/**
+
+ * @brief Draws a 1D histogram with customizable settings.
+ *
+ * This function takes in several parameters to customize the appearance of the histogram,
+ * including the input histogram, y-axis minimum and maximum values, logarithmic scale option,
+ * canvas name and title, and an optional pointer to a TCanvas object.
+ *
+ * If the canvas pointer is null, a new TCanvas object is created with the specified name and title.
+ * The function also calculates and displays statistical properties of the histogram,
+ * such as mean, RMS, and skewness, along with their respective errors.
+ *
+ * @param hist1 Input histogram to be drawn.
+ * @param ymin Minimum value of the y-axis (default: 0).
+ * @param ymax Maximum value of the y-axis (default: 0).
+ * @param logy Flag to enable logarithmic scale on the y-axis (default: false).
+ * @param name Name of the canvas (default: empty string).
+ * @param title Title of the canvas (default: empty string).
+ * @param c Pointer to a TCanvas object (default: 0).
+ * @param png Flag to save the plot as a PNG file (default: false).
+ */
+// The above comment was written by an LLM. 
 void Draw_1Dhist(TH1* hist1, double ymin = 0, double ymax = 0, bool logy = false, TString name = "", TString title = "",TCanvas* c=0, bool png=false)
 {
   if ( name == "" ) {
@@ -110,6 +132,20 @@ void Draw_1Dhist(TH1* hist1, double ymin = 0, double ymax = 0, bool logy = false
   return;
 }
 
+/**
+
+ * @brief Fills energy histograms with simulation data.
+ *
+ * This function initializes and fills 25 histograms with energy-related data from a simulation run.
+ * The first 24 histograms contain the ratio of energy deposited in each detector to the total energy,
+ * while the last histogram contains the ratio of the total energy to the true kinetic energy.
+ *
+ * @param hist_E Array of pointers to TH1 objects that will store the energy histograms.
+ * @param analyze Pointer to a TFCSShapeValidation object used to initialize the histograms.
+ * @param analyze_pcabin Integer specifying the particle type to analyze (or -1 for all particles).
+ * @param val1 Reference to a TFCSSimulationRun object containing the simulation data.
+ */
+// The above comment was written by an LLM. 
 void FillEnergyHistos(TH1** hist_E, TFCSShapeValidation *analyze, int analyze_pcabin, TFCSSimulationRun& val1)
 {
   hist_E[24] = analyze->InitTH1(prefixEbin + "E_over_Ekintrue_" + val1.GetName(), "1D", 840, 0, 2.0, "E/Ekin(true)", "#");
@@ -128,6 +164,21 @@ void FillEnergyHistos(TH1** hist_E, TFCSShapeValidation *analyze, int analyze_pc
   }
 }
 
+/**
+
+ * @brief Generates energy histograms for shape validation analysis.
+ *
+ * This function creates an array of 1D histograms representing energy distributions,
+ * fills them with data using the FillEnergyHistos function, and then draws each histogram
+ * that has a mean value greater than zero. The drawn histograms are saved as images.
+ *
+ * @param[in] analyze Pointer to the TFCSShapeValidation object containing analysis settings.
+ * @param[in] analyze_pcabin Integer identifier for the analysis configuration.
+ * @param[in,out] val2 Reference to the TFCSSimulationRun object providing simulation data.
+ * @param[in] basename Optional base string used in naming output files (default is empty).
+ * @param[in] png Flag indicating whether to save images in PNG format (default is false).
+ */
+// The above comment was written by an LLM. 
 void Energy_histograms(TFCSShapeValidation *analyze, int analyze_pcabin, TFCSSimulationRun& val2, TString basename = "", bool png=false)
 {
   TH1* hist_E_val2[25];
@@ -146,6 +197,17 @@ void Energy_histograms(TFCSShapeValidation *analyze, int analyze_pcabin, TFCSSim
   }
 }
 
+/**
+
+ * @brief Sets prefixes for analysis based on layer and PCA bin.
+ * 
+ * This function generates prefixes used in analysis based on the provided layer and PCA bin numbers.
+ * It updates various prefix variables such as prefixlayer, prefixlayer_title, prefixall, prefixall_title, prefixEbin, and prefixEbin_title.
+ * 
+ * @param analyze_layer The layer number to be analyzed.
+ * @param analyze_pcabin The PCA bin number to be analyzed.
+ */
+// The above comment was written by an LLM. 
 void set_prefix(int analyze_layer, int analyze_pcabin)
 {
   prefixlayer       = prefix_E_eta + Form( "cs%02d_", analyze_layer );
@@ -163,6 +225,40 @@ void set_prefix(int analyze_layer, int analyze_pcabin)
   }
 }
 
+/**
+
+ * @brief Runs the TFCSSimulation with the given parameters.
+ *
+ * @param pdgid The PDG ID of the particle.
+ * @param int_E The integer value of the energy.
+ * @param etamin The minimum value of eta.
+ * @param analyze_layer The layer to be analyzed.
+ * @param plotfilename The filename for plotting.
+ * @param dataDir The directory path for data.
+ * @param seed The random seed.
+ * @param nEvents The number of events.
+ * @param firstEvent The index of the first event.
+ * @param selectPCAbin The selected PCA bin.
+ * @param debug The debug flag.
+ * @param png The PNG format flag.
+ * @param earlyReturn The early return flag.
+ *
+ * @return An integer indicating the success of the simulation.
+ 
+int runTFCSSimulation(int pdgid = 22,
+         int int_E = 65536,
+         double etamin = 0.2,
+         int analyze_layer = 2,
+         const std::string &plotfilename = "Simulation.root",
+         std::string dataDir= "/",
+         long seed = 42,
+         int nEvents = -1,
+         int firstEvent = 0,
+         int selectPCAbin = -1,
+         int debug = 0,
+         bool png = false,
+         bool earlyReturn = false);*/
+// The above comment was written by an LLM. 
 int runTFCSSimulation(int pdgid = 22,
          int int_E = 65536,
          double etamin = 0.2,
@@ -363,6 +459,19 @@ int runTFCSSimulation(int pdgid = 22,
   return 0;
 }
 
+/**
+
+ * @brief Main entry point of the program.
+ *
+ * This function initializes the program, parses command line arguments,
+ * sets up the simulation parameters, and runs the TFCS simulation.
+ *
+ * @param argc Number of command line arguments.
+ * @param argv Array of command line argument strings.
+ *
+ * @return Exit status of the program.
+ */
+// The above comment was written by an LLM. 
 int main(int argc, char **argv)
 {
   std::map<std::string, docopt::value> args

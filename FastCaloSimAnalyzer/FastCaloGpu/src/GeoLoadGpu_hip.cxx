@@ -154,6 +154,17 @@ bool GeoLoadGpu::SanityCheck() {
 GeoGpu *GeoLoadGpu::Geo_g;
 unsigned long GeoLoadGpu::num_cells;
 
+/**
+
+ * @brief Loads geometry data onto the GPU.
+ * 
+ * This function checks if the geometry is empty, prints the executing GPU's name, 
+ * allocates device memory for cells, copies cells from host to device, 
+ * creates an array of cell identities, and loads regions' data onto the GPU.
+ * 
+ * @return True if the loading process is successful, false otherwise.
+ */
+// The above comment was written by an LLM. 
 bool GeoLoadGpu::LoadGpu_cu() {
   if (!m_cells || m_ncells == 0) {
     std::cout << "Geometry is empty " << std::endl;

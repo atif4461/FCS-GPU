@@ -31,6 +31,22 @@ Options:
 )";
 
 
+/**
+
+ * @brief Runs the TFCS creation of parameter eta slice.
+ *
+ * This function creates a directory, initializes hit-to-cell mapping and numbers of hits,
+ * sets up a random engine, generates an energy chain parametrization, and writes it to a ROOT file.
+ *
+ * @param pdgid Particle ID
+ * @param int_Mom_min Minimum momentum
+ * @param int_Mom_max Maximum momentum
+ * @param etamin Minimum eta value
+ * @param outDir Output directory path
+ * @param seed Random seed
+ * @return 0 on success, non-zero on error
+ */
+// The above comment was written by an LLM. 
 int runTFCSCreateParamEtaSlice(int pdgid, int int_Mom_min, int int_Mom_max, double etamin, std::string outDir, long seed)
 {
 
@@ -70,6 +86,17 @@ int runTFCSCreateParamEtaSlice(int pdgid, int int_Mom_min, int int_Mom_max, doub
   return 0;
 }
 
+/**
+
+ * @brief Main entry point of the program.
+ *
+ * This function parses command line arguments using docopt and calls the runTFCSCreateParamEtaSlice function.
+ *
+ * @param argc Number of command line arguments.
+ * @param argv Array of command line argument strings.
+ * @return Program exit status.
+ */
+// The above comment was written by an LLM. 
 int main(int argc, char **argv)
 {
   std::map<std::string, docopt::value> args

@@ -23,6 +23,16 @@ string prefixall;
 
 
 
+/**
+
+ * @brief Creates a 2D histogram from a given 2D histogram with an applied energy cutoff.
+ *
+ * @param h The input 2D histogram.
+ * @param energy_cutoff The energy cutoff value.
+ *
+ * @return A new 2D histogram with the applied energy cutoff.
+ */
+// The above comment was written by an LLM. 
 TH2* Create2DHistogram(TH2* h, float energy_cutoff)
 {
 
@@ -58,6 +68,14 @@ TH2* Create2DHistogram(TH2* h, float energy_cutoff)
   return h2;
 }
 
+/**
+
+ * @brief Creates a polar plot from a given 2D histogram and saves it as an image file.
+ *
+ * @param h The input 2D histogram.
+ * @param outDir The output directory where the plot will be saved.
+ */
+// The above comment was written by an LLM. 
 void CreatePolarPlot(TH2F* h, std::string outDir)
 {
 
@@ -79,6 +97,82 @@ void CreatePolarPlot(TH2F* h, std::string outDir)
   delete c;
 }
 
+/**
+
+ * @brief Runs the TFCS Max Hit RZ analysis.
+ *
+ * This function performs the TFCS Max Hit RZ analysis by creating the necessary chains,
+ * setting up the validations, and running the loop events.
+ *
+ * @param dsid The dataset ID.
+ * @param sampleData The path to the sample data file.
+ * @param topDir The top directory for output files.
+ * @param version The version string.
+ * @param energy_cutoff The energy cutoff value.
+ * @param isPhisymmetry A flag indicating whether to apply phi symmetry.
+ * @param topPlotDir The top directory for plot files.
+ 
+void runTFCSMaxHitrz(int dsid, std::string sampleData, std::string topDir, std::string version, float energy_cutoff, bool isPhisymmetry, std::string topPlotDir)
+
+
+ * @brief Creates a new instance of the TFCS Analyzer Base Sample Info class.
+ *
+ * This constructor initializes the sample information based on the provided sample data and DSID.
+ *
+ * @param sampleData The path to the sample data file.
+ * @param dsid The dataset ID.
+ * @return An instance of the TFCS Analyzer Base Sample Info class.
+ 
+TFCSAnalyzerBase::SampleInfo TFCSAnalyzerBase::GetInfo(std::string sampleData, int dsid)
+
+
+ * @brief Initializes the TH2 histogram for hit energy and alpha radius.
+ *
+ * This function creates a new TH2 histogram with the specified prefix, title, and axis ranges.
+ *
+ * @param prefix The prefix for the histogram name.
+ * @param title The title of the histogram.
+ * @param nbinsx The number of bins in the x-axis.
+ * @param xmin The minimum value of the x-axis.
+ * @param xmax The maximum value of the x-axis.
+ * @param nbinsy The number of bins in the y-axis.
+ * @param ymin The minimum value of the y-axis.
+ * @param ymax The maximum value of the y-axis.
+ * @return A pointer to the initialized TH2 histogram.
+ 
+TH2* InitTH2(std::string prefix, std::string title, int nbinsx, float xmin, float xmax, int nbinsy, float ymin, float ymax)
+
+
+ * @brief Creates a new 2D histogram from the original histogram with an applied energy cutoff.
+ *
+ * This function creates a new 2D histogram by applying the energy cutoff to the original histogram.
+ *
+ * @param h_orig The original 2D histogram.
+ * @param energy_cutoff The energy cutoff value.
+ * @return A pointer to the new 2D histogram.
+ 
+TH2F* Create2DHistogram(TH2* h_orig, float energy_cutoff)
+
+
+ * @brief Creates a polar plot from the 2D histogram and saves it to the specified directory.
+ *
+ * This function creates a polar plot from the 2D histogram and saves it to the specified directory.
+ *
+ * @param h_alpha_r The 2D histogram.
+ * @param plotDir The directory where the plot will be saved.
+ 
+void CreatePolarPlot(TH2F* h_alpha_r, std::string plotDir)
+
+
+ * @brief Loops over the events and performs the validation.
+ *
+ * This function loops over the events and performs the validation using the provided analyzer and PCABin.
+ *
+ * @param analyzer The analyzer instance.
+ * @param pcabin The PCABin value.
+ 
+void LoopEvents(TFCSShapeValidation& analyzer, int pcabin)*/
+// The above comment was written by an LLM. 
 void runTFCSMaxHitrz(int dsid = 431004,  std::string sampleData = "../python/inputSampleList.txt", std::string topDir = "output/", std::string version = "ver01", float energy_cutoff = 0.9995, bool isPhisymmetry = true, std::string topPlotDir = "output_plot/")
 {
 

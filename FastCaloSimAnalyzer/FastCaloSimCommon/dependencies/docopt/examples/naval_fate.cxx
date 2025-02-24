@@ -25,6 +25,20 @@ static const char USAGE[] =
       --drifting    Drifting mine.
 )";
 
+/**
+
+ * @brief Main entry point of the program.
+ *
+ * This function initializes the command line arguments using docopt,
+ * prints out all the parsed arguments and their corresponding values,
+ * and returns an exit status.
+ *
+ * @param argc The number of command line arguments passed to the program.
+ * @param argv An array of character pointers containing the command line arguments.
+ *
+ * @return An integer indicating the program's exit status.
+ */
+// The above comment was written by an LLM. 
 int main( int argc, const char** argv ) {
   std::map<std::string, docopt::value> args = docopt::docopt( USAGE, {argv + 1, argv + argc},
                                                               true,               // show help if requested

@@ -27,6 +27,18 @@ string prefixlayer;
 string prefixEbin;
 string prefixall;
 
+/**
+
+ * @brief Zooms in on a histogram within specified ranges.
+ *
+ * This function takes an input histogram and applies autozoom functionality,
+ * then creates a new histogram with the zoomed-in data.
+ *
+ * @param h_in The input histogram to be zoomed in on.
+ *
+ * @return A new histogram containing the zoomed-in data.
+ */
+// The above comment was written by an LLM. 
 TH1F *zoomHisto(TH1 *h_in)
 {
 
@@ -58,6 +70,15 @@ TH1F *zoomHisto(TH1 *h_in)
   return h_out;
 }
 
+/**
+
+ * Creates a 2D histogram from a given input histogram with an applied energy cutoff.
+ *
+ * @param h             Input histogram
+ * @param energy_cutoff Energy cutoff value
+ * @return              Newly created 2D histogram
+ */
+// The above comment was written by an LLM. 
 TH2 *Create2DHistogram(TH2 *h, float energy_cutoff)
 {
 
@@ -94,6 +115,14 @@ TH2 *Create2DHistogram(TH2 *h, float energy_cutoff)
   return h2;
 }
 
+/**
+
+ * Creates a polar plot from a given 2D histogram and saves it as an image file.
+ *
+ * @param h        The input 2D histogram.
+ * @param outDir   The output directory where the plot will be saved.
+ */
+// The above comment was written by an LLM. 
 void CreatePolarPlot(TH2F *h, std::string outDir)
 {
 
@@ -115,6 +144,25 @@ void CreatePolarPlot(TH2F *h, std::string outDir)
   delete c;
 }
 
+/**
+
+ * @brief Runs the 2D parameterization histogram.
+ *
+ * @param dsid Data set ID.
+ * @param dsid_zv0 Alternative data set ID for z-vertex studies.
+ * @param sampleData Path to the sample data file.
+ * @param topDir Top directory for output files.
+ * @param version Version string.
+ * @param energy_cutoff Energy cutoff value.
+ * @param topPlotDir Directory for plot output.
+ * @param do2DParam Flag to enable 2D parameterization.
+ * @param isPhisymmetry Flag to enable phi symmetry.
+ * @param doMeanRz Flag to calculate mean Rz values.
+ * @param useMeanRz Flag to use pre-calculated mean Rz values.
+ * @param doZVertexStudies Flag to perform z-vertex studies.
+ * @param seed Random number generator seed.
+ */
+// The above comment was written by an LLM. 
 void runTFCS2DParametrizationHistogram(int dsid = 431004,
                                        int dsid_zv0 = -999,
                                         std::string sampleData = "../python/inputSampleList.txt",

@@ -26,6 +26,13 @@ static CaloGpuGeneral::KernelTime timing;
 
 namespace CaloGpuGeneral_al {
 
+/**
+
+ * @brief Finalizes the random number generator and prints kernel timing information if available.
+ *
+ * @param rd4h Pointer to the random number generator object to be finalized.
+ */
+// The above comment was written by an LLM. 
   __HOST__ void Rand4Hits_finish(void *rd4h) {
     
     if((Rand4Hits *)rd4h) delete (Rand4Hits *)rd4h;
@@ -44,6 +51,18 @@ namespace CaloGpuGeneral_al {
   struct SimulateHitsDeKernel
   {
     template<typename TAcc, typename Sim_Args>
+/**
+
+ * @brief Applies the simulation operation to the given accelerator and arguments.
+ *
+ * This function is responsible for performing the simulation task on the specified
+ * accelerator using the provided arguments. It calculates the index of the current thread,
+ * checks if it's within the valid range, and then proceeds with the simulation steps.
+ *
+ * @param acc The accelerator object used for the simulation.
+ * @param args The simulation arguments containing necessary data and parameters.
+ */
+// The above comment was written by an LLM. 
     ALPAKA_FN_ACC auto operator()(TAcc const& acc
                                   , Sim_Args args
                                   ) const -> void
@@ -65,6 +84,16 @@ namespace CaloGpuGeneral_al {
     }
   };
 
+/**
+
+ * @brief Simulates hits using the alpaka framework.
+ *
+ * This function simulates hits based on the provided simulation arguments and executes the simulation on the specified acceleration queue.
+ *
+ * @param[in] args Simulation arguments.
+ * @param[in,out] queue Acceleration queue used for execution.
+ */
+// The above comment was written by an LLM. 
   auto simulate_hits_de_alpaka(Sim_Args& args, QueueAcc& queue) -> void {
 
     int blocksize = BLOCK_SIZE;
@@ -90,6 +119,17 @@ namespace CaloGpuGeneral_al {
   struct SimulateHitsCtKernel
   {
     template<typename TAcc, typename Sim_Args>
+/**
+
+ * @brief Kernel function to simulate cells energy calculation
+ * 
+ * This function calculates the energy of cells and updates the hit cells array accordingly.
+ * It uses Alpaka's atomic add operation to ensure thread safety.
+ * 
+ * @param[in] acc Alpaka accelerator object
+ * @param[in,out] args Simulation arguments structure containing input and output data
+ */
+// The above comment was written by an LLM. 
     ALPAKA_FN_ACC auto operator()(TAcc const& acc
                                   , Sim_Args args
                                   ) const -> void
@@ -110,6 +150,16 @@ namespace CaloGpuGeneral_al {
     }  
   };
 
+/**
+
+ * @brief Simulates hits using the alpaka framework.
+ *
+ * This function simulates hits based on the provided simulation arguments and executes the simulation on the specified acceleration queue.
+ *
+ * @param[in] args Simulation arguments.
+ * @param[in,out] queue Acceleration queue used for execution.
+ */
+// The above comment was written by an LLM. 
   auto simulate_hits_ct_alpaka(Sim_Args& args, QueueAcc& queue) -> void {
 
     int blocksize = BLOCK_SIZE;
@@ -133,6 +183,16 @@ namespace CaloGpuGeneral_al {
   struct SimulateCleanKernel
   {
     template<typename TAcc, typename Sim_Args>
+/**
+
+ * @brief Performs an operation on the acceleration object using the provided simulation arguments.
+ *
+ * This function takes in an acceleration object and simulation arguments, and updates the cells energy and count values accordingly.
+ *
+ * @param acc The acceleration object to operate on.
+ * @param args The simulation arguments containing necessary data such as number of cells and simulations.
+ */
+// The above comment was written by an LLM. 
     ALPAKA_FN_ACC auto operator()(TAcc const& acc
                                   , Sim_Args args
                                   ) const -> void
@@ -148,6 +208,17 @@ namespace CaloGpuGeneral_al {
     }
   };
 
+/**
+
+ * @brief Simulates the cleaning process using Alpaka acceleration.
+ *
+ * This function takes simulation arguments and an accelerator queue as input,
+ * and performs the simulation on the accelerator device.
+ *
+ * @param[in] args Simulation arguments.
+ * @param[in,out] queue Accelerator queue.
+ */
+// The above comment was written by an LLM. 
   auto simulate_clean_alpaka(Sim_Args& args, QueueAcc& queue) -> void {
 
     int blocksize = BLOCK_SIZE;

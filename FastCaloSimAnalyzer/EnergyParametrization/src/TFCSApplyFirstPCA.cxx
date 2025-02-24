@@ -26,6 +26,15 @@ using namespace std;
 
 #include <iostream>
 
+/**
+
+ * @brief Constructor for TFCSApplyFirstPCA class.
+ * 
+ * Initializes the object with the root filename for the first PCA.
+ * 
+ * @param MakeFirstPCA_rootfilename The root filename for the first PCA.
+ */
+// The above comment was written by an LLM. 
 TFCSApplyFirstPCA::TFCSApplyFirstPCA( string MakeFirstPCA_rootfilename ) {
   // default parameters:
   m_nbins1     = 5;
@@ -34,6 +43,17 @@ TFCSApplyFirstPCA::TFCSApplyFirstPCA( string MakeFirstPCA_rootfilename ) {
   m_infilename = MakeFirstPCA_rootfilename;
 }
 
+/**
+
+ * @brief Initializes the TFCSApplyFirstPCA object.
+ *
+ * This function initializes the object by reading the principal components from a file,
+ * setting up the layer numbers and names, and calculating the quantiles of the first principal component.
+ *
+ * It also sets up the histograms for the composition of the first principal component in each bin.
+ 
+void TFCSApplyFirstPCA::init();*/
+// The above comment was written by an LLM. 
 void TFCSApplyFirstPCA::init() {
 
   cout << "TFCSApplyFirstPCA::init" << endl;
@@ -140,6 +160,19 @@ void TFCSApplyFirstPCA::init() {
   delete[] yq;
 }
 
+/**
+
+ * @brief Returns the bin number corresponding to the first principal component of the simulation state.
+ * 
+ * This function takes a TFCSSimulationState object as input, applies the Principal Component Analysis (PCA) transformation,
+ * and then determines the bin number based on the transformed data.
+ * 
+ * The binning is applied to the 1st and 2nd principal components separately, and the resulting bin numbers are combined to produce the final output.
+ * 
+ * @param simstate The input simulation state.
+ * @return The bin number corresponding to the first principal component of the simulation state.
+ */
+// The above comment was written by an LLM. 
 int TFCSApplyFirstPCA::get_PCAbin_from_simstate( TFCSSimulationState& simstate ) {
 
   int firstPCAbin = -1;
@@ -177,6 +210,19 @@ int TFCSApplyFirstPCA::get_PCAbin_from_simstate( TFCSSimulationState& simstate )
   return firstPCAbin;
 }
 
+/**
+
+ * @brief Retrieves the PCA-transformed data from a simulation state.
+ *
+ * This function takes a TFCSSimulationState object as input, extracts the energy fractions
+ * for each layer, applies a transformation using the cumulative energies, and then performs
+ * a Principal Component Analysis (PCA) on the transformed data.
+ *
+ * @param simstate The simulation state containing the energy fractions for each layer.
+ *
+ * @return A vector of doubles representing the PCA-transformed data.
+ */
+// The above comment was written by an LLM. 
 vector<double> TFCSApplyFirstPCA::get_PCAdata_from_simstate( TFCSSimulationState& simstate ) {
 
   vector<double> PCA_transformed_data;
@@ -348,6 +394,14 @@ void TFCSApplyFirstPCA::quantiles( TH1D* h, int nq, double* xq, double* yq ) {
   }
 }
 
+/**
+
+ * @brief Prints the binning of the first principal component.
+ *
+ * This function iterates over the bins of the first component and prints their boundaries.
+ * For each bin in the first component, it also prints the binning of the second component.
+ */
+// The above comment was written by an LLM. 
 void TFCSApplyFirstPCA::print_binning() {
 
   cout << "binning of the first component" << endl;
@@ -358,11 +412,28 @@ void TFCSApplyFirstPCA::print_binning() {
   }
 }
 
+/**
+
+ * @brief Sets the number of bins in the first and second dimensions for PCA binning.
+ * 
+ * @param bin1 The number of bins in the first dimension.
+ * @param bin2 The number of bins in the second dimension.
+ */
+// The above comment was written by an LLM. 
 void TFCSApplyFirstPCA::set_pcabinning( int bin1, int bin2 ) {
   m_nbins1 = bin1;
   m_nbins2 = bin2;
 }
 
+/**
+
+ * @brief Sets the cumulative energy histograms from an input vector of 1D histograms.
+ *
+ * This function copies the input data into the member variable, allowing for storage and further processing of the cumulative energy distributions.
+ *
+ * @param cumul_inputdata A vector of pointers to 1D histograms containing the cumulative energy data.
+ */
+// The above comment was written by an LLM. 
 void TFCSApplyFirstPCA::set_cumulative_energy_histos( vector<TH1D*> cumul_inputdata ) {
 
   // copy the stuff into the member variable:

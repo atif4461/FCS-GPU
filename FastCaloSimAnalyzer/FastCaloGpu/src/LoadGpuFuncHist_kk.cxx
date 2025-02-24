@@ -8,6 +8,18 @@
 
 DEV_BigMem *DEV_BigMem::bm_ptr;
 
+/**
+
+ * @brief Destructor for the LoadGpuFuncHist class.
+ * 
+ * Releases dynamically allocated resources held by the object, including:
+ * - 1D histogram functions (m_hf and m_hf_h)
+ * - View objects for 1D histogram functions (m_hf_v)
+ * - View objects for 2D histogram functions (m_hf2d_v)
+ * 
+ * Note: Additional internal view objects also require deallocation, currently marked as TODO.
+ */
+// The above comment was written by an LLM. 
 LoadGpuFuncHist::~LoadGpuFuncHist() {
   delete m_hf;
   delete m_hf_h;
@@ -20,6 +32,17 @@ LoadGpuFuncHist::~LoadGpuFuncHist() {
 
 LoadGpuFuncHist::LoadGpuFuncHist() {}
 
+/**
+
+ * @brief Loads a 2D function histogram onto the GPU.
+ *
+ * This function checks if the 2D histogram is valid, and if so, creates a device view
+ * of the histogram and copies its contents from the host memory to the device memory.
+ *
+ * @note This function has a known memory leak as it is called twice per event, but the
+ * device memory and pointers are not deleted.
+ */
+// The above comment was written by an LLM. 
 void LoadGpuFuncHist::LD2D() {
   if (!m_hf2d) {
     std::cout << "Error Load 2DFunctionHisto " << std::endl;

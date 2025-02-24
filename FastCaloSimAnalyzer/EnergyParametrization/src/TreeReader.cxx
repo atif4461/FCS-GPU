@@ -33,6 +33,13 @@ TreeReader::TreeReader()
   m_entries      = -1;
 }
 
+/**
+
+ * @brief Destructor for the TreeReader class.
+ * 
+ * Releases any resources held by the object, specifically clearing the formulae container.
+ */
+// The above comment was written by an LLM. 
 TreeReader::~TreeReader()
 {
   m_formulae.clear();

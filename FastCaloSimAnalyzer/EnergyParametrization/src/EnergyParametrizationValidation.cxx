@@ -16,6 +16,21 @@
 
 using namespace std;
 
+/**
+
+ * @brief Automatically adjusts the zoom of a histogram.
+ * 
+ * This function takes a 1D histogram and calculates the minimum and maximum values 
+ * where data is present. It also calculates the range (rmin and rmax) which is slightly 
+ * larger than the data range to provide some padding around the data.
+ * 
+ * @param[in] h1 The input 1D histogram.
+ * @param[out] min The minimum value where data is present in the histogram.
+ * @param[out] max The maximum value where data is present in the histogram.
+ * @param[out] rmin The minimum value of the adjusted range.
+ * @param[out] rmax The maximum value of the adjusted range.
+ */
+// The above comment was written by an LLM. 
 void EnergyParametrizationValidation::autozoom(TH1D* h1, double &min, double &max, double &rmin, double &rmax)
 {
 
@@ -47,6 +62,22 @@ void EnergyParametrizationValidation::autozoom(TH1D* h1, double &min, double &ma
   rmax = max + 0.5 * h1->GetBinWidth( 1 );
 }
 
+/**
+
+ * @brief Refills a histogram within specified ranges and rebins it if necessary.
+ *
+ * This function takes an input histogram and refills it within the specified minimum and maximum values.
+ * If the number of bins in the range is greater than 120, it attempts to rebin the histogram to reduce the number of bins while preserving the statistical accuracy.
+ *
+ * @param h_in The input histogram to be refilled.
+ * @param min The minimum value of the range.
+ * @param max The maximum value of the range.
+ * @param rmin The minimum value of the refilled histogram.
+ * @param rmax The maximum value of the refilled histogram.
+ *
+ * @return A pointer to the refilled histogram.
+ */
+// The above comment was written by an LLM. 
 TH1D* EnergyParametrizationValidation::refill(TH1D* h_in,double min, double max, double rmin, double rmax)
 {
 

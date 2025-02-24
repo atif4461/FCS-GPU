@@ -43,6 +43,18 @@ TFCSValidationHitSpy::TFCSValidationHitSpy( const char* name, const char* title,
     , m_hist_total_hitPhi_minus_cellPhi_etaboundary( 0 )
     , m_hist_matched_hitPhi_minus_cellPhi_etaboundary( 0 ) {}
 
+/**
+
+ * Simulates a hit in the calorimeter.
+ *
+ * @param hit The hit object to be simulated.
+ * @param simulstate The simulation state.
+ * @param truth The truth state.
+ * @param extrapol The extrapolation state.
+ *
+ * @return The status code of the simulation.
+ */
+// The above comment was written by an LLM. 
 FCSReturnCode TFCSValidationHitSpy::simulate_hit( Hit& hit, TFCSSimulationState& simulstate,
                                                   const TFCSTruthState*         truth,
                                                   const TFCSExtrapolationState* extrapol ) {
@@ -226,6 +238,17 @@ FCSReturnCode TFCSValidationHitSpy::simulate_hit( Hit& hit, TFCSSimulationState&
   return FCSSuccess;
 }
 
+/**
+
+ * Simulates the validation hit spy.
+ *
+ * @param simstate The simulation state.
+ * @param truth The truth state.
+ * @param extrapol The extrapolation state.
+ *
+ * @return The return code indicating success or failure.
+ */
+// The above comment was written by an LLM. 
 FCSReturnCode TFCSValidationHitSpy::simulate( TFCSSimulationState& /*simulstate*/, const TFCSTruthState* /*truth*/,
                                               const TFCSExtrapolationState* /*extrapol*/ ) {
 
@@ -253,6 +276,13 @@ FCSReturnCode TFCSValidationHitSpy::simulate( TFCSSimulationState& /*simulstate*
   return FCSSuccess;
 }
 
+/**
+
+ * Prints the validation hit spy information.
+ *
+ * @param option printing options
+ */
+// The above comment was written by an LLM. 
 void TFCSValidationHitSpy::Print( Option_t* option ) const {
   TString opt( option );
   bool    shortprint = opt.Index( "short" ) >= 0;
@@ -265,6 +295,14 @@ void TFCSValidationHitSpy::Print( Option_t* option ) const {
   if ( longprint ) ATH_MSG_INFO( optprint << "  Previous hit spy=" << m_previous );
 }
 
+/**
+
+ * Returns the charge of a particle based on its PDG ID.
+ *
+ * @param pdgID The Particle Data Group ID of the particle.
+ * @return The charge of the particle, or -999 if the PDG ID is not supported.
+ */
+// The above comment was written by an LLM. 
 double TFCSValidationHitSpy::getCharge( const int pdgID ) {
 
   if ( pdgID == 11 || pdgID == 211 || pdgID == 2212 )

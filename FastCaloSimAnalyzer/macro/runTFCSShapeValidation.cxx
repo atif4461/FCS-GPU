@@ -87,6 +87,23 @@ double sumcellE(int analyze_layer, const TFCSSimulationState& simul)
   return sumweight;
 }
 
+/**
+
+ * @brief Fills histograms with cell distance information in eta-phi space.
+ *
+ * This function iterates over cells in the simulation state and fills two histograms:
+ * one with the radial distance of each cell from the truth tracking curve (hist1D) and
+ * another with the delta eta and delta phi values between the cell position and the
+ * corresponding point on the truth tracking curve (hist2D).
+ *
+ * @param[in] analyze_layer The layer number to be analyzed.
+ * @param[in] simul The simulation state containing cell information.
+ * @param[in] sumweight The total weight used for normalization.
+ * @param[in] extrapol The extrapolation state providing truth tracking curves.
+ * @param[out] hist1D A profile histogram to store radial distances.
+ * @param[out] hist2D A 2D profile histogram to store delta eta and delta phi values.
+ */
+// The above comment was written by an LLM. 
 void Fill_Evsdxdy_hist(int analyze_layer, const TFCSSimulationState& simul, double sumweight, const TFCSExtrapolationState& extrapol, TProfile* hist1D, TProfile2D* hist2D)
 {
   for ( const auto& iter : simul.cells() ) {
@@ -107,6 +124,23 @@ void Fill_Evsdxdy_hist(int analyze_layer, const TFCSSimulationState& simul, doub
   }
 }
 
+/**
+
+ * @brief Fills 1D and 2D histograms with the ratio of cell weights between two simulations.
+ *
+ * This function calculates the distance in eta and phi between cells in two simulations,
+ * and fills 1D and 2D histograms with the ratio of cell weights.
+ *
+ * @param[in] analyze_layer The layer to analyze.
+ * @param[in] simul1 The first simulation state.
+ * @param[in] sumweight1 The sum of weights for the first simulation.
+ * @param[in] simul2 The second simulation state.
+ * @param[in] sumweight2 The sum of weights for the second simulation.
+ * @param[in] extrapol The extrapolation state.
+ * @param[out] hist1D The 1D histogram to fill.
+ * @param[out] hist2D The 2D histogram to fill.
+ */
+// The above comment was written by an LLM. 
 void Fill_Evsdxdy_ratio(int analyze_layer, const TFCSSimulationState& simul1, double sumweight1, const TFCSSimulationState& simul2, double sumweight2, const TFCSExtrapolationState& extrapol, TProfile* hist1D, TProfile2D* hist2D)
 {
   for ( const auto& iter1 : simul1.cells() ) {
@@ -130,6 +164,26 @@ void Fill_Evsdxdy_ratio(int analyze_layer, const TFCSSimulationState& simul1, do
   }
 }
 
+/**
+
+ * @brief Draws a 2D histogram with customizable settings.
+ *
+ * This function creates a clone of the input histogram, sets its title,
+ * and draws it on a newly created canvas. The histogram's z-axis range
+ * can be customized using the zmin and zmax parameters. Additionally,
+ * the function calculates and displays various statistical metrics such as mean,
+ * RMS, and skewness for both x and y axes.
+ *
+ * @param historg The input histogram to be drawn.
+ * @param zmin The minimum value of the z-axis (default: 0.00001).
+ * @param zmax The maximum value of the z-axis (default: 1).
+ * @param logz Whether to use a logarithmic scale for the z-axis (default: false).
+ * @param name The name of the output canvas (default: same as the input histogram).
+ * @param title The title of the output canvas (default: same as the input histogram).
+ *
+ * @return A pointer to the newly created TCanvas object.
+ */
+// The above comment was written by an LLM. 
 TCanvas* Draw_2Dhist(TH1* historg, double zmin = 0.00001, double zmax = 1, bool logz = false, TString name = "", TString title = "")
 {
   if ( name == "" ) {
@@ -164,6 +218,21 @@ TCanvas* Draw_2Dhist(TH1* historg, double zmin = 0.00001, double zmax = 1, bool 
   return c;
 }
 
+/**
+
+ * @brief Draws a 1D histogram with optional comparison to another histogram.
+ *
+ * @param hist1 The primary histogram to be drawn.
+ * @param hist2 The secondary histogram to compare with the primary histogram (default is 0).
+ * @param ymin The minimum value of the y-axis (default is 0).
+ * @param ymax The maximum value of the y-axis (default is 0).
+ * @param logy Whether to set the y-axis to logarithmic scale (default is false).
+ * @param name The name of the canvas (default is an empty string).
+ * @param title The title of the histogram (default is an empty string).
+ *
+ * @return A pointer to the created TCanvas object.
+ */
+// The above comment was written by an LLM. 
 TCanvas* Draw_1Dhist(TH1* hist1, TH1* hist2 = 0, double ymin = 0, double ymax = 0, bool logy = false, TString name = "", TString title = "")
 {
   if ( name == "" ) {
@@ -516,6 +585,22 @@ void CompareShape2D(TFCSShapeValidation *analyze, int analyze_layer, int analyze
   // c=Draw_1Dhist(hist_cellEvsdR_ratio,0,0.5,1.5,false,name,title);
 }
 
+/**
+
+ * @brief Converts an axis to a logarithmic scale.
+ *
+ * This function takes a TAxis object as input, calculates the logarithm of its minimum and maximum values,
+ * and then creates a new array of bin edges with a uniform spacing in the logarithmic scale.
+ *
+ * The new bin edges are calculated using the formula: new_bin_i = exp(from + i * width),
+ * where 'from' is the logarithm of the minimum value, 'width' is the width of each bin in the logarithmic scale,
+ * and 'i' is the bin index.
+ *
+ * Finally, the function sets the new bin edges for the input axis and deletes the dynamically allocated memory.
+ *
+ * @param axis The TAxis object to be converted to a logarithmic scale.
+ */
+// The above comment was written by an LLM. 
 void BinLog(TAxis *axis)
 {
   // TAxis *axis = h->GetXaxis();
@@ -533,6 +618,17 @@ void BinLog(TAxis *axis)
   delete[] new_bins;
 }
 
+/**
+
+ * @brief Sets prefixes for analysis based on layer and PCA bin.
+ * 
+ * This function generates prefixes used in analysis based on the provided layer and PCA bin numbers.
+ * It updates various prefix variables such as prefixlayer, prefixlayer_title, prefixall, prefixall_title, prefixEbin, and prefixEbin_title.
+ * 
+ * @param analyze_layer The layer number to be analyzed.
+ * @param analyze_pcabin The PCA bin number to be analyzed.
+ */
+// The above comment was written by an LLM. 
 void set_prefix(int analyze_layer, int analyze_pcabin)
 {
   prefixlayer       = prefix_E_eta + Form( "cs%02d_", analyze_layer );
@@ -550,6 +646,25 @@ void set_prefix(int analyze_layer, int analyze_pcabin)
   }
 }
 
+/**
+
+```cpp
+ * @brief Runs the TFCSShapeValidation tool with various settings.
+ *
+ * @param pdgid The PDG ID of the particles to be validated.
+ * @param int_E The integer value representing the energy of the particles.
+ * @param etamin The minimum pseudorapidity of the particles.
+ * @param analyze_layer The layer number for which the analysis should be performed.
+ * @param plotfilename The filename where the plots should be saved.
+ * @param dataDir The directory containing the data files.
+ * @param seed The random seed used for simulations.
+ * @param nEvents The number of events to process (-1 means all events).
+ * @param firstEvent The starting event number (used when nEvents > 0).
+ * @param debug A flag indicating whether debugging information should be printed.
+ * @return An integer indicating the success of the operation (0 for success).
+ 
+```*/
+// The above comment was written by an LLM. 
 int runTFCSShapeValidation(int pdgid = 22,
 			   int int_E = 65536,
 			   double etamin = 0.2,
@@ -1091,6 +1206,16 @@ int runTFCSShapeValidation(int pdgid = 22,
   return 0;
 }
 
+/**
+
+ * @brief Main entry point of the program.
+ * 
+ * @param argc Number of command line arguments.
+ * @param argv Array of command line argument strings.
+ * 
+ * @return Program exit status.
+ */
+// The above comment was written by an LLM. 
 int main( int argc, char** argv ) {
   std::map<std::string, docopt::value> args = docopt::docopt( USAGE, {argv + 1, argv + argc}, true );
 

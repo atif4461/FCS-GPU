@@ -32,6 +32,17 @@ static CaloGpuGeneral::KernelTime timing;
 
 namespace CaloGpuGeneral_cu {
 
+/**
+
+ * @brief Finalizes the Rand4Hits object and releases allocated resources.
+ *
+ * This function calculates the amount of GPU memory used, prints the result,
+ * and deletes the Rand4Hits object if it exists. Additionally, it displays
+ * kernel timing information if available.
+ *
+ * @param rd4h Pointer to the Rand4Hits object to be finalized.
+ */
+// The above comment was written by an LLM. 
 __host__ void Rand4Hits_finish(void *rd4h) {
 
   size_t free, total;

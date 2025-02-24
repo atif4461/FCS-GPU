@@ -5,6 +5,21 @@
 #include "runTFCSMergeParamEtaSlices.cxx"
 
 
+/**
+
+ * @brief Calculates the memory usage of a TFCS simulation.
+ *
+ * This function calculates the resident and virtual memory used by a TFCS simulation.
+ * It reads a ROOT file containing the simulation data, measures the memory usage before and after reading the file,
+ * and prints out the difference in memory usage.
+ *
+ * @param file The name of the ROOT file to read (default: "TFCSparam_v008.root")
+ * @param int_Emin The minimum energy value (default: 64)
+ * @param int_Emax The maximum energy value (default: 4194304)
+ * @param etamin The minimum eta value (default: 0.)
+ * @param etamax The maximum eta value (default: 5.)
+ */
+// The above comment was written by an LLM. 
 void runTFCSCalculateMemory(std::string file = "TFCSparam_v008.root", int int_Emin = 64, int int_Emax = 4194304, double etamin = 0., double etamax = 5) {
 
 

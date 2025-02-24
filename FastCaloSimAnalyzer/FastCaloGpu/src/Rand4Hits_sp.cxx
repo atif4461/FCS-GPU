@@ -11,6 +11,17 @@
 #include <algorithm>
 #include "CountingIterator.h"
 
+/**
+
+ * @brief Allocates memory for simulation data structures.
+ *
+ * This function initializes the memory required for the simulation, including
+ * cell energies, hit cells, simulation bins, and hit parameters.
+ *
+ * @param maxhitct Maximum number of hits per cell.
+ * @param n_cells Number of cells in the simulation.
+ */
+// The above comment was written by an LLM. 
 void Rand4Hits::allocate_simulation(int /*maxbins*/, int maxhitct,
                                     unsigned long n_cells) {
 
@@ -46,6 +57,15 @@ void Rand4Hits::allocate_simulation(int /*maxbins*/, int maxhitct,
          (void *)m_ct);
 }
 
+/**
+
+ * @brief Allocates memory for generating random numbers on the CPU.
+ * 
+ * This function initializes a vector to store random numbers and resizes it to the specified size.
+ * 
+ * @param num The number of random numbers to generate.
+ */
+// The above comment was written by an LLM. 
 void Rand4Hits::allocateGenMem(size_t num) {
   m_rnd_cpu = new std::vector<float>;
   m_rnd_cpu->resize(num);
@@ -53,6 +73,13 @@ void Rand4Hits::allocateGenMem(size_t num) {
             << std::endl;
 }
 
+/**
+
+ * @brief Deallocates memory allocated for internal data structures.
+ *
+ * Releases system resources held by the object by freeing dynamically allocated arrays and deleting CPU random number generator.
+ */
+// The above comment was written by an LLM. 
 void Rand4Hits::deallocate() {
   free(m_cells_energy);
   free(m_cell_e_h);

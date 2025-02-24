@@ -46,6 +46,15 @@ std::chrono::duration<double> TFCSShapeValidation::time_g1;
 std::chrono::duration<double> TFCSShapeValidation::time_g2;
 std::chrono::duration<double> TFCSShapeValidation::time_h;
 
+/**
+
+ * @brief Constructor for TFCSShapeValidation class.
+ * 
+ * Initializes the object with a random engine seeded with the provided value.
+ * 
+ * @param seed The seed value for the random engine.
+ */
+// The above comment was written by an LLM. 
 TFCSShapeValidation::TFCSShapeValidation( long seed ) {
   m_debug      = 0;
   m_geo        = 0;
@@ -61,6 +70,17 @@ TFCSShapeValidation::TFCSShapeValidation( long seed ) {
 #endif
 }
 
+/**
+
+ * @brief Constructor for TFCSShapeValidation class.
+ * 
+ * Initializes the object with the given parameters.
+ * 
+ * @param chain The input TChain object.
+ * @param layer The layer number.
+ * @param seed The random seed value.
+ */
+// The above comment was written by an LLM. 
 TFCSShapeValidation::TFCSShapeValidation( TChain* chain, int layer, long seed ) {
   m_debug      = 0;
   m_chain      = chain;
@@ -84,6 +104,15 @@ TFCSShapeValidation::TFCSShapeValidation( TChain* chain, int layer, long seed ) 
 
 TFCSShapeValidation::~TFCSShapeValidation() {}
 
+/**
+
+ * @brief Loads the detector geometry from file.
+ *
+ * This function checks if the geometry is already loaded, and if so, returns immediately.
+ * Otherwise, it creates a new instance of CaloGeometryFromFile and loads the geometry
+ * from the specified files using the LoadGeometryFromFile and LoadFCalGeometryFromFiles methods.
+ */
+// The above comment was written by an LLM. 
 void TFCSShapeValidation::LoadGeo() {
   if ( m_geo ) return;
 
@@ -95,6 +124,87 @@ void TFCSShapeValidation::LoadGeo() {
   m_geo->LoadFCalGeometryFromFiles( TFCSSampleDiscovery::geometryNameFCal() );
 }
 
+/**
+
+```cpp
+ * @brief Loop through events in the input tree and perform simulations.
+ *
+ * @param pcabin The PCA bin number (-1 means all bins).
+ 
+void TFCSShapeValidation::LoopEvents(int pcabin);
+
+ * @brief Load geometry data.
+ 
+void TFCSShapeValidation::LoadGeo();
+
+ * @brief Initialize input tree for a specific layer.
+ *
+ * @param chain Input tree.
+ * @param layer Layer number.
+ 
+void TFCSShapeValidation::InitInputTree(TChain* chain, int layer);
+
+ * @brief Perform simulation for an event.
+ *
+ * @param validation Validation object.
+ * @param chain_simul Simulation state.
+ * @param truthTLV Truth state.
+ * @param extrapol Extrapolation state.
+ 
+void TFCSShapeValidation::basesim::simulate(TFCSSimulationState& chain_simul, TFCSTruthState* truthTLV, TFCSExtrapolationState* extrapol);
+
+ * @brief Set up truth state for an event.
+ *
+ * @param px x-component of momentum.
+ * @param py y-component of momentum.
+ * @param pz z-component of momentum.
+ * @param E Energy.
+ * @param pdgid Particle ID.
+ 
+void TFCSTruthState::SetPxPyPzE(float px, float py, float pz, float E, int pdgid);
+
+ * @brief Set up extrapolation state for an event.
+ *
+ * @param i Sample index.
+ * @param pos Position (entrance, exit, or middle).
+ * @param value Value to set.
+ 
+void TFCSExtrapolationState::set_value(int i, TFCSExtrapolationState::Position pos, float value);
+
+ * @brief Deposit energy into a cell.
+ *
+ * @param cellele Cell descriptor.
+ * @param energy Energy to deposit.
+ 
+void TFCSSimulationState::deposit(CaloDetDescrElement* cellele, float energy);
+
+ * @brief Print debug information about the simulation state.
+ 
+void TFCSSimulationState::Print();
+
+ * @brief Get title of the validation object.
+ *
+ * @return Title string.
+ 
+std::string TFCSShapeValidation::basesim::GetTitle();
+
+ * @brief Get pointer to the random engine.
+ *
+ * @return Random engine pointer.
+ 
+void* TFCSShapeValidation::get_rd4h();
+
+ * @brief Finish using the random engine.
+ 
+void CaloGpuGeneral::Rand4Hits_finish(void* rd4h);
+
+ * @brief Simulate hits on the GPU.
+ *
+ * @param args Simulation arguments.
+ 
+void CaloGpuGeneral::simulate_hits_gr(Sim_Args args);
+```*/
+// The above comment was written by an LLM. 
 void TFCSShapeValidation::LoopEvents( int pcabin = -1 ) {
   auto start = std::chrono::system_clock::now();
   LoadGeo();
@@ -569,6 +679,17 @@ void TFCSShapeValidation::LoopEvents( int pcabin = -1 ) {
 }
 
 #ifdef USE_GPU
+/**
+
+ * @brief Initializes the geometry loader for GPU acceleration.
+ *
+ * This function sets up the geometry loader with the necessary parameters,
+ * including the number of cells, maximum sampling, and regions.
+ * It also allocates memory for the region data and sample index if needed.
+ *
+ * @note The function assumes that the geometry object (m_geo) has been properly initialized.
+ */
+// The above comment was written by an LLM. 
 void TFCSShapeValidation::GeoLg() {
   m_gl = new GeoLoadGpu();
   m_gl->set_ncells( m_geo->get_cells()->size() );
@@ -604,6 +725,19 @@ void TFCSShapeValidation::GeoLg() {
   }
 }
 
+/**
+
+ * @brief Copies region data from a CaloGeometryLookup object to a GeoRegion object.
+ *
+ * This function transfers all relevant parameters from the CaloGeometryLookup object
+ * to the GeoRegion object, including grid adjustments, indices, cell grid dimensions,
+ * and boundary values. It also copies the cell grid data, which is stored as an array of
+ * unsigned long integers.
+ *
+ * @param glkup The CaloGeometryLookup object containing the source data.
+ * @param gr The GeoRegion object that will receive the copied data.
+ */
+// The above comment was written by an LLM. 
 void TFCSShapeValidation::region_data_cpy( CaloGeometryLookup* glkup, GeoRegion* gr ) {
 
   // Copy all parameters

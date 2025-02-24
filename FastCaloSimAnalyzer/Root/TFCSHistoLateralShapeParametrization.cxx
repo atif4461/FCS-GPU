@@ -26,12 +26,25 @@ TFCSHistoLateralShapeParametrization::TFCSHistoLateralShapeParametrization( cons
   reset_phi_symmetric();
 }
 
+/**
+
+ * Destructor for the class responsible for lateral shape parametrization of histograms.
+ */
+// The above comment was written by an LLM. 
 TFCSHistoLateralShapeParametrization::~TFCSHistoLateralShapeParametrization() {
 #ifdef USE_GPU
 delete m_LdFH ;
 #endif 
 }
 
+/**
+
+ * Returns the number of hits in the lateral shape parametrization
+ * 
+ * @param simulstate The simulation state object
+ * @return The number of hits or -1 if random engine is not available
+ */
+// The above comment was written by an LLM. 
 int TFCSHistoLateralShapeParametrization::get_number_of_hits( TFCSSimulationState& simulstate,
                                                               const TFCSTruthState* /*truth*/,
                                                               const TFCSExtrapolationState* /*extrapol*/ ) const {
@@ -42,6 +55,18 @@ int TFCSHistoLateralShapeParametrization::get_number_of_hits( TFCSSimulationStat
 
 void TFCSHistoLateralShapeParametrization::set_number_of_hits( float nhits ) { m_nhits = nhits; }
 
+/**
+
+ * Simulates a hit in the lateral shape parametrization.
+ *
+ * @param hit The hit object to be simulated.
+ * @param simulstate The simulation state.
+ * @param truth The truth state.
+ * @param extrapol The extrapolation state.
+ *
+ * @return The status code of the simulation.
+ */
+// The above comment was written by an LLM. 
 FCSReturnCode TFCSHistoLateralShapeParametrization::simulate_hit( Hit& hit, TFCSSimulationState& simulstate,
                                                                   const TFCSTruthState*         truth,
                                                                   const TFCSExtrapolationState* /*extrapol*/ ) {
@@ -114,6 +139,14 @@ FCSReturnCode TFCSHistoLateralShapeParametrization::simulate_hit( Hit& hit, TFCS
   return FCSSuccess;
 }
 
+/**
+
+ * Initializes the lateral shape parametrization with a given 2D histogram.
+ *
+ * @param hist  the input 2D histogram
+ * @return true if initialization is successful, false otherwise
+ */
+// The above comment was written by an LLM. 
 bool TFCSHistoLateralShapeParametrization::Initialize( TH2* hist ) {
   if(!hist) return false;
 	m_hist.Initialize(hist);
@@ -124,6 +157,15 @@ bool TFCSHistoLateralShapeParametrization::Initialize( TH2* hist ) {
   return true;
 }
 
+/**
+
+ * Initializes the lateral shape parametrization from a histogram file.
+ *
+ * @param filepath path to the input file containing the histogram
+ * @param histname name of the histogram in the file
+ * @return true if initialization is successful, false otherwise
+ */
+// The above comment was written by an LLM. 
 bool TFCSHistoLateralShapeParametrization::Initialize( const char* filepath, const char* histname ) {
   // input file with histogram to fit
   std::unique_ptr<TFile> inputfile(TFile::Open( filepath, "READ" ));
@@ -140,6 +182,13 @@ bool TFCSHistoLateralShapeParametrization::Initialize( const char* filepath, con
   return OK;
 }
 
+/**
+
+ * Prints the lateral shape parametrization histogram.
+ *
+ * @param option printing options
+ */
+// The above comment was written by an LLM. 
 void TFCSHistoLateralShapeParametrization::Print( Option_t* option ) const {
   TString opt(option);
   bool shortprint=opt.Index("short")>=0;
@@ -162,6 +211,16 @@ void TFCSHistoLateralShapeParametrization::Print( Option_t* option ) const {
 }
 
 #ifdef USE_GPU
+/**
+
+ * Loads histogram functions for lateral shape parametrization.
+ *
+ * Checks if the load flag is already set, and if so, returns immediately.
+ * Otherwise, initializes a new LoadGpuFuncHist object and sets its parameters.
+ * Configures the 2D function histo with bin sizes and borders from the input histo.
+ * Sets the contents of the 2D function histo and loads it into the GPU.
+ */
+// The above comment was written by an LLM. 
 void TFCSHistoLateralShapeParametrization::LoadHistFuncs() {
 
  if (m_LdFH ){

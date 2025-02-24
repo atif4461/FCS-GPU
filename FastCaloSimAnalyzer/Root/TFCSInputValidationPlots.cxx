@@ -38,6 +38,17 @@
 
 TFCSInputValidationPlots::TFCSInputValidationPlots() { m_debug = 0; }
 
+/**
+
+ * Constructor for the class 
+ * Initializes the object with a TTree pointer, an output file directory and a vector of integers
+ * Sets up the environment for batch mode and loads necessary macros if running in CINT mode
+ * Calls the base class method to create a color vector
+ * @param tree pointer to the input TTree
+ * @param outputfiledir path to the output file directory
+ * @param vlayer vector of layer identifiers
+ */
+// The above comment was written by an LLM. 
 TFCSInputValidationPlots::TFCSInputValidationPlots( TTree* tree, std::string outputfiledir, std::vector<int> vlayer ) {
   gROOT->SetBatch( kTRUE );
 
@@ -58,6 +69,14 @@ TFCSInputValidationPlots::TFCSInputValidationPlots( TTree* tree, std::string out
 
 TFCSInputValidationPlots::~TFCSInputValidationPlots() {}
 
+/**
+
+ * @brief Plots validation of pi+ and pi- for different layers
+ * @param files vector of input files containing FCS flat ntuples
+ * @param var variable to plot
+ * @param xlabel label for x-axis
+ */
+// The above comment was written by an LLM. 
 void TFCSInputValidationPlots::PlotJOValidation( std::vector<std::string>* files, std::string var,
                                                  std::string xlabel ) {
 
@@ -129,12 +148,29 @@ void TFCSInputValidationPlots::PlotJOValidation( std::vector<std::string>* files
   }
 }
 
+/**
+
+ * Brief description of the function that plots TH1 variables with specified labels.
+ *
+ * Detailed description of the function including its parameters:
+ * var is the variable to be plotted as a TH1
+ * xlabel is the label for the x axis of the plot
+ */
+// The above comment was written by an LLM. 
 void TFCSInputValidationPlots::PlotTH1( std::string var, std::string xlabel ) {
 
   PlotTH1Layer( var, xlabel );
   PlotTH1PCA( var, xlabel );
 }
 
+/**
+
+ * Plots a TH1 layer with specified variable and x-axis label.
+ *
+ * @param var        Variable to plot.
+ * @param xlabel     X-axis label of the plot.
+ */
+// The above comment was written by an LLM. 
 void TFCSInputValidationPlots::PlotTH1Layer( std::string var, std::string xlabel ) {
 
   bool is_mm = false;
@@ -159,6 +195,17 @@ void TFCSInputValidationPlots::PlotTH1Layer( std::string var, std::string xlabel
   PlotTH1Layer( var, nbins, xmin, xmax, xlabel );
 }
 
+/**
+
+ * PlotTH1Layer plots a histogram of a specified variable for different layers.
+ *
+ * @param var        The variable to be plotted.
+ * @param nbins     The number of bins in the histogram.
+ * @param xmin       The minimum value of the x-axis range.
+ * @param xmax       The maximum value of the x-axis range.
+ * @param xlabel     The label for the x-axis.
+ */
+// The above comment was written by an LLM. 
 void TFCSInputValidationPlots::PlotTH1Layer( std::string var, int nbins, double xmin, double xmax,
                                              std::string xlabel ) {
 
@@ -232,6 +279,14 @@ void TFCSInputValidationPlots::PlotTH1Layer( std::string var, int nbins, double 
   c1->Close();
 }
 
+/**
+
+ * Plots a TH1 PCA plot for the specified variable and x label.
+ *
+ * @param var   The variable to be plotted.
+ * @param xlabel The x-axis label of the plot.
+ */
+// The above comment was written by an LLM. 
 void TFCSInputValidationPlots::PlotTH1PCA( std::string var, std::string xlabel ) {
 
   std::vector<int> v_layer = m_vlayer;
@@ -259,6 +314,18 @@ void TFCSInputValidationPlots::PlotTH1PCA( std::string var, std::string xlabel )
   }
 }
 
+/**
+
+ * PlotTH1PCA plots histograms of a specified variable for different PCA components in a given layer.
+ *
+ * @param var        The variable to be plotted.
+ * @param layer     The layer number.
+ * @param nbins     The number of bins for the histogram.
+ * @param xmin      The minimum value of the x-axis range.
+ * @param xmax      The maximum value of the x-axis range.
+ * @param xlabel    The label for the x-axis.
+ */
+// The above comment was written by an LLM. 
 void TFCSInputValidationPlots::PlotTH1PCA( std::string var, int layer, int nbins, double xmin, double xmax,
                                            std::string xlabel ) {
 
@@ -340,6 +407,15 @@ void TFCSInputValidationPlots::PlotTH1PCA( std::string var, int layer, int nbins
   c1->Close();
 }
 
+/**
+
+ * Plots a 2D histogram of a specified variable with customizable x and y labels.
+ *
+ * @param var     The variable to be plotted.
+ * @param xlabel  The label for the x-axis.
+ * @param ylabel  The label for the y-axis.
+ */
+// The above comment was written by an LLM. 
 void TFCSInputValidationPlots::PlotTH2( std::string var, std::string xlabel, std::string ylabel ) {
 
   int              npca    = 6;
@@ -376,6 +452,23 @@ void TFCSInputValidationPlots::PlotTH2( std::string var, std::string xlabel, std
   }
 }
 
+/**
+
+ * @brief Plots a 2D histogram from a TTree.
+ *
+ * @param var        Variable to plot.
+ * @param layer     Layer number.
+ * @param pca       PCA number.
+ * @param nbinsx    Number of bins in x-axis.
+ * @param xmin      Minimum value of x-axis.
+ * @param xmax      Maximum value of x-axis.
+ * @param nbinsy    Number of bins in y-axis.
+ * @param ymin      Minimum value of y-axis.
+ * @param ymax      Maximum value of y-axis.
+ * @param xlabel    Label for x-axis.
+ * @param ylabel    Label for y-axis.
+ */
+// The above comment was written by an LLM. 
 void TFCSInputValidationPlots::PlotTH2( std::string var, int layer, int pca, int nbinsx, double xmin, double xmax,
                                         int nbinsy, double ymin, double ymax, std::string xlabel, std::string ylabel ) {
 
@@ -478,6 +571,13 @@ void TFCSInputValidationPlots::PlotTH2( std::string var, int layer, int pca, int
   delete c1;
 }
 
+/**
+
+ * Creates automatic binning for global and mm coordinates.
+ *
+ * @param cutoff The cutoff value used for determining the bin edges.
+ */
+// The above comment was written by an LLM. 
 void TFCSInputValidationPlots::CreateBinning( double cutoff ) {
 
   std::cout << " * Creating automatic binning for global and mm coordinates " << std::endl;
@@ -552,11 +652,30 @@ void TFCSInputValidationPlots::CreateBinning( double cutoff ) {
   }
 }
 
+/**
+
+ * Returns the maximum energy value for a given layer and PCA component.
+ *
+ * @param layer The layer number.
+ * @param pca The PCA component number.
+ * @return A vector of doubles containing the maximum energy values.
+ */
+// The above comment was written by an LLM. 
 std::vector<double> TFCSInputValidationPlots::GetEnergyRmax( int layer, int pca ) {
 
   return EnergyRmax[std::make_pair( layer, pca )];
 }
 
+/**
+
+ * Returns the maximum radius value for a given layer and PCA option.
+ *
+ * @param layer The layer number.
+ * @param pca The principal component analysis option.
+ * @param opt The optimization option string.
+ * @return The maximum radius value.
+ */
+// The above comment was written by an LLM. 
 double TFCSInputValidationPlots::GetRmax( int layer, int pca, std::string opt ) {
   double rmax;
 
@@ -572,6 +691,14 @@ double TFCSInputValidationPlots::GetEnergy( int layer, int pca ) {
   return ( EnergyRmax[std::make_pair( layer, pca )] ).at( 0 );
 }
 
+/**
+
+ * Returns the maximum Rmax value from all layers based on the input option.
+ *
+ * @param opt Input option to determine which type of Rmax to retrieve
+ * @return Maximum Rmax value
+ */
+// The above comment was written by an LLM. 
 double TFCSInputValidationPlots::GetMaxRmax( std::string opt ) {
   std::vector<int> v_layer = m_vlayer;
   double           maxRmax = -1;
@@ -589,6 +716,14 @@ double TFCSInputValidationPlots::GetMaxRmax( std::string opt ) {
   return maxRmax;
 }
 
+/**
+
+ * Returns the minimum Rmax value from all layers based on the input option.
+ *
+ * @param opt Input option to determine which Rmax calculation method to use
+ * @return The minimum Rmax value found across all layers
+ */
+// The above comment was written by an LLM. 
 double TFCSInputValidationPlots::GetMinRmax( std::string opt ) {
 
   std::vector<int> v_layer = m_vlayer;
@@ -606,6 +741,15 @@ double TFCSInputValidationPlots::GetMinRmax( std::string opt ) {
   return minRmax;
 }
 
+/**
+
+ * Returns bin values for input validation plots based on variable and maximum radius.
+ *
+ * @param var Variable name as string
+ * @param rmax Maximum radius value
+ * @return binStruct containing number of bins minimum and maximum values
+ */
+// The above comment was written by an LLM. 
 TFCSInputValidationPlots::binStruct TFCSInputValidationPlots::GetBinValues( std::string var, double rmax ) {
   binStruct bin;
 
@@ -647,6 +791,14 @@ TFCSInputValidationPlots::binStruct TFCSInputValidationPlots::GetBinValues( std:
   return bin;
 }
 
+/**
+
+ * Creates input validation HTML file with plots.
+ *
+ * @param filename Output filename for the HTML file
+ * @param histNames Vector of histogram names to include in the HTML file
+ */
+// The above comment was written by an LLM. 
 void TFCSInputValidationPlots::CreateInputValidationHTML( std::string filename, std::vector<std::string> histNames ) {
 
   std::vector<int> v_layer = m_vlayer;

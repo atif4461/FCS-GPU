@@ -32,6 +32,16 @@
 
 using namespace std;
 
+/**
+
+ * @brief Constructor for the secondPCA class.
+ * 
+ * Initializes the object with input and output file names and sets default values for various parameters.
+ * 
+ * @param firstpcafilename Name of the input file containing the first PCA results.
+ * @param outfilename Name of the output file where the second PCA results will be stored.
+ */
+// The above comment was written by an LLM. 
 secondPCA::secondPCA( string firstpcafilename, string outfilename ) {
   m_firstpcafilename = firstpcafilename;
   m_outfilename      = outfilename;
@@ -53,6 +63,14 @@ void secondPCA::set_cut_maxdeviation_smartrebin( double val ) { m_maxdev_smartre
 
 void secondPCA::set_Ntoys( int val ) { m_ntoys = val; }
 
+/**
+
+ * @brief Sets the range of neurons for iteration.
+ * 
+ * @param start The starting neuron index.
+ * @param end The ending neuron index.
+ */
+// The above comment was written by an LLM. 
 void secondPCA::set_neurons_iteration( int start, int end ) {
   m_neurons_start = start;
   m_neurons_end   = end;
@@ -407,6 +425,20 @@ void secondPCA::do_pca( CLHEP::HepRandomEngine* randEngine, vector<string> layer
 
 double secondPCA::get_lowerBound( TH1D* h_cumulative ) { return h_cumulative->GetBinContent( 1 ); }
 
+/**
+
+ * @brief Retrieves histograms of energy data from a binary tree reader for multiple layers.
+ *
+ * This function iterates over all events in the binary tree, extracting energy values for each layer.
+ * It determines the minimum and maximum energy values per layer, creates histograms with these ranges,
+ * fills them with the corresponding energy values, normalizes the histograms, and returns them as a vector.
+ *
+ * @param layer A vector of strings representing the names of the layers to retrieve data for.
+ * @param read_bintree A pointer to a TreeReader object containing the binary tree data.
+ *
+ * @return A vector of pointers to TH1D objects, where each histogram represents the normalized energy distribution for a layer.
+ */
+// The above comment was written by an LLM. 
 vector<TH1D*> secondPCA::get_histos_data( vector<string> layer, TreeReader* read_bintree ) {
 
   vector<TH1D*> data;
@@ -445,6 +477,19 @@ vector<TH1D*> secondPCA::get_histos_data( vector<string> layer, TreeReader* read
   return data;
 }
 
+/**
+
+ * @brief Retrieves the layer bin centers from a given histogram in a ROOT file.
+ *
+ * This function reads a 2D histogram from a ROOT file, extracts the layer information
+ * stored in the y-axis, and returns a vector of layer bin centers where the bin content is 1.
+ *
+ * @param[in] file The ROOT file containing the histogram.
+ * @param[out] bins The number of bins in the x-axis of the histogram.
+ *
+ * @return A vector of integers representing the layer bin centers.
+ */
+// The above comment was written by an LLM. 
 vector<int> secondPCA::getLayerBins( TFile* file, int& bins ) {
 
   vector<int> layer;

@@ -15,24 +15,49 @@
 void printATLASlabel( float size, float x, float y, string s = "Simulation Internal" );
 void WriteInfo( string info, float size, float x, float y, int color = 1 );
 
+/**
+
+ * @brief Removes negative values from a histogram by setting them to a minimum value.
+ * @param hist The input histogram to modify.
+ */
+// The above comment was written by an LLM. 
 void removeNegatives( TH1* hist ) {
   for ( int i = 1; i < hist->GetNbinsX() + 1; ++i ) {
     if ( hist->GetBinContent( i ) < 0.001 ) hist->SetBinContent( i, 0.001 );
   }
 }
 
+/**
+
+ * Default constructor initializing member variables to default values
+ */
+// The above comment was written by an LLM. 
 TFCSVertexZPositionStudies::TFCSVertexZPositionStudies() {
 
   m_histos.clear();
   m_hist_nominal = nullptr;
 }
 
+/**
+
+ * Destructor to free allocated memory of histograms.
+ */
+// The above comment was written by an LLM. 
 TFCSVertexZPositionStudies::~TFCSVertexZPositionStudies() {
   for ( TH1F* h : m_histos ) {
     if ( h ) delete h;
   }
 }
 
+/**
+
+ * Loads files from a specified directory into the class instance.
+ *
+ * @param dirname The directory path where the files are located.
+ * @param filename_nominal The name of the nominal file.
+ * @param filenames_shifted A list of shifted file names.
+ */
+// The above comment was written by an LLM. 
 void TFCSVertexZPositionStudies::loadFiles( string dirname, string filename_nominal,
                                             vector<string>& filenames_shifted ) {
 
@@ -71,6 +96,16 @@ void TFCSVertexZPositionStudies::loadFiles( string dirname, string filename_nomi
   // m_files_shifted;
 }
 
+/**
+
+ * Sets particle information based on the provided filename.
+ *
+ * The function attempts to extract particle details such as type and energy
+ * from the input filename and stores them in member variables.
+ *
+ * @param filename Input filename containing particle information
+ */
+// The above comment was written by an LLM. 
 void TFCSVertexZPositionStudies::setParticleInfo( string filename ) { // Function will attempt to determine particle
                                                                       // info from filename
 
@@ -124,6 +159,14 @@ void TFCSVertexZPositionStudies::setParticleInfo( string filename ) { // Functio
   // cout << pid << " " << m_particle_info << endl;
 }
 
+/**
+
+ * Initializes layers and principal components from file keys.
+ *
+ * Iterates over all keys in the nominal file, extracts layer and PCA numbers
+ * from key names, and adds them to the respective lists if they do not already exist.
+ */
+// The above comment was written by an LLM. 
 void TFCSVertexZPositionStudies::initializeLayersAndPCAs() {
 
   TIter nextkey( m_file_nominal->GetListOfKeys() );
@@ -149,6 +192,15 @@ void TFCSVertexZPositionStudies::initializeLayersAndPCAs() {
   }
 }
 
+/**
+
+ * Loads histograms in layer and PCA.
+ *
+ * @param layer The layer number.
+ * @param pca The PCA number.
+ * @param histname The histogram name.
+ */
+// The above comment was written by an LLM. 
 void TFCSVertexZPositionStudies::loadHistogramsInLayerAndPCA( int layer, int pca, string histname ) {
 
   m_name = Form( "cs%i_pca%i_", layer, pca );
@@ -183,6 +235,14 @@ void TFCSVertexZPositionStudies::loadHistogramsInLayerAndPCA( int layer, int pca
   m_info = Form( "Layer %i, pca %i", m_currentLayer, m_currentPCA );
 }
 
+/**
+
+ * Loads histograms for all principal components in a specified layer.
+ *
+ * @param layer The layer number for which to load histograms.
+ * @param histname The base name of the histogram to be loaded.
+ */
+// The above comment was written by an LLM. 
 void TFCSVertexZPositionStudies::loadHistogramsAllPCAs( int layer, string histname ) {
 
   m_currentPCA   = 0;
@@ -231,6 +291,13 @@ void TFCSVertexZPositionStudies::loadHistogramsAllPCAs( int layer, string histna
   m_info = Form( "Layer %i, All PCAs", m_currentLayer );
 }
 
+/**
+
+ * Loads mean energy histogram from file.
+ *
+ * @param histname Name of the histogram to load.
+ */
+// The above comment was written by an LLM. 
 void TFCSVertexZPositionStudies::loadMeanEnergyHistogram( string histname ) {
   // const int npcas=m_pcas.size();
   // vector<vector<TH1F*> > histos(m_nshifted);
@@ -293,6 +360,14 @@ void TFCSVertexZPositionStudies::loadMeanEnergyHistogram( string histname ) {
   m_name = histname + "_AllLayers";
 }
 
+/**
+
+ * Loads mean energy histogram from file.
+ *
+ * @param pca principal component analysis number
+ * @param histname histogram name
+ */
+// The above comment was written by an LLM. 
 void TFCSVertexZPositionStudies::loadMeanEnergyHistogram( int pca, string histname ) {
   m_name = Form( "pca%i_", pca );
   m_name += histname;
@@ -338,6 +413,15 @@ void TFCSVertexZPositionStudies::loadMeanEnergyHistogram( int pca, string histna
   m_info = Form( "pca %i", m_currentPCA );
 }
 
+/**
+
+ * Loads histograms for fixed Z vertex and layer.
+ *
+ * @param zv_index Index of the Z vertex position.
+ * @param layer The layer number.
+ * @param histname Name of the histogram.
+ */
+// The above comment was written by an LLM. 
 void TFCSVertexZPositionStudies::loadHistogramsForFixedZVAndLayer( int zv_index, int layer, string histname ) {
   m_name = Form( "zv_%s_cs%i_", m_vertexZPositions[zv_index].c_str(), layer );
   m_name += histname;
@@ -361,6 +445,11 @@ void TFCSVertexZPositionStudies::loadHistogramsForFixedZVAndLayer( int zv_index,
   m_info         = Form( "Vertex z %s, Layer %i", m_vertexZPositions[zv_index].c_str(), m_currentLayer );
 }
 
+/**
+
+ * Normalizes histograms by scaling them to unit integral value and calculates ratios with respect to nominal histogram.
+ */
+// The above comment was written by an LLM. 
 void TFCSVertexZPositionStudies::normalizeHistograms() {
   const int nhistos = m_histos.size();
 
@@ -373,6 +462,11 @@ void TFCSVertexZPositionStudies::normalizeHistograms() {
   }
 }
 
+/**
+
+ * Deletes all histograms and clears associated containers.
+ */
+// The above comment was written by an LLM. 
 void TFCSVertexZPositionStudies::deleteHistograms() {
   const int nhistos = m_histos.size();
   for ( int i = 0; i < nhistos; i++ ) {
@@ -385,6 +479,15 @@ void TFCSVertexZPositionStudies::deleteHistograms() {
   delete m_hist_nominal;
 }
 
+/**
+
+ * Finds the optimal binning for the histogram based on the given parameters.
+ *
+ * @param useMMbinning Flag to indicate whether to use MM binning or not.
+ * @param factor Factor to apply to the optimal bin width.
+ * @param quantile Quantile value to use for finding the binning.
+ */
+// The above comment was written by an LLM. 
 void TFCSVertexZPositionStudies::findBinning( bool useMMbinning, double factor, double quantile ) {
 
   int nbins = m_hist_nominal->GetNbinsX();
@@ -471,6 +574,11 @@ void TFCSVertexZPositionStudies::findBinning( bool useMMbinning, double factor, 
   delete h_temp;
 }
 
+/**
+
+ * Rebins histograms according to specified binning scheme
+ */
+// The above comment was written by an LLM. 
 void TFCSVertexZPositionStudies::rebinHistos() {
   TH1F* h_temp = (TH1F*)m_hist_nominal->Rebin( m_binning.size() - 1, m_hist_nominal->GetName(), &m_binning[0] );
   delete m_hist_nominal;
@@ -490,6 +598,16 @@ void TFCSVertexZPositionStudies::rebinHistos() {
 
 void TFCSVertexZPositionStudies::printMeanValues() {}
 
+/**
+
+ * Plots histograms with optional ratio plots and error bars.
+ *
+ * @param outputDir Directory where histogram plots will be saved
+ * @param ratioPlots Flag indicating whether to generate ratio plots
+ * @param drawErrorBars Flag indicating whether to display error bars
+ * @param useLogScale Flag indicating whether to use logarithmic scale
+ */
+// The above comment was written by an LLM. 
 void TFCSVertexZPositionStudies::plotHistograms( string outputDir, bool ratio_plots, bool drawErrorBars,
                                                  bool useLogScale ) {
 
@@ -499,6 +617,16 @@ void TFCSVertexZPositionStudies::plotHistograms( string outputDir, bool ratio_pl
     plotHistograms( m_histos, outputDir, drawErrorBars, useLogScale );
 }
 
+/**
+
+ * @brief Plots histograms with specified options.
+ *
+ * @param histos Vector of TH1F pointers representing the histograms to plot.
+ * @param outputDir Directory where the output image will be saved.
+ * @param drawErrorBars Flag indicating whether to draw error bars.
+ * @param useLogScale Flag indicating whether to use log scale for y-axis.
+ */
+// The above comment was written by an LLM. 
 void TFCSVertexZPositionStudies::plotHistograms( vector<TH1F*>& histos, string outputDir, bool drawErrorBars,
                                                  bool useLogScale ) {
 
@@ -564,6 +692,16 @@ void TFCSVertexZPositionStudies::plotHistograms( vector<TH1F*>& histos, string o
   c->SaveAs( ( outputDir + "/" + m_name + ".png" ).c_str() );
 }
 
+/**
+
+ * Prints an ATLAS label at a specified location with additional text.
+ *
+ * @param size   The size of the text to be printed.
+ * @param x      The x-coordinate of the text position in NDC.
+ * @param y      The y-coordinate of the text position in NDC.
+ * @param text   The text to be printed next to the ATLAS label.
+ */
+// The above comment was written by an LLM. 
 void printATLASlabel( float size, float x, float y, string text ) {
 
   TLatex l;
@@ -586,6 +724,16 @@ void printATLASlabel( float size, float x, float y, string text ) {
   l.DrawLatex( x + shift, y, text.c_str() );
 }
 
+/**
+
+ * Writes informational text at a specified location on a plot.
+ * @param info The text to be written.
+ * @param size The font size of the text.
+ * @param x The x-coordinate of the text position.
+ * @param y The y-coordinate of the text position.
+ * @param color The color of the text.
+ */
+// The above comment was written by an LLM. 
 void WriteInfo( string info, float size, float x, float y, int color ) {
   TLatex l;
   l.SetNDC();

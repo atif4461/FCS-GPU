@@ -10,6 +10,14 @@
 
 class LoadGpuFuncHist::Impl {
 public:
+/**
+
+ * @brief Constructor for initializing member variables with allocated device buffers.
+ *
+ * Allocates memory on the acceleration device for various buffer types,
+ * including borders, contents, FH2D, low edge, SZs, contents pointers, borders pointers, and FHs.
+ */
+// The above comment was written by an LLM. 
   Impl()
     : bufBordersX_acc{alpaka::allocBuf<float, Idx>(alpaka::getDevByIdx<Acc>(0u), Idx{1})}
     , bufBordersY_acc{alpaka::allocBuf<float, Idx>(alpaka::getDevByIdx<Acc>(0u), Idx{1})}
@@ -43,11 +51,25 @@ public:
 
 
 
+/**
+
+ * @brief Default constructor for LoadGpuFuncHist.
+ * 
+ * Initializes the object by allocating memory for the implementation details.
+ */
+// The above comment was written by an LLM. 
 LoadGpuFuncHist::LoadGpuFuncHist() 
 {
   pImpl = new Impl();
 }
 
+/**
+
+ * @brief Destructor for the LoadGpuFuncHist class.
+ * 
+ * Releases dynamically allocated memory and deletes implementation details.
+ */
+// The above comment was written by an LLM. 
 LoadGpuFuncHist::~LoadGpuFuncHist() {
   free(m_hf);
 

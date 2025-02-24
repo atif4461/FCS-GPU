@@ -34,6 +34,18 @@
 #endif
 
 #ifndef USE_STDPAR
+/**
+
+ * @brief Allocates memory for simulation variables on the GPU.
+ *
+ * This function allocates memory for various simulation-related variables such as
+ * cell energies, hit cells, simulation bins, hit parameters, and count pointers.
+ *
+ * @param maxbins The maximum number of bins for simulation.
+ * @param maxhitct The maximum number of hits per cell.
+ * @param n_cells The total number of cells.
+ */
+// The above comment was written by an LLM. 
 void Rand4Hits::allocate_simulation(int maxbins, int maxhitct,
                                     unsigned long n_cells) {
 
@@ -72,6 +84,15 @@ void Rand4Hits::allocate_simulation(int maxbins, int maxhitct,
 #endif
 
 #ifndef USE_STDPAR
+/**
+
+ * @brief Allocates memory for generating random numbers on the CPU.
+ *
+ * This function initializes a vector to store random numbers and resizes it to the specified size.
+ *
+ * @param num The number of random numbers to generate.
+ */
+// The above comment was written by an LLM. 
 void Rand4Hits::allocateGenMem(size_t num) {
   m_rnd_cpu = new std::vector<float>;
   m_rnd_cpu->resize(num);
@@ -80,6 +101,16 @@ void Rand4Hits::allocateGenMem(size_t num) {
 }
 #endif
 
+/**
+
+ * @brief Destructor for the Rand4Hits class.
+ * 
+ * Releases all allocated resources, including memory and GPU handles.
+ * 
+ * @note The behavior of this destructor depends on the compilation flags,
+ *       specifically USE_STDPAR and RNDGEN_CPU.
+ */
+// The above comment was written by an LLM. 
 Rand4Hits::~Rand4Hits() {
 
 #ifdef USE_STDPAR
@@ -117,6 +148,15 @@ Rand4Hits::~Rand4Hits() {
   }
 };
 
+/**
+
+ * @brief Regenerates random numbers for hits.
+ *
+ * This function regenerates random numbers for hits based on whether CPU or GPU is being used.
+ * If using CPU, it generates random numbers using the CPU generator and copies them to the GPU memory if necessary.
+ * If using GPU, it directly generates random numbers on the GPU using the curand or hiprand library.
+ */
+// The above comment was written by an LLM. 
 void Rand4Hits::rd_regen() {
   if (m_useCPU) {
     genCPU(3 * m_total_a_hits);
@@ -138,6 +178,15 @@ void Rand4Hits::rd_regen() {
   }
 };
 
+/**
+
+ * @brief Creates a random number generator with the specified parameters.
+ *
+ * @param[in] seed The seed value for the random number generator.
+ * @param[in] num The number of random values to generate.
+ * @param[in] useCPU Flag indicating whether to use the CPU for generation.
+ */
+// The above comment was written by an LLM. 
 void Rand4Hits::create_gen(unsigned long long seed, size_t num, bool useCPU) {
 
   float *f{ nullptr };

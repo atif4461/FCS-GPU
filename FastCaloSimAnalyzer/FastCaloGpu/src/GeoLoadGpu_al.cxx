@@ -9,6 +9,14 @@
 
 class GeoLoadGpu::Impl {
 public:
+/**
+
+ * @brief Constructor for initializing member variables with allocated buffers.
+ *
+ * Allocates memory for various data structures on both host and accelerator devices,
+ * including sample indices, geometric regions, GPU geometry, and calorimeter detector descriptions.
+ */
+// The above comment was written by an LLM. 
   Impl()
     : sample_index_buf_host{alpaka::allocBuf<Rg_Sample_Index, Idx>(alpaka::getDevByIdx<Host>(0u), Idx{1})}
     , regions_buf_host{alpaka::allocBuf<GeoRegion, Idx>(alpaka::getDevByIdx<Host>(0u), Idx{1})}
@@ -37,6 +45,16 @@ public:
 struct TestHelloKernel
 {
   template<typename TAcc>
+/**
+
+ * @brief Kernel operator function executed on the GPU.
+ *
+ * This function is responsible for printing a greeting message from each GPU thread,
+ * identifying itself by its unique index.
+ *
+ * @param acc Accelerator object providing access to grid and thread indices.
+ */
+// The above comment was written by an LLM. 
   ALPAKA_FN_ACC auto operator()(TAcc const& acc) const -> void
   {
     auto const idx = alpaka::getIdx<alpaka::Grid, alpaka::Threads>(acc)[0];
@@ -47,6 +65,17 @@ struct TestHelloKernel
 struct TestCellKernel
 {
   template<typename TAcc>
+/**
+
+ * @brief Operator function for accessing and processing calorimeter detector description elements on the accelerator.
+ *
+ * @param[in] acc        Accelerator object (not used)
+ * @param[in] cells      Array of calorimeter detector description elements
+ * @param[in] index      Index of the element to be processed
+ *
+ * @return None
+ */
+// The above comment was written by an LLM. 
   ALPAKA_FN_ACC auto operator()(TAcc const& /*acc*/
 				, const CaloDetDescrElement* cells
 				, unsigned long index) const -> void
@@ -70,6 +99,25 @@ struct TestCellKernel
 struct TestGeoKernel
 {
   template<typename TAcc>
+/**
+
+ * @brief Operator function to access and print cell grid information from GPU.
+ *
+ * This function takes in several parameters including acceleration object,
+ * detector description elements, geometric regions, and indices.
+ * It calculates and prints various properties such as cell grid dimensions,
+ * indices, hash IDs, sampling information, and cell pointers.
+ *
+ * @param acc Acceleration object (not used in this implementation).
+ * @param cells Array of detector description elements.
+ * @param regions Array of geometric regions.
+ * @param nregions Number of regions (not used in this implementation).
+ * @param ncells Number of cells (not used in this implementation).
+ * @param r Region index.
+ * @param ir Index in the radial direction.
+ * @param ip Index in the phi direction.
+ */
+// The above comment was written by an LLM. 
   ALPAKA_FN_ACC auto operator()(TAcc const& /*acc*/
 				, const CaloDetDescrElement* cells
 				, const GeoRegion* regions
@@ -121,6 +169,22 @@ struct TestGeoKernel
 struct TestGeoKernel_G
 {
   template<typename TAcc>
+/**
+
+ * @brief Operator function to access and manipulate data on the GPU.
+ *
+ * This function takes in several parameters including an accelerator object,
+ * a geometry object, and indices. It uses these parameters to calculate
+ * various values such as the index of a cell in a grid, its corresponding
+ * hash ID, identification number, sampling value, eta and phi coordinates.
+ *
+ * @param acc Accelerator object
+ * @param geo Geometry object
+ * @param r Region index
+ * @param ir Index in the radial direction
+ * @param ip Index in the phi direction
+ */
+// The above comment was written by an LLM. 
   ALPAKA_FN_ACC auto operator()(TAcc const& /*acc*/
 				, const GeoGpu* geo
 				, int r, int ir, int ip) const -> void
@@ -239,6 +303,16 @@ bool GeoLoadGpu::SanityCheck() {
 GeoGpu *GeoLoadGpu::Geo_g;
 unsigned long GeoLoadGpu::num_cells;
 
+/**
+
+ * @brief Returns a host-accessible pointer to the sample index buffer.
+ * 
+ * This function allocates a buffer on the host device to store sample indices if it has not been initialized yet.
+ * It returns a native pointer to the allocated buffer, allowing direct access to the sample index data.
+ * 
+ * @return A pointer to the sample index buffer on the host device.
+ */
+// The above comment was written by an LLM. 
 Rg_Sample_Index* GeoLoadGpu::get_sample_index_h_al()
 {
   if(!pImpl) pImpl = new Impl();
@@ -247,6 +321,16 @@ Rg_Sample_Index* GeoLoadGpu::get_sample_index_h_al()
   return (Rg_Sample_Index*)alpaka::getPtrNative(pImpl->sample_index_buf_host);
 }
 
+/**
+
+ * @brief Retrieves an array of geometric regions allocated on the GPU.
+ *
+ * This function initializes the implementation if necessary, allocates a buffer for the regions on the host,
+ * and returns a pointer to the native memory location of the allocated buffer.
+ *
+ * @return A pointer to the array of geometric regions on the GPU.
+ */
+// The above comment was written by an LLM. 
 GeoRegion* GeoLoadGpu::get_regions_al()
 {
   if(!pImpl) pImpl = new Impl();
@@ -255,6 +339,15 @@ GeoRegion* GeoLoadGpu::get_regions_al()
   return (GeoRegion*)alpaka::getPtrNative(pImpl->regions_buf_host);
 }
 
+/**
+
+ * @brief Retrieves a cell grid allocated on the GPU.
+ * 
+ * @param[in] neta Number of eta bins in the grid.
+ * @param[in] nphi Number of phi bins in the grid.
+ * @return A pointer to the cell grid data on the GPU.
+ */
+// The above comment was written by an LLM. 
 long long* GeoLoadGpu::get_cell_grid_al(int neta, int nphi)
 {
   if(!pImpl) pImpl = new Impl();
@@ -264,6 +357,17 @@ long long* GeoLoadGpu::get_cell_grid_al(int neta, int nphi)
   return (long long*)alpaka::getPtrNative(cells);
 }
 
+/**
+
+ * @brief Loads geometry data onto the GPU using the Alpaka library.
+ *
+ * This function checks if the geometry is empty, initializes the Alpaka device,
+ * allocates memory for cells and regions on the GPU, copies data from the host
+ * to the device, and sets up the GeoGpu struct on the GPU.
+ *
+ * @return True if the loading was successful, false otherwise.
+ */
+// The above comment was written by an LLM. 
 bool GeoLoadGpu::LoadGpu_al() {
   if ( !m_cells || m_ncells == 0 ) {
     std::cout << "Geometry is empty " << std::endl;

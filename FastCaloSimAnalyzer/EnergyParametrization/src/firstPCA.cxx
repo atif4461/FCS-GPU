@@ -24,6 +24,26 @@ using namespace std;
 
 #include <iostream>
 
+/**
+
+ * @brief Constructor for the firstPCA class.
+ * 
+ * Initializes the object with default parameter values.
+ * 
+ * @details
+ * The constructor sets the following default parameters:
+ * - m_numberfinebins: Number of fine bins (default: 5000)
+ * - m_edepositcut: Energy deposit cut (default: 0.001)
+ * - m_cut_eta_low: Lower eta cut (default: -100)
+ * - m_cut_eta_high: Upper eta cut (default: 100)
+ * - m_nbins1: Number of bins in dimension 1 (default: 5)
+ * - m_nbins2: Number of bins in dimension 2 (default: 1)
+ * - m_debuglevel: Debug level (default: 0)
+ * - m_apply_etacut: Flag to apply eta cut (default: 1)
+ * - m_outfilename: Output file name (default: empty string)
+ * - m_chain: Chain number (default: 0)
+ */
+// The above comment was written by an LLM. 
 firstPCA::firstPCA()
 {
   // default parameters:
@@ -40,6 +60,17 @@ firstPCA::firstPCA()
   m_chain       = 0;
 }
 
+/**
+
+ * @brief Constructor for the firstPCA class.
+ * 
+ * Initializes the object with a TChain and an output filename.
+ * Sets default values for various parameters used in the analysis.
+ * 
+ * @param chain Pointer to a TChain object.
+ * @param outfilename Name of the output file.
+ */
+// The above comment was written by an LLM. 
 firstPCA::firstPCA(TChain* chain,string outfilename)
 {
   // default parameters:
@@ -55,33 +86,131 @@ firstPCA::firstPCA(TChain* chain,string outfilename)
   m_chain       = chain;
 }
 
+/**
+
+ * @brief Applies an eta cut based on the provided flag.
+ * 
+ * @param flag A boolean indicating whether to apply the eta cut (true) or not (false).
+ */
+// The above comment was written by an LLM. 
 void firstPCA::apply_etacut(int flag)
 {
  m_apply_etacut=flag;
 }
 
+/**
+
+ * @brief Sets the number of cumulative histogram bins.
+ * 
+ * @param bins The number of fine bins for the cumulative histogram.
+ */
+// The above comment was written by an LLM. 
 void firstPCA::set_cumulativehistobins(int bins)
 {
   m_numberfinebins=bins;
 }
 
+/**
+
+ * @brief Sets the energy deposit cut value.
+ * 
+ * @param cut The new energy deposit cut value.
+ */
+// The above comment was written by an LLM. 
 void firstPCA::set_edepositcut(double cut)
 {
   m_edepositcut=cut;
 }
 
+/**
+
+ * @brief Sets the eta cut range for the first principal component analysis.
+ * 
+ * @param cut_low  The lower bound of the eta cut range.
+ * @param cut_high The upper bound of the eta cut range.
+ */
+// The above comment was written by an LLM. 
 void firstPCA::set_etacut(double cut_low, double cut_high)
 {
   m_cut_eta_low  = cut_low;
   m_cut_eta_high = cut_high;
 }
 
+/**
+
+ * @brief Sets the number of bins in the PCA binning.
+ * 
+ * @param bin1 The number of bins in the first dimension.
+ * @param bin2 The number of bins in the second dimension.
+ */
+// The above comment was written by an LLM. 
 void firstPCA::set_pcabinning(int bin1,int bin2)
 {
   m_nbins1 = bin1;
   m_nbins2 = bin2;
 }
 
+/**
+
+ * @brief Runs the first principal component analysis (PCA).
+ *
+ * This function performs the first PCA on the input data, applies the PCA transformation,
+ * and bins the results. It also creates output trees and histograms to store the results.
+ *
+ * @return None
+ 
+void firstPCA::run()
+
+ * @brief Gets the relevant layers and input histograms.
+ *
+ * This function retrieves the relevant layers and input histograms from the input tree reader.
+ *
+ * @param layerNr Vector of layer numbers
+ * @param read_inputTree Input tree reader
+ * @return Vector of TH1D pointers to the input histograms
+ 
+vector<TH1D*> get_relevantlayers_inputs(vector<int>& layerNr, TreeReader* read_inputTree)
+
+ * @brief Gets the cumulative histograms.
+ *
+ * This function calculates the cumulative histograms for the given layers and input histograms.
+ *
+ * @param layer Vector of layer names
+ * @param histos_data Vector of TH1D pointers to the input histograms
+ * @return Vector of TH1D pointers to the cumulative histograms
+ 
+vector<TH1D*> get_cumul_histos(vector<string> layer, vector<TH1D*> histos_data)
+
+ * @brief Performs uniformization and Gaussianization.
+ *
+ * This function transforms the input data using uniformization and Gaussianization techniques.
+ *
+ * @param data Input data value
+ * @param cumul_data Cumulative histogram
+ * @return Transformed data value
+ 
+double get_cumulant(double data, TH1D* cumul_data)
+
+ * @brief Applies the PCA transformation.
+ *
+ * This function applies the PCA transformation to the input data.
+ *
+ * @param input_data Input data
+ * @param data_PCA Transformed data
+ 
+void TPrincipal::X2P(double* input_data, double* data_PCA)
+
+ * @brief Calculates the quantiles.
+ *
+ * This function calculates the quantiles for the given histogram and number of bins.
+ *
+ * @param h Histogram
+ * @param nbins Number of bins
+ * @param xq Array to store the quantile values
+ * @param yq Array to store the quantile boundaries
+ 
+void quantiles(TH1D* h, int nbins, double* xq, double* yq)*/
+// The above comment was written by an LLM. 
 void firstPCA::run()
 {
   cout << endl;
@@ -404,6 +533,20 @@ vector<TH1D*> firstPCA::get_cumul_histos(vector<string> layer, vector<TH1D*> his
   return cumul;
 }
 
+/**
+
+ * @brief Retrieves the relevant layers' inputs from the input tree.
+ *
+ * This function iterates over all events in the input tree, applies an eta cut,
+ * calculates the energy fraction for each layer, and determines which layers
+ * have a significant energy deposit. It then creates histograms for these
+ * relevant layers and fills them with the corresponding energy fractions.
+ *
+ * @param layerNr A reference to a vector of integers to store the numbers of the relevant layers.
+ * @param read_inputTree A pointer to the input tree containing the event data.
+ * @return A vector of pointers to TH1D objects representing the histograms for the relevant layers.
+ */
+// The above comment was written by an LLM. 
 vector<TH1D*> firstPCA::get_relevantlayers_inputs(vector<int> &layerNr, TreeReader* read_inputTree)
 {
 
@@ -520,6 +663,19 @@ vector<TH1D*> firstPCA::get_relevantlayers_inputs(vector<int> &layerNr, TreeRead
 }
 
 
+/**
+
+ * @brief Calculates the cumulative distribution value at a given point x using a histogram.
+ *
+ * This function takes into account the number of bins in the histogram,
+ * the average number of events per bin, and the content of adjacent bins.
+ *
+ * @param x The point at which to calculate the cumulative distribution value.
+ * @param h The input histogram used for calculation.
+ *
+ * @return The calculated cumulative distribution value at point x.
+ */
+// The above comment was written by an LLM. 
 double firstPCA::get_cumulant(double x, TH1D* h)
 {
 
@@ -584,6 +740,16 @@ double firstPCA::get_cumulant(double x, TH1D* h)
 }
 
 
+/**
+
+ * @brief Computes the quantiles of a histogram.
+ * 
+ * @param[in] h The input histogram.
+ * @param[in] nq The number of quantiles to compute.
+ * @param[out] xq An array containing the positions where to compute the quantiles in the range [0,1].
+ * @param[out] yq An array to store the computed quantiles.
+ */
+// The above comment was written by an LLM. 
 void firstPCA::quantiles(TH1D* h, int nq, double* xq, double* yq)
 {
 

@@ -31,6 +31,19 @@
     }
 #endif
 
+/**
+
+ * @brief Allocates memory for simulation data structures on the default device.
+ *
+ * This function allocates memory for various data structures used in the simulation,
+ * including cell energies, hit cells, simulation bins, hit parameters, and cell counts.
+ * The allocated memory is stored in class member variables for later use.
+ *
+ * @param maxbins The maximum number of bins in the simulation.
+ * @param maxhitct The maximum number of hits in the simulation.
+ * @param n_cells The total number of cells in the simulation.
+ */
+// The above comment was written by an LLM. 
 void Rand4Hits::allocate_simulation( int maxbins, int maxhitct, unsigned long n_cells ) {
 
   int m_default_device = omp_get_default_device();
@@ -66,12 +79,34 @@ void Rand4Hits::allocate_simulation( int maxbins, int maxhitct, unsigned long n_
           n_cells, (void*)m_cells_energy, (void*)m_cell_e, (void*)m_ct );
 }
 
+/**
+
+ * @brief Allocates memory for generating random numbers on the CPU.
+ *
+ * This function initializes a vector to store random numbers and resizes it to the specified size.
+ *
+ * @param num The number of random numbers to generate.
+ */
+// The above comment was written by an LLM. 
 void Rand4Hits::allocateGenMem( size_t num ) {
   m_rnd_cpu = new std::vector<float>;
   m_rnd_cpu->resize( num );
   std::cout << "m_rnd_cpu: " << m_rnd_cpu << "  " << m_rnd_cpu->data() << std::endl;
 }
 
+/**
+
+ * @brief Destructor for the Rand4Hits class.
+ * 
+ * Releases all dynamically allocated memory and destroys any generated random number generators.
+ * 
+ * @details
+ * - Deletes the CPU random number generator.
+ * - Prints statistics about big memory allocation if available.
+ * - Frees OpenMP target memory if compiled with RNDGEN_OMP.
+ * - Destroys the CPU generator if using CPU, otherwise destroys the GPU generator.
+ */
+// The above comment was written by an LLM. 
 Rand4Hits::~Rand4Hits() {
 
   delete ( m_rnd_cpu );
@@ -100,6 +135,18 @@ Rand4Hits::~Rand4Hits() {
   }
 };
 
+/**
+
+ * @brief Regenerates random numbers for hits.
+ *
+ * This function regenerates random numbers for hits based on the current settings.
+ * If CPU is used, it generates random numbers on the CPU and copies them to the GPU.
+ * Otherwise, it uses OpenMP or CUDA/RoCRAND to generate random numbers directly on the device.
+ *
+ * @return None
+ 
+void Rand4Hits::rd_regen();*/
+// The above comment was written by an LLM. 
 void Rand4Hits::rd_regen() {
   if ( m_useCPU ) {
     genCPU( 3 * m_total_a_hits );
@@ -133,6 +180,19 @@ void Rand4Hits::rd_regen() {
   }
 };
 
+/**
+
+ * @brief Creates a random number generator.
+ *
+ * This function initializes the random number generator with the given seed and
+ * allocates memory for the generated numbers. It also determines whether to use
+ * the CPU or GPU for generation based on the input parameter.
+ *
+ * @param seed The seed value for the random number generator.
+ * @param num The number of random numbers to generate.
+ * @param useCPU Flag indicating whether to use the CPU for generation.
+ */
+// The above comment was written by an LLM. 
 void Rand4Hits::create_gen( unsigned long long seed, size_t num, bool useCPU ) {
 
   float* f{ nullptr };

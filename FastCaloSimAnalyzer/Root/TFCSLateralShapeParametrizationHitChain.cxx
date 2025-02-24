@@ -39,6 +39,13 @@ static std::once_flag calledGetEnv{};
 TFCSLateralShapeParametrizationHitChain::TFCSLateralShapeParametrizationHitChain( const char* name, const char* title )
     : TFCSLateralShapeParametrization( name, title ), m_number_of_hits_simul( nullptr ) {}
 
+/**
+
+ * Constructor for TFCSLateralShapeParametrizationHitChain class 
+ * initializes the object with a single hit simulation
+ * @param hitsim pointer to the initial hit simulation
+ */
+// The above comment was written by an LLM. 
 TFCSLateralShapeParametrizationHitChain::TFCSLateralShapeParametrizationHitChain(
     TFCSLateralShapeParametrizationHitBase* hitsim )
     : TFCSLateralShapeParametrization( TString( "hit_chain_" ) + hitsim->GetName(),
@@ -49,11 +56,28 @@ TFCSLateralShapeParametrizationHitChain::TFCSLateralShapeParametrizationHitChain
   m_chain.push_back( hitsim );
 }
 
+/**
+
+ * Sets the geometry for this object and its associated simulation hits.
+ *
+ * @param geo The new geometry to be used.
+ */
+// The above comment was written by an LLM. 
 void TFCSLateralShapeParametrizationHitChain::set_geometry( ICaloGeometry* geo ) {
   TFCSLateralShapeParametrization::set_geometry( geo );
   if ( m_number_of_hits_simul ) m_number_of_hits_simul->set_geometry( geo );
 }
 
+/**
+
+ * Returns the number of hits in the simulation state.
+ *
+ * @param simulstate The simulation state object.
+ * @param truth      The truth state object.
+ * @param extrapol  The extrapolation state object.
+ * @return The number of hits.
+ */
+// The above comment was written by an LLM. 
 int TFCSLateralShapeParametrizationHitChain::get_number_of_hits( TFCSSimulationState&          simulstate,
                                                                  const TFCSTruthState*         truth,
                                                                  const TFCSExtrapolationState* extrapol ) const {
@@ -414,6 +438,13 @@ FCSReturnCode TFCSLateralShapeParametrizationHitChain::simulate( TFCSSimulationS
   return FCSSuccess;
 }
 
+/**
+
+ * Prints the lateral shape parametrization hit chain.
+ *
+ * @param option printing options
+ */
+// The above comment was written by an LLM. 
 void TFCSLateralShapeParametrizationHitChain::Print( Option_t* option ) const {
   TFCSLateralShapeParametrization::Print( option );
   TString opt( option );

@@ -24,6 +24,18 @@ TFCSHistoLateralShapeParametrizationFCal::TFCSHistoLateralShapeParametrizationFC
 
 TFCSHistoLateralShapeParametrizationFCal::~TFCSHistoLateralShapeParametrizationFCal() {}
 
+/**
+
+ * Simulates a hit in the lateral shape parametrization.
+ *
+ * @param hit Reference to the hit object to be modified.
+ * @param simulstate Reference to the simulation state.
+ * @param truth Pointer to the truth state.
+ * @param extrapol Pointer to the extrapolation state (not used).
+ *
+ * @return The status code of the simulation.
+ */
+// The above comment was written by an LLM. 
 FCSReturnCode TFCSHistoLateralShapeParametrizationFCal::simulate_hit( Hit& hit, TFCSSimulationState& simulstate,
                                                                       const TFCSTruthState* truth,
                                                                       const TFCSExtrapolationState* /*extrapol*/ ) {

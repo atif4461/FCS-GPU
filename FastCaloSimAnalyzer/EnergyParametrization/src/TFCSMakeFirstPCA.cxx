@@ -28,6 +28,24 @@ using namespace std;
 
 #define LAYERMAX 24
 
+/**
+
+ * @brief Default constructor for the class.
+ * 
+ * Initializes member variables with default values.
+ * 
+ * @details
+ *   - m_use_absolute_layercut is set to 0.
+ *   - m_numberfinebins is set to 5000.
+ *   - m_edepositcut is set to 0.001.
+ *   - m_cut_eta_low is set to -100.
+ *   - m_cut_eta_high is set to 100.
+ *   - m_apply_etacut is set to 1.
+ *   - m_dorescale is set to 1.
+ *   - m_outfilename is set to an empty string.
+ *   - m_chain is set to 0.
+ */
+// The above comment was written by an LLM. 
 TFCSMakeFirstPCA::TFCSMakeFirstPCA() {
   // default parameters:
   m_use_absolute_layercut = 0;
@@ -42,6 +60,16 @@ TFCSMakeFirstPCA::TFCSMakeFirstPCA() {
   m_chain       = 0;
 }
 
+/**
+
+ * @brief Constructor for TFCSMakeFirstPCA class.
+ * 
+ * Initializes the object with the given TChain and output filename.
+ * 
+ * @param chain The input TChain.
+ * @param outfilename The output filename.
+ */
+// The above comment was written by an LLM. 
 TFCSMakeFirstPCA::TFCSMakeFirstPCA( TChain* chain, string outfilename ) {
   // default parameters:
   m_use_absolute_layercut = 0;
@@ -60,6 +88,14 @@ void TFCSMakeFirstPCA::set_cumulativehistobins( int bins ) { m_numberfinebins = 
 
 void TFCSMakeFirstPCA::set_edepositcut( double cut ) { m_edepositcut = cut; }
 
+/**
+
+ * @brief Sets the eta cut range for the first PCA calculation.
+ * 
+ * @param cut_low The lower bound of the eta cut range.
+ * @param cut_high The upper bound of the eta cut range.
+ */
+// The above comment was written by an LLM. 
 void TFCSMakeFirstPCA::set_etacut( double cut_low, double cut_high ) {
   m_cut_eta_low  = cut_low;
   m_cut_eta_high = cut_high;
@@ -249,6 +285,21 @@ vector<TH1D*> TFCSMakeFirstPCA::get_cumul_histos( vector<string> layer_totE_name
   return cumul;
 }
 
+/**
+
+ * @brief Returns a list of relevant layers based on the input tree and energy cut.
+ *
+ * This function iterates over all events in the input tree, applies an eta cut if specified,
+ * and calculates the average energy fraction and total energy for each layer.
+ * It then checks if the average energy fraction is above the specified threshold and
+ * if the total energy is above a certain absolute value (if specified).
+ * Layers that meet these conditions are considered relevant and added to the output list.
+ *
+ * @param read_inputTree The input tree containing the event data.
+ * @param ecut The energy cut threshold.
+ * @return A vector of integers representing the relevant layer numbers.
+ */
+// The above comment was written by an LLM. 
 vector<int> TFCSMakeFirstPCA::get_relevantlayers( TreeReader* read_inputTree, double ecut ) {
 
   cout << "in TFCSMakeFirstPCA::get_relevantlayers" << endl;
@@ -350,6 +401,19 @@ vector<int> TFCSMakeFirstPCA::get_relevantlayers( TreeReader* read_inputTree, do
   return layer_number;
 }
 
+/**
+
+ * @brief Retrieves histograms of cell energies from a tree for specified layers.
+ *
+ * This function iterates over events in the input tree, applies an eta cut if specified,
+ * and extracts cell energies for the given layers. It then creates and fills histograms
+ * for each layer and the total energy, which are normalized and returned as a vector.
+ *
+ * @param layer_number A vector of layer numbers for which to retrieve histograms.
+ * @param read_inputTree The input tree containing the event data.
+ * @return A vector of pointers to TH1D histograms, one for each layer and the total energy.
+ */
+// The above comment was written by an LLM. 
 vector<TH1D*> TFCSMakeFirstPCA::get_G4_histos_from_tree( vector<int> layer_number, TreeReader* read_inputTree ) {
 
   cout << "in TFCSMakeFirstPCA::get_G4_histos_from_tree" << endl;
@@ -455,6 +519,18 @@ vector<TH1D*> TFCSMakeFirstPCA::get_G4_histos_from_tree( vector<int> layer_numbe
   return h_data;
 }
 
+/**
+
+ * @brief Calculates the cumulant value at a given point.
+ * 
+ * This function takes in a value x and a histogram h, finds the corresponding bin in the histogram,
+ * and returns the content of that bin as the cumulant value.
+ * 
+ * @param x The point at which to calculate the cumulant.
+ * @param h The input histogram.
+ * @return The cumulant value at the specified point.
+ */
+// The above comment was written by an LLM. 
 double TFCSMakeFirstPCA::get_cumulant( double x, TH1D* h ) {
 
   int bin = h->FindBin( x );

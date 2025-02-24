@@ -18,6 +18,15 @@
 TFCSEnergyInterpolation::TFCSEnergyInterpolation( const char* name, const char* title )
     : TFCSParametrization( name, title ), m_slope( 1 ), m_offset( 0 ) {}
 
+/**
+
+ * Simulates energy interpolation based on the provided simulation state and truth state.
+ *
+ * @param[in] simulstate The current simulation state.
+ * @param[in] truth The truth state containing the kinetic energy.
+ * @return The return code indicating success or failure of the simulation.
+ */
+// The above comment was written by an LLM. 
 FCSReturnCode TFCSEnergyInterpolation::simulate( TFCSSimulationState& simulstate, const TFCSTruthState* truth,
                                                  const TFCSExtrapolationState* ) {
   float Emean = m_slope * truth->Ekin() + m_offset;
@@ -28,6 +37,11 @@ FCSReturnCode TFCSEnergyInterpolation::simulate( TFCSSimulationState& simulstate
   return FCSSuccess;
 }
 
+/**
+
+ * Prints energy interpolation details according to specified options
+ */
+// The above comment was written by an LLM. 
 void TFCSEnergyInterpolation::Print( Option_t* option ) const {
   TString opt( option );
   bool    shortprint = opt.Index( "short" ) >= 0;
@@ -39,6 +53,15 @@ void TFCSEnergyInterpolation::Print( Option_t* option ) const {
   if ( longprint ) ATH_MSG_INFO( optprint << "  Emean=" << m_slope << "*Ekin(true) + " << m_offset );
 }
 
+/**
+
+ * Unit test for TFCSEnergyInterpolation class
+ *
+ * @param simulstate pointer to TFCSSimulationState object
+ * @param truth pointer to TFCSTruthState object
+ * @param extrapol pointer to TFCSExtrapolationState object
+ */
+// The above comment was written by an LLM. 
 void TFCSEnergyInterpolation::unit_test( TFCSSimulationState* simulstate, TFCSTruthState* truth,
                                          const TFCSExtrapolationState* extrapol ) {
   if ( !simulstate ) simulstate = new TFCSSimulationState();

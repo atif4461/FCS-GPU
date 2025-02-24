@@ -6,6 +6,103 @@
 #include "TH1.h"
 #include "TCanvas.h"
 
+/**
+
+ * @brief Runs a test of the TFCS functions.
+ *
+ * This function tests various aspects of the TFCS functions, including histogram generation,
+ * interpolation, and random number generation. It also demonstrates how to use these functions
+ * in practice.
+ *
+ * @return None
+ 
+void runTFCSFunctionTest()
+
+ * @brief Generates a histogram with a triangular shape.
+ *
+ * The histogram has 64 bins, ranging from 0 to 1, and is filled with values that form a triangle.
+ *
+ * @param none
+ * @return None
+ 
+// Code generating the triangular histogram
+
+ * @brief Tests the unit functionality of a TFCS1DFunction object.
+ *
+ * This function takes a histogram, a TFCS1DFunction object, and two integers as input, and performs
+ * a series of tests to verify the correctness of the function's behavior.
+ *
+ * @param hist The input histogram.
+ * @param func The TFCS1DFunction object to be tested.
+ * @param numEvents The number of events to generate.
+ * @param seed An integer seed value.
+ * @return None
+ 
+// TFCS1DFunction::unit_test(hist, funcInt8Int8, 10000000, histfine);
+
+ * @brief Initializes a TFCSHitCellMappingWiggle object.
+ *
+ * This function sets up the mapping between hit cells and wiggles, using a list of functions and bin edges.
+ *
+ * @param functions A list of TFCS1DFunction objects.
+ * @param bin_low_edges A list of bin low edge values.
+ * @return None
+ 
+// wiggle_test->initialize(functions, bin_low_edges);
+
+ * @brief Writes a TFCSHitCellMappingWiggle object to a file.
+ *
+ * This function saves the mapping to a ROOT file, allowing it to be retrieved later.
+ *
+ * @param filename The name of the file to write to.
+ * @return None
+ 
+// wiggle_test->Write();
+
+ * @brief Retrieves a TFCSHitCellMappingWiggle object from a file.
+ *
+ * This function reads the mapping from a ROOT file and returns a pointer to the retrieved object.
+ *
+ * @param filename The name of the file to read from.
+ * @return A pointer to the retrieved TFCSHitCellMappingWiggle object.
+ 
+// TFCSHitCellMappingWiggle* wiggle_test = (TFCSHitCellMappingWiggle*)ftest->Get("WiggleTest");
+
+ * @brief Gets the number of bins in a TFCSHitCellMappingWiggle object.
+ *
+ * This function returns the total number of bins in the mapping.
+ *
+ * @return The number of bins.
+ 
+// int get_number_of_bins()
+
+ * @brief Gets the function associated with a particular bin in a TFCSHitCellMappingWiggle object.
+ *
+ * This function returns a pointer to the TFCS1DFunction object associated with the specified bin.
+ *
+ * @param i The index of the bin.
+ * @return A pointer to the TFCS1DFunction object.
+ 
+// const TFCS1DFunction* get_function(int i)
+
+ * @brief Gets the lower edge of a bin in a TFCSHitCellMappingWiggle object.
+ *
+ * This function returns the lower edge value of the specified bin.
+ *
+ * @param i The index of the bin.
+ * @return The lower edge value.
+ 
+// double get_bin_low_edge(int i)
+
+ * @brief Gets the upper edge of a bin in a TFCSHitCellMappingWiggle object.
+ *
+ * This function returns the upper edge value of the specified bin.
+ *
+ * @param i The index of the bin.
+ * @return The upper edge value.
+ 
+// double get_bin_up_edge(int i)*/
+// The above comment was written by an LLM. 
 void runTFCSFunctionTest()
 {
   int       binscale = 4;

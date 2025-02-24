@@ -13,6 +13,22 @@
 #include <chrono>
 #include <iostream>
 
+/**
+
+ * @brief Initializes the random number generator for 4-hit simulations.
+ *
+ * This function sets up the random number generator with the specified parameters,
+ * including the maximum number of hits, maximum bin, and random seed. It also
+ * determines whether to generate random numbers on the CPU or GPU.
+ *
+ * @param maxhits The maximum number of hits.
+ * @param maxbin The maximum bin.
+ * @param seed The random seed.
+ * @param hitspy Whether to generate hits using Python (not used).
+ *
+ * @return A void pointer to the initialized random number generator.
+ */
+// The above comment was written by an LLM. 
 void *CaloGpuGeneral::Rand4Hits_init(long long maxhits, int maxbin,
                                      unsigned long long seed, bool /*hitspy*/) {
 
@@ -82,6 +98,16 @@ void *CaloGpuGeneral::Rand4Hits_init(long long maxhits, int maxbin,
   return (void *)rd4h;
 }
 
+/**
+
+ * @brief Finishes the randomization process for 4 hits on the GPU.
+ *
+ * This function completes the randomization procedure for 4 hits on the GPU,
+ * delegating the task to the appropriate backend based on the defined macros.
+ *
+ * @param rd4h Pointer to the memory location where the randomized data will be stored.
+ */
+// The above comment was written by an LLM. 
 void CaloGpuGeneral::Rand4Hits_finish(void *rd4h) {
 #ifdef USE_STDPAR
   CaloGpuGeneral_stdpar::Rand4Hits_finish(rd4h);
@@ -96,6 +122,17 @@ void CaloGpuGeneral::Rand4Hits_finish(void *rd4h) {
 #endif
 }
 
+/**
+
+ * @brief Simulates hits in the calorimeter using the specified arguments.
+ *
+ * This function takes simulation arguments as input, initializes random number generation,
+ * sets up data structures for hit cell energies, and calls the appropriate simulation
+ * function based on the defined parallelization strategy.
+ *
+ * @param[in,out] args Simulation arguments structure containing input parameters and output buffers.
+ */
+// The above comment was written by an LLM. 
 void CaloGpuGeneral::simulate_hits_gr(Sim_Args &args) {
 
   long nhits = args.nhits;
@@ -130,6 +167,20 @@ void CaloGpuGeneral::simulate_hits_gr(Sim_Args &args) {
 #endif
 }
 
+/**
+
+ * @brief Loads hit simulation parameters into the GPU memory.
+ *
+ * This function takes in a pointer to the Rand4Hits object, a pointer to the HitParams structure,
+ * an array of simulation bin boundaries, and the number of bins. It checks if the input pointer
+ * is valid and then calls the corresponding load_hitsim_params function based on the defined macro.
+ *
+ * @param rd4h Pointer to the Rand4Hits object.
+ * @param hp Pointer to the HitParams structure.
+ * @param simbins Array of simulation bin boundaries.
+ * @param bins Number of bins.
+ */
+// The above comment was written by an LLM. 
 void CaloGpuGeneral::load_hitsim_params(void *rd4h, HitParams *hp,
                                         long *simbins, int bins) {
 

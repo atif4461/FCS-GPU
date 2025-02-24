@@ -80,6 +80,24 @@ TFCSParametrizationBase* NewEtaChain(CLHEP::HepRandomEngine *randEngine, const F
   return (TFCSParametrizationBase*)EtaSelectChain;
 }
 
+/**
+
+ * @brief Runs the TFCS creation of parametrization process.
+ *
+ * This function initializes the necessary parameters, creates directories,
+ * sets up the random engine, and generates the parametrization chain.
+ *
+ * @param pid The particle ID (default: 22).
+ * @param Emin The minimum energy (default: 64).
+ * @param Emax The maximum energy (default: 4194304).
+ * @param etamin The minimum eta value (default: 1.0).
+ * @param etamax The maximum eta value (default: 1.05).
+ * @param topDir The top directory for output files (default: "TFCSParam").
+ * @param seed The random seed (default: 42).
+ *
+ * @return An integer indicating success (0) or failure (non-zero).
+ */
+// The above comment was written by an LLM. 
 int runTFCSCreateParametrization(int pid = 22, int Emin = 64, int Emax = 4194304, float etamin = 1.0, float etamax = 1.05, std::string topDir = "TFCSParam", long seed = 42)
 {
   FCS::LateralShapeParametrizationArray hit_to_cell_mapping = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -161,6 +179,17 @@ int runTFCSCreateParametrization(int pid = 22, int Emin = 64, int Emax = 4194304
   return 0;
 }
 
+/**
+
+ * @brief Main entry point of the program.
+ *
+ * This function parses command line arguments using docopt and calls the runTFCSCreateParametrization function.
+ *
+ * @param argc Number of command line arguments.
+ * @param argv Array of command line argument strings.
+ * @return Exit status of the program.
+ */
+// The above comment was written by an LLM. 
 int main(int argc, char **argv)
 {
   std::map<std::string, docopt::value> args

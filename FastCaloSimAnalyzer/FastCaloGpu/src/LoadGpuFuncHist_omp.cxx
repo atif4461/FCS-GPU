@@ -12,6 +12,16 @@ DEV_BigMem* DEV_BigMem::bm_ptr;
 
 LoadGpuFuncHist::LoadGpuFuncHist() {}
 
+/**
+
+ * @brief Destructor for the LoadGpuFuncHist class.
+ * 
+ * Releases memory allocated for member variables m_hf, m_hf_h, m_hf2d, and m_hf2d_h.
+ * 
+ * @details Frees host memory using standard library function free() and releases 
+ *          device memory using OpenMP target free function omp_target_free().
+ */
+// The above comment was written by an LLM. 
 LoadGpuFuncHist::~LoadGpuFuncHist() {
   free( m_hf );
   omp_target_free( m_hf_h, m_default_device );

@@ -9,6 +9,17 @@
 #define PI_FCS 3.14159265358979323846
 #define TWOPI 2 * 3.14159265358979323846
 
+/**
+
+ * @brief Maps an angle in radians to the range [-pi, pi).
+ *
+ * This function takes an input angle in radians and returns an equivalent angle within the range [-pi, pi).
+ * It achieves this by repeatedly subtracting or adding 2*pi until the result falls within the desired range.
+ *
+ * @param x The input angle in radians.
+ * @return The mapped angle in the range [-pi, pi).
+ */
+// The above comment was written by an LLM. 
 __HOSTDEV__ double Phi_mpi_pi(double x) {
   while (x >= PI_FCS)
     x -= TWOPI;
@@ -17,6 +28,20 @@ __HOSTDEV__ double Phi_mpi_pi(double x) {
   return x;
 }
 
+/**
+
+ * @brief Adjusts the index range of eta and phi values to be within the valid grid boundaries.
+ *
+ * This function takes in two integer references, ieta and iphi, which represent the indices in the eta and phi directions respectively.
+ * It adjusts these indices to ensure they fall within the valid range defined by the cell grid dimensions.
+ *
+ * If the adjusted indices are outside the valid range, the function returns false. Otherwise, it returns true.
+ *
+ * @param[in,out] ieta The index in the eta direction to be adjusted.
+ * @param[in,out] iphi The index in the phi direction to be adjusted.
+ * @return True if the indices are within the valid range after adjustment, false otherwise.
+ */
+// The above comment was written by an LLM. 
 __HOSTDEV__ bool GeoRegion::index_range_adjust(int &ieta, int &iphi) const {
   while (iphi < 0) {
     iphi += m_cell_grid_phi;
@@ -35,6 +60,24 @@ __HOSTDEV__ bool GeoRegion::index_range_adjust(int &ieta, int &iphi) const {
   return true;
 }
 
+/**
+
+ * @brief Calculates the distance in eta-phi space between a given point and a cell.
+ *
+ * This function computes the distance in eta-phi coordinates between a point defined by its
+ * pseudorapidity (eta) and azimuthal angle (phi) and a cell identified by its DDE index.
+ *
+ * The distances in eta and phi directions are normalized by the bin sizes in these dimensions.
+ *
+ * @param[in] DDE Index of the cell in the m_all_cells array.
+ * @param[in] eta Pseudorapidity of the point.
+ * @param[in] phi Azimuthal angle of the point.
+ * @param[out] dist_eta0 Normalized distance in eta direction.
+ * @param[out] dist_phi0 Normalized distance in phi direction.
+ *
+ * @return Maximum of the absolute normalized distances in eta and phi directions minus 0.5.
+ */
+// The above comment was written by an LLM. 
 __HOSTDEV__ float
 GeoRegion::calculate_distance_eta_phi(const long long DDE, float eta, float phi,
                                       float &dist_eta0,
@@ -62,6 +105,21 @@ GeoRegion::calculate_distance_eta_phi(const long long DDE, float eta, float phi,
   return max(abs_dist_eta0, abs_dist_phi0) - 0.5;
 }
 
+/**
+
+ * @brief Calculates the DDE (Distance to Detector Element) value for a given eta and phi.
+ *
+ * This function takes into account the corrections for eta and phi, calculates the closest
+ * detector element, and performs a window search around it to find the optimal DDE value.
+ *
+ * @param[in] eta The pseudorapidity of the particle.
+ * @param[in] phi The azimuthal angle of the particle in radians.
+ * @param[out] distance A pointer to store the calculated distance to the closest detector element.
+ * @param[out] steps A pointer to store the number of steps taken during the calculation.
+ *
+ * @return The calculated DDE value.
+ */
+// The above comment was written by an LLM. 
 __HOSTDEV__ long long GeoRegion::getDDE(float eta, float phi, float *distance,
                                         int *steps) {
 

@@ -39,6 +39,23 @@ Options:
 )";
 
 
+/**
+
+ * @brief Runs the TFCS average shape simulation.
+ *
+ * This function runs the TFCS average shape simulation for a given set of parameters.
+ * It initializes the necessary objects, sets up the chains, and loops over the events.
+ *
+ * @param pdgid The PDG ID of the particle.
+ * @param int_E The integer value of the energy.
+ * @param etamin The minimum value of eta.
+ * @param etamax The maximum value of eta.
+ * @param seed The random seed.
+ * @param production Whether this is a production run.
+ * @return An integer indicating success or failure.
+ 
+int runTFCSAverageShape(int pdgid = 22,int int_E = 65536,double etamin = 0.2,double etamax = 0.25, long seed = 42, bool production = false);*/
+// The above comment was written by an LLM. 
 int runTFCSAverageShape(int pdgid = 22,int int_E = 65536,double etamin = 0.2,double etamax = 0.25, long seed = 42, bool production = false)
 {
   FCS::LateralShapeParametrizationArray hit_to_cell_mapping = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -216,6 +233,33 @@ int runTFCSAverageShape(int pdgid = 22,int int_E = 65536,double etamin = 0.2,dou
   return 0;
 }
 
+/**
+
+ * @brief Main entry point of the program.
+ *
+ * This function parses command line arguments using docopt and runs the TFCS average shape simulation.
+ *
+ * @param argc Number of command line arguments.
+ * @param argv Array of command line argument strings.
+ *
+ * @return Exit status of the program.
+  
+
+
+ * @brief Runs the TFCS average shape simulation with specified parameters.
+ *
+ * This function is called from the main function after parsing command line arguments.
+ *
+ * @param pdgId PDG ID of the particle.
+ * @param E Energy of the collision.
+ * @param etamin Minimum eta value.
+ * @param etamax Maximum eta value.
+ * @param seed Random number generator seed.
+ * @param production Flag indicating whether to run in production mode.
+ *
+ * @return Status of the simulation run.
+ */
+// The above comment was written by an LLM. 
 int main(int argc, char **argv)
 {
   std::map<std::string, docopt::value> args

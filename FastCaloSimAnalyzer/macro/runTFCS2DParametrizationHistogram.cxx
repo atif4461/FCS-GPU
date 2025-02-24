@@ -35,6 +35,18 @@
 #include "TFCSSampleDiscovery.h"
 
 
+/**
+
+ * @brief Zooms in on a histogram within specified ranges.
+ *
+ * This function takes an input histogram and returns a new histogram that is zoomed in
+ * on the range [rmin, rmax]. The output histogram has the same title as the input
+ * histogram but with "_zoom" appended to its name.
+ *
+ * @param h_in The input histogram to be zoomed.
+ * @return A new histogram that is zoomed in on the specified range.
+ */
+// The above comment was written by an LLM. 
 TH1F* zoomHisto(TH1* h_in)
 {
 
@@ -67,6 +79,20 @@ TH1F* zoomHisto(TH1* h_in)
 }
 
 
+/**
+
+ * @brief Creates a 2D histogram from a given 2D histogram with an applied energy cutoff.
+ *
+ * This function takes a 2D histogram and a float value representing the energy cutoff,
+ * projects the histogram onto the Y-axis, calculates the new Y-axis range based on the cutoff,
+ * and creates a new 2D histogram with the updated Y-axis range. It then copies the content of the original
+ * histogram into the new one and normalizes it.
+ *
+ * @param h The input 2D histogram.
+ * @param energy_cutoff The energy cutoff value.
+ * @return A pointer to the newly created 2D histogram.
+ */
+// The above comment was written by an LLM. 
 TH2* Create2DHistogram(TH2* h, float energy_cutoff)
 {
 
@@ -104,6 +130,14 @@ TH2* Create2DHistogram(TH2* h, float energy_cutoff)
   return h2;
 }
 
+/**
+
+ * @brief Creates a polar plot from a given 2D histogram and saves it as an image file.
+ *
+ * @param h The input 2D histogram.
+ * @param outDir The output directory where the plot will be saved.
+ */
+// The above comment was written by an LLM. 
 void CreatePolarPlot(TH2F* h, std::string outDir)
 {
 
@@ -126,6 +160,46 @@ void CreatePolarPlot(TH2F* h, std::string outDir)
 }
 
 
+/**
+
+```cpp
+ * @brief Runs the TFCS 2D parameterization histogram.
+ *
+ * @param dsid Data set ID.
+ * @param dsid_zv0 Data set ID for z-vertex studies.
+ * @param sampleData Sample data string.
+ * @param topDir Top directory path.
+ * @param version Version string.
+ * @param energy_cutoff Energy cutoff value.
+ * @param topPlotDir Top plot directory path.
+ * @param do2DParam Flag to perform 2D parameterization.
+ * @param isPhiSymmetry Flag to enable phi symmetry.
+ * @param doMeanRz Flag to calculate mean Rz values.
+ * @param useMeanRz Flag to use pre-calculated mean Rz values.
+ * @param doZVertexStudies Flag to perform z-vertex studies.
+ * @param seed Random seed value.
+ * @param nEvents Number of events to process.
+ * @param firstEvent First event index.
+ * @param debug Debug flag.
+ 
+void runTFCS2DParametrizationHistogram(int dsid,
+                                       int dsid_zv0,
+                                       std::string sampleData,
+                                       std::string topDir,
+                                       std::string version,
+                                       float energy_cutoff,
+                                       std::string topPlotDir,
+                                       bool do2DParam,
+                                       bool isPhiSymmetry,
+                                       bool doMeanRz,
+                                       bool useMeanRz,
+                                       bool doZVertexStudies,
+                                       long seed,
+                                       int nEvents,
+                                       int firstEvent,
+                                       int debug);
+```*/
+// The above comment was written by an LLM. 
 void runTFCS2DParametrizationHistogram(int dsid,
                                        int dsid_zv0,
                                        std::string sampleData,
@@ -586,6 +660,126 @@ Options:
 
 
 
+/**
+
+ * @brief Main entry point of the program.
+ *
+ * This function initializes variables, parses command line arguments,
+ * checks their validity, and calls the runTFCS2DParametrizationHistogram function.
+ *
+ * @param argc Number of command line arguments.
+ * @param argv Array of command line argument strings.
+ * @return Exit status of the program.
+ 
+int main(int argc, char **argv)
+
+ * @brief Parses command line argument --dsid and stores its value in dsid variable.
+ *
+ * Throws std::invalid_argument exception if --dsid option is missing or not an integer.
+ 
+try{ dsid=args["--dsid"].asLong();} 
+
+ * @brief Parses command line argument --dsid_zv0 and stores its value in dsid_zv0 variable.
+ *
+ * Throws std::invalid_argument exception if --dsid_zv0 option is not an integer.
+ 
+try{ dsid_zv0=args["--dsid_zv0"].asLong();}
+
+ * @brief Parses command line argument --sampleData and stores its value in sampleData variable.
+ *
+ * Throws std::invalid_argument exception if --sampleData option is not a string.
+ 
+try{ sampleData=args["--sampleData"].asString();}
+
+ * @brief Parses command line argument --topDir and stores its value in topDir variable.
+ *
+ * Throws std::invalid_argument exception if --topDir option is not a string.
+ 
+try{ topDir=args["--topDir"].asString();}
+
+ * @brief Parses command line argument --version and stores its value in version variable.
+ *
+ * Throws std::invalid_argument exception if --version option is not a string.
+ 
+try{ version=args["--version"].asString();}
+
+ * @brief Parses command line argument --energy_cutoff and stores its value in energy_cutoff variable.
+ *
+ * Throws std::invalid_argument exception if --energy_cutoff option is not a float.
+ 
+try{ energy_cutoff=std::stof( args["--energy_cutoff"].asString() );}
+
+ * @brief Parses command line argument --topPlotDir and stores its value in topPlotDir variable.
+ *
+ * Throws std::invalid_argument exception if --topPlotDir option is not a string.
+ 
+try{ topPlotDir=args["--topPlotDir"].asString();}
+
+ * @brief Parses command line argument --do2DParam and stores its value in do2DParam variable.
+ *
+ * Throws std::invalid_argument exception if --do2DParam option is not an integer.
+ 
+try{ do2DParam=args["--do2DParam"].asLong();}
+
+ * @brief Parses command line argument --isPhiSymmetry and stores its value in isPhiSymmetry variable.
+ *
+ * Throws std::invalid_argument exception if --isPhiSymmetry option is not an integer.
+ 
+try{ isPhiSymmetry=args["--isPhiSymmetry"].asLong();}
+
+ * @brief Parses command line argument --doMeanRz and stores its value in doMeanRz variable.
+ *
+ * Throws std::invalid_argument exception if --doMeanRz option is not an integer.
+ 
+try{ doMeanRz=args["--doMeanRz"].asLong();}
+
+ * @brief Parses command line argument --useMeanRz and stores its value in useMeanRz variable.
+ *
+ * Throws std::invalid_argument exception if --useMeanRz option is not an integer.
+ 
+try{ useMeanRz=args["--useMeanRz"].asLong();}
+
+ * @brief Parses command line argument --doZVertexStudies and stores its value in doZVertexStudies variable.
+ *
+ * Throws std::invalid_argument exception if --doZVertexStudies option is not an integer.
+ 
+try{ doZVertexStudies=args["--doZVertexStudies"].asLong();}
+
+ * @brief Parses command line argument --seed and stores its value in seed variable.
+ *
+ * Throws std::invalid_argument exception if --seed option is not an integer.
+ 
+try{ seed=args["--seed"].asLong();}
+
+ * @brief Parses command line argument --nEvents and stores its value in nEvents variable.
+ *
+ * Throws std::invalid_argument exception if --nEvents option is not an integer.
+ 
+try{ nEvents=args["--nEvents"].asLong();}
+
+ * @brief Parses command line argument --firstEvent and stores its value in firstEvent variable.
+ *
+ * Throws std::invalid_argument exception if --firstEvent option is not an integer.
+ 
+try{ firstEvent=args["--firstEvent"].asLong();}
+
+ * @brief Parses command line argument --debug and stores its value in debug variable.
+ *
+ * Throws std::invalid_argument exception if --debug option is not an integer.
+ 
+try{ debug=args["--debug"].asLong();}
+
+ * @brief Checks if both doMeanRz and useMeanRz are set to true and exits with error message if so.
+ 
+if ( doMeanRz && useMeanRz ) {
+    std::cout << "Error: doMeanRz and useMeanRz cannot be set as true at the same moment!" << std::endl;
+    exit( -3 );
+}
+
+ * @brief Calls the runTFCS2DParametrizationHistogram function with parsed arguments.
+ 
+runTFCS2DParametrizationHistogram(dsid,dsid_zv0,sampleData,topDir,version,energy_cutoff,topPlotDir,do2DParam,isPhiSymmetry,doMeanRz,useMeanRz,doZVertexStudies,seed,nEvents,firstEvent,debug);*/
+// The above comment was written by an LLM. 
 int main(int argc, char **argv)
 {
   

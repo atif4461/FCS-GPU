@@ -23,6 +23,17 @@
 using namespace std;
 
 
+/**
+
+ * @brief Stores regression data from file into weight matrices.
+ * 
+ * This function reads weights from a specified file and stores them in the provided matrices.
+ * 
+ * @param weightfilename The filename containing the regression weights.
+ * @param fWeightMatrix0to1 The first weight matrix to store regression data.
+ * @param fWeightMatrix1to2 The second weight matrix to store regression data.
+ */
+// The above comment was written by an LLM. 
 void TFCS1DRegression::storeRegression(string weightfilename, vector<vector<double> > &fWeightMatrix0to1, vector<vector<double> > &fWeightMatrix1to2)
 {
 
@@ -32,6 +43,18 @@ void TFCS1DRegression::storeRegression(string weightfilename, vector<vector<doub
   // validate(10,weightfilename);
 }
 
+/**
+
+ * @brief Validates the regression value calculated from the weights against the TMVA value.
+ * 
+ * This function generates a specified number of random values and calculates the corresponding 
+ * regression values using both the internal calculation and the TMVA application. The results 
+ * are then printed to the console for comparison.
+ * 
+ * @param Ntoys The number of toy experiments to perform for validation.
+ * @param weightfilename The filename containing the weights used in the regression calculation.
+ */
+// The above comment was written by an LLM. 
 void TFCS1DRegression::validate(int Ntoys,string weightfilename)
 {
 
@@ -50,6 +73,20 @@ void TFCS1DRegression::validate(int Ntoys,string weightfilename)
   }
 }
 
+/**
+
+ * @brief Transforms an input histogram into a standardized form.
+ *
+ * This function checks if the x-axis of the input histogram is within the range [0, 1].
+ * If not, it transforms the histogram to have an x-axis ranging from 0 to 1.
+ *
+ * @param h_input The input histogram to be transformed.
+ * @param rangeval Output parameter storing the original range of the x-axis.
+ * @param startval Output parameter storing the starting value of the x-axis.
+ *
+ * @return A pointer to the transformed histogram.
+ */
+// The above comment was written by an LLM. 
 TH1* TFCS1DRegression::transform(TH1* h_input, float &rangeval, float& startval)
 {
 
@@ -82,6 +119,17 @@ TH1* TFCS1DRegression::transform(TH1* h_input, float &rangeval, float& startval)
   return h_out;
 }
 
+/**
+
+ * @brief Returns the lower bound of the range in a 1D histogram where data starts.
+ * 
+ * This function iterates over the bins of a given 1D histogram and returns the value of the first non-empty bin,
+ * which is considered as the lower bound of the range where data starts.
+ * 
+ * @param hist The input 1D histogram.
+ * @return The lower bound of the range where data starts in the histogram.
+ */
+// The above comment was written by an LLM. 
 double TFCS1DRegression::get_range_low(TH1* hist)
 {
   double range_low = 0.0;
@@ -98,6 +146,18 @@ double TFCS1DRegression::get_range_low(TH1* hist)
   return range_low;
 }
 
+/**
+
+ * @brief Returns a cumulative histogram of the input histogram.
+ * 
+ * This function creates a clone of the input histogram, then iterates over its bins,
+ * accumulating the bin contents and updating the corresponding bin in the cloned
+ * histogram with the cumulative sum.
+ * 
+ * @param hist The input histogram.
+ * @return A new histogram containing the cumulative bin contents of the input histogram.
+ */
+// The above comment was written by an LLM. 
 TH1* TFCS1DRegression::get_cumul(TH1* hist)
 {
   TH1D*  h_cumul = (TH1D*)hist->Clone( "h_cumul" );
@@ -110,6 +170,31 @@ TH1* TFCS1DRegression::get_cumul(TH1* hist)
   return h_cumul;
 }
 
+/**
+
+ * @brief Tests the histogram using a neural network regression.
+ *
+ * This function takes in a histogram, applies transformations, maps the y-axis to 0-1,
+ * turns the histogram into a tree, and trains a neural network to perform regression.
+ *
+ * It iteratively increases the number of neurons until the maximum deviation between
+ * the original histogram and the regressed one falls below a specified cutoff.
+ *
+ * The final result is stored as a set of histograms representing the cumulative distribution
+ * at different stages of the regression process.
+ *
+ * @param hist Input histogram to be tested
+ * @param weightfilename File containing weights for the neural network
+ * @param[out] rangeval Range value for transformation
+ * @param[out] startval Start value for transformation
+ * @param outfilename Output file name for storing results
+ * @param neurons_start Initial number of neurons for the neural network
+ * @param neurons_end Maximum number of neurons for the neural network
+ * @param cut_maxdev Maximum allowed deviation between original and regressed histograms
+ * @param ntoys Number of toy simulations for testing the regression
+ * @return Status indicating whether the regression was successful (1 or 2) or failed (3)
+ */
+// The above comment was written by an LLM. 
 int TFCS1DRegression::testHisto(TH1* hist, std::string weightfilename, float &rangeval, float &startval, std::string outfilename, int neurons_start, int neurons_end, double cut_maxdev, int ntoys)
 {
   // int debug=1;
@@ -223,6 +308,19 @@ int TFCS1DRegression::testHisto(TH1* hist, std::string weightfilename, float &ra
 }
 
 
+/**
+
+ * @brief Applies a regression model from a file.
+ *
+ * This function applies a machine learning regression model stored in a file
+ * specified by the weightfile parameter. The model is applied to a single input value,
+ * uniform, and returns the predicted output value.
+ *
+ * @param uniform Input value to apply the regression model to.
+ * @param weightfile File containing the trained regression model weights.
+ * @return Predicted output value.
+ */
+// The above comment was written by an LLM. 
 double TFCS1DRegression::tmvaregression_application(double uniform, std::string weightfile)
 {
 
@@ -286,6 +384,21 @@ double TFCS1DRegression::tmvaregression_application(double uniform, std::string 
   return 0;
 }
 
+/**
+
+ * @brief Trains a neural network using the TMVA regression method.
+ *
+ * This function trains a neural network with the specified number of neurons,
+ * using the provided decision tree and weight file, and saves the output to the
+ * specified file. It also sets the pass_training flag to indicate success.
+ *
+ * @param neurons The number of neurons in the neural network.
+ * @param regTree The decision tree used for regression.
+ * @param weightfile The file containing the weights for the regression.
+ * @param outfilename The file where the output will be saved.
+ * @param pass_training A flag indicating whether the training was successful.
+ */
+// The above comment was written by an LLM. 
 void TFCS1DRegression::tmvaregression_training(int neurons, TTree *regTree, std::string weightfile, std::string outfilename, int& pass_training)
 {
 
@@ -362,6 +475,18 @@ void TFCS1DRegression::tmvaregression_training(int neurons, TTree *regTree, std:
 }
 
 
+/**
+
+ * @brief Retrieves weights from a file and stores them in matrices.
+ * 
+ * This function reads weights from a specified file and populates two matrices,
+ * fWeightMatrix0to1 and fWeightMatrix1to2, with the retrieved weights.
+ * 
+ * @param weightfile The name of the file containing the weights.
+ * @param fWeightMatrix0to1 A reference to the first matrix to be populated with weights.
+ * @param fWeightMatrix1to2 A reference to the second matrix to be populated with weights.
+ */
+// The above comment was written by an LLM. 
 void TFCS1DRegression::get_weights(string weightfile, vector<vector<double> > &fWeightMatrix0to1, vector<vector<double> > &fWeightMatrix1to2)
 {
 

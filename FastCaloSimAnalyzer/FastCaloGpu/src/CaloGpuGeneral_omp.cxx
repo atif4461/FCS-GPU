@@ -31,6 +31,16 @@ static CaloGpuGeneral::KernelTime timing;
 
 namespace CaloGpuGeneral_omp {
 
+/**
+
+ * @brief Finalizes the Rand4Hits object and releases allocated resources.
+ *
+ * This function cleans up the memory used by the Rand4Hits object and prints out
+ * the amount of GPU memory used. It also displays kernel timing information if available.
+ *
+ * @param rd4h Pointer to the Rand4Hits object to be finalized.
+ */
+// The above comment was written by an LLM. 
   void Rand4Hits_finish( void* rd4h ) {
 
     size_t free, total;
@@ -48,6 +58,21 @@ namespace CaloGpuGeneral_omp {
     }
   }
 
+/**
+
+ * @brief Calculates the Distance to the Detector Element (DDE) for a given set of geometric parameters.
+ *
+ * This function takes into account the sampling, eta, and phi values to determine the DDE.
+ * It iterates over the sample index and regions to find the minimum distance.
+ *
+ * @param[in] geo         Pointer to the GeoGpu object containing geometric information.
+ * @param[in] sampling   Sampling value to consider.
+ * @param[in] eta        Eta value to consider.
+ * @param[in] phi        Phi value to consider.
+ *
+ * @return The calculated DDE value, or -1 if an error occurs.
+ */
+// The above comment was written by an LLM. 
   inline long long getDDE( GeoGpu* geo, int sampling, float eta, float phi ) {
 
     float* distance = 0;
@@ -106,6 +131,21 @@ namespace CaloGpuGeneral_omp {
     return bestDDE;
   }
 
+/**
+
+ * @brief Finds the first index in a sorted array where the element value exceeds a given threshold.
+ *
+ * This function performs a binary search on a sorted array to find the first index
+ * where the element value is greater than the specified value.
+ *
+ * @param[in] array The input array to search, assumed to be sorted in ascending order.
+ * @param[in] size The number of elements in the input array.
+ * @param[in] value The threshold value to search for.
+ *
+ * @return The index of the first element in the array that has a value greater than the specified threshold,
+ *         or the last index of the array if all elements are less than or equal to the threshold.
+ */
+// The above comment was written by an LLM. 
   inline int find_index_f( float* array, int size, float value ) {
     // fist index (from 0)  have element value > value
     // array[i] > value ; array[i-1] <= value
@@ -123,6 +163,20 @@ namespace CaloGpuGeneral_omp {
     return m_index;
   }
 
+/**
+
+ * @brief Finds the first index in a sorted array where the element is greater than a given value.
+ *
+ * This function performs a binary search on a sorted array of uint32_t values to find the first index
+ * where the element is greater than the specified value. The array is assumed to be sorted in ascending order.
+ *
+ * @param[in] array The sorted array of uint32_t values.
+ * @param[in] size The number of elements in the array.
+ * @param[in] value The value to search for.
+ *
+ * @return The index of the first element greater than the specified value, or the last index if all elements are less than or equal to the value.
+ */
+// The above comment was written by an LLM. 
   inline int find_index_uint32( uint32_t* array, int size, uint32_t value ) {
     // fist index i  have element value > value
     // array[i] > value ; array[i-1] <= value
@@ -139,6 +193,19 @@ namespace CaloGpuGeneral_omp {
     return m_index;
   }
 
+/**
+
+ * @brief Finds the first index of the element in the array that has a value greater than the specified value.
+ *
+ * This function performs a binary search on the array to find the first index where the value exceeds the specified threshold.
+ *
+ * @param[in] array The input array to search.
+ * @param[in] size The number of elements in the array.
+ * @param[in] value The threshold value to compare against.
+ *
+ * @return The index of the first element with a value greater than the specified value, or the last index if no such element exists.
+ */
+// The above comment was written by an LLM. 
   inline int find_index_long( long* array, int size, long value ) {
     // find the first index of element which has vaule > value
     int low     = 0;
@@ -157,6 +224,20 @@ namespace CaloGpuGeneral_omp {
     return m_index;
   }
 
+/**
+
+ * @brief Generates random values in 2D space according to a histogram distribution.
+ *
+ * This function takes two random numbers and generates corresponding x and y values
+ * following the probability density described by a 2D histogram.
+ *
+ * @param[out] valuex The generated x value.
+ * @param[out] valuey The generated y value.
+ * @param[in] rnd0 A random number between 0 and 1 used for generating the x value.
+ * @param[in] rnd1 A random number between 0 and 1 used for generating the y value.
+ * @param[in] hf2d A pointer to a 2D histogram object containing the distribution.
+ */
+// The above comment was written by an LLM. 
   inline void rnd_to_fct2d( float& valuex, float& valuey, float rnd0, float rnd1, FH2D* hf2d ) {
 
     // printf("-r-r-r-r- RN at %f %f \n", rnd0, rnd1);
@@ -193,6 +274,22 @@ namespace CaloGpuGeneral_omp {
     valuey = HistoBordersy[biny] + ( HistoBordersy[biny + 1] - HistoBordersy[biny] ) * rnd1;
   }
 
+/**
+
+ * @brief Maps a random number to a function value in a 1D histogram.
+ *
+ * This function takes a random number between 0 and 1, and maps it to a function value
+ * within a given 1D histogram defined by its contents and border values.
+ *
+ * @param[in] rnd The random number to be mapped.
+ * @param[in] contents The contents of the histogram bins.
+ * @param[in] borders The border values of the histogram bins.
+ * @param[in] nbins The number of bins in the histogram.
+ * @param[in] s_MaxValue The maximum value used for scaling the random number.
+ *
+ * @return The mapped function value.
+ */
+// The above comment was written by an LLM. 
   inline float rnd_to_fct1d( float rnd, uint32_t* contents, float* borders, int nbins, uint32_t s_MaxValue ) {
 
     uint32_t int_rnd = s_MaxValue * rnd;
@@ -220,6 +317,18 @@ namespace CaloGpuGeneral_omp {
     }
   }
 
+/**
+
+ * @brief Loads hit simulation parameters into device memory.
+ *
+ * This function copies hit simulation parameters from host memory to device memory.
+ *
+ * @param[in] rd4h     Pointer to the Rand4Hits object containing the parameters.
+ * @param[out] hp      Array of HitParams objects to be copied to the device.
+ * @param[out] simbins Array of simulation bin values to be copied to the device.
+ * @param[in]  bins    Number of bins in the simulation.
+ */
+// The above comment was written by an LLM. 
   void load_hitsim_params( void* rd4h, HitParams* hp, long* simbins, int bins ) {
 
     int         m_default_device = omp_get_default_device();
@@ -246,6 +355,18 @@ namespace CaloGpuGeneral_omp {
     }
   }
 
+/**
+
+ * @brief Resets the workspace by initializing the energy of all cells and hit counters.
+ *
+ * This function takes the simulation arguments as input and resets the energy of all cells
+ * and hit counters to zero. It uses OpenMP directives to parallelize the operation across
+ * multiple teams and threads.
+ *
+ * @param[in,out] args Simulation arguments containing the cell energies, hit counters, and
+ *                     other simulation parameters.
+ */
+// The above comment was written by an LLM. 
   inline void simulate_clean( Sim_Args& args ) {
 
     auto                cells_energy = args.cells_energy;
@@ -264,6 +385,18 @@ namespace CaloGpuGeneral_omp {
     }
   }
 
+/**
+
+ * @brief Calculates the highest power of 2 less than or equal to the given number.
+ *
+ * This function takes an unsigned integer as input and returns the highest power of 2
+ * that is less than or equal to the input number. If the input is less than 1,
+ * the function returns 0.
+ *
+ * @param n The input number.
+ * @return The highest power of 2 less than or equal to n.
+ */
+// The above comment was written by an LLM. 
   inline int highestPowerof2( unsigned int n ) {
     // Invalid input
     if ( n < 1 ) return 0;
@@ -516,6 +649,18 @@ namespace CaloGpuGeneral_omp {
     }
   }
 
+/**
+
+ * @brief Simulates hits in the calorimeter using parallel processing.
+ *
+ * This function takes simulation arguments as input and performs the following tasks:
+ * - Iterates over all cells and simulations to calculate the energy deposited in each cell.
+ * - Updates the count of hit cells for each simulation using atomic operations.
+ * - Stores the energy and cell ID of hit cells in a structured array for further processing.
+ *
+ * @param[in] args Simulation arguments containing necessary parameters such as number of cells, simulations, and energy arrays.
+ */
+// The above comment was written by an LLM. 
   inline void simulate_hits_ct( const Sim_Args args ) {
 
     const unsigned long ncells = args.ncells;
@@ -545,6 +690,16 @@ namespace CaloGpuGeneral_omp {
     }
   }
 
+/**
+
+ * @brief Simulates hits in the calorimeter using GPU acceleration.
+ *
+ * This function orchestrates the simulation of hits in the calorimeter by calling various
+ * specialized functions. It also handles memory management and data transfer between host and device.
+ *
+ * @param[in,out] args Simulation arguments structure containing input parameters and output buffers.
+ */
+// The above comment was written by an LLM. 
   void simulate_hits_gr( Sim_Args& args ) {
 
     int         m_default_device = omp_get_default_device();

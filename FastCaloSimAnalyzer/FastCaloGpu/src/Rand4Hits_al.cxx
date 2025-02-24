@@ -10,6 +10,20 @@
 struct InitRngKernel
 {
   template<typename TAcc, typename TExtent, typename TRandEngine>
+/**
+
+ * @brief Initializes the random number generator states buffer on an accelerator.
+ *
+ * This function initializes the random number generator states buffer on the specified accelerator.
+ * It takes into account the current accelerator, the size of the generator states buffer,
+ * a pointer to the generator states buffer, and a seed number.
+ *
+ * @param[in] acc Current accelerator
+ * @param[in] extent Size of the generator states buffer
+ * @param[out] states Generator states buffer
+ * @param[in] seed Seed number
+ */
+// The above comment was written by an LLM. 
   ALPAKA_FN_ACC auto operator()(TAcc const& acc                    // current accelerator
 				, TExtent const extent             // size of the generator states buffer
 				, TRandEngine* const states        // generator states buffer
@@ -29,6 +43,22 @@ struct InitRngKernel
 struct GenerateKernel
 {
   template<typename TAcc, typename TExtent>
+/**
+
+ * @brief Generates an array of random numbers using a Parallel Random Number Generator (PRNG)
+ * 
+ * This function takes in the current accelerator, the size of the memory buffer with random numbers,
+ * a buffer with generator states, a memory buffer with random numbers, and the size of the memory buffer 
+ * with generator states. It then generates an array of random numbers using the PRNG and stores them in the 
+ * provided memory buffer.
+ * 
+ * @param acc Current accelerator
+ * @param extent Size of the memory buffer with random numbers
+ * @param states Buffer with generator states
+ * @param cells Memory buffer with random numbers
+ * @param numStates Size of the memory buffer with generator states
+ */
+// The above comment was written by an LLM. 
   ALPAKA_FN_ACC auto operator()(TAcc const& acc                      // current accelerator
 				, TExtent const extent               // size of the memory buffer with random numbers
 				, RandomEngine<TAcc>* const states   // buffer with generator states
@@ -53,6 +83,17 @@ struct GenerateKernel
 };
 
 
+/**
+
+ * @brief Allocates memory for simulation data structures.
+ *
+ * This function allocates memory for various data structures used in the simulation,
+ * including cell energies, hit cell energies, simulation bins, hit parameters, and cell counts.
+ *
+ * @param maxhitct The maximum number of hits per cell.
+ * @param n_cells The total number of cells.
+ */
+// The above comment was written by an LLM. 
 void Rand4Hits::allocate_simulation(int /*maxbins*/, int maxhitct,
                                      unsigned long n_cells) {
 
@@ -80,6 +121,15 @@ void Rand4Hits::allocate_simulation(int /*maxbins*/, int maxhitct,
          n_cells, (void*)m_cells_energy, (void*)m_cell_e, (void*)m_ct);
 }
 
+/**
+
+ * @brief Allocates memory for generating random numbers on the CPU.
+ *
+ * This function initializes a vector to store random numbers and resizes it to the specified size.
+ *
+ * @param num The number of random numbers to generate.
+ */
+// The above comment was written by an LLM. 
 void Rand4Hits::allocateGenMem(size_t num) {
   m_rnd_cpu = new std::vector<float>;
   m_rnd_cpu->resize(num);
@@ -90,6 +140,16 @@ Rand4Hits::~Rand4Hits() {
   delete m_rnd_cpu;
 }
 
+/**
+
+ * @brief Regenerates random numbers for hits.
+ *
+ * This function regenerates random numbers for hits either on the CPU or accelerator,
+ * depending on the value of m_useCPU. If m_useCPU is true, it generates random numbers
+ * on the CPU and copies them to the accelerator. Otherwise, it generates random numbers
+ * directly on the accelerator.
+ */
+// The above comment was written by an LLM. 
 void Rand4Hits::rd_regen() {
   if ( m_useCPU ) {
     genCPU( 3 * m_total_a_hits );
@@ -123,6 +183,19 @@ void Rand4Hits::rd_regen() {
   }
 }
 
+/**
+
+ * @brief Creates a random number generator.
+ *
+ * This function initializes the random number generator with the given seed and
+ * allocates memory for the generated numbers. It can operate in either CPU or
+ * accelerator mode, depending on the value of the useCPU parameter.
+ *
+ * @param seed The seed value for the random number generator.
+ * @param num The number of random values to generate.
+ * @param useCPU Flag indicating whether to use the CPU (true) or accelerator (false).
+ */
+// The above comment was written by an LLM. 
 void Rand4Hits::create_gen( unsigned long long seed, size_t num, bool useCPU ) {
 
   m_bufAcc=alpaka::allocBuf<float, Idx>(alpaka::getDevByIdx<Acc>(0u), Vec{Idx(num)});

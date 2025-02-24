@@ -15,6 +15,21 @@
 #endif
 
 namespace CaloGpuGeneral_fnc {
+/**
+
+ * @brief Calculates the Distance-to-Edge (DDE) value for a given set of geometric parameters.
+ *
+ * This function takes into account the geometry, sampling strategy, and angular coordinates (eta, phi)
+ * to determine the closest distance to the edge of a geometric region.
+ *
+ * @param[in] geo         Pointer to the geometry object containing regional information.
+ * @param[in] sampling   Sampling strategy index.
+ * @param[in] eta        Angular coordinate (eta).
+ * @param[in] phi        Angular coordinate (phi).
+ *
+ * @return The calculated DDE value, or -1 if an error occurs.
+ */
+// The above comment was written by an LLM. 
 __DEVICE__ long long getDDE(GeoGpu *geo, int sampling, float eta, float phi) {
   float *distance = 0;
   int *steps = 0;
@@ -289,6 +304,19 @@ __DEVICE__ void HistoLateralShapeParametrization_g_d(const HitParams hp,
 __DEVICE__ void HitCellMapping_g_d(Acc const& acc, HitParams hp, Hit &hit, unsigned long /*t*/,
                                    Sim_Args args) {
 #else
+/**
+
+ * @brief Maps a hit to a cell in the detector geometry.
+ *
+ * This function takes a hit parameters object, a reference to a hit object, 
+ * and simulation arguments, and maps the hit to a cell in the detector geometry.
+ * It calculates the cell index and updates the corresponding energy deposit.
+ *
+ * @param[in] hp Hit parameters object containing information about the hit.
+ * @param[in,out] hit Reference to a hit object that contains information about the hit.
+ * @param[in] args Simulation arguments object containing information about the simulation.
+ */
+// The above comment was written by an LLM. 
 __DEVICE__ void HitCellMapping_g_d(HitParams hp, Hit &hit, unsigned long /*t*/,
                                    Sim_Args args) {
 #endif
@@ -328,6 +356,30 @@ __DEVICE__ void HitCellMapping_g_d(HitParams hp, Hit &hit, unsigned long /*t*/,
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #ifdef USE_ALPAKA
+/**
+
+ * @brief Maps a hit to a cell with wiggling effect in the detector.
+ *
+ * This function takes into account the hit parameters, simulation arguments, and time
+ * to determine the correct cell mapping with an added wiggling effect.
+ *
+ * @param[in] acc        Accelerator object (only used when defined)
+ * @param[in] hp        Hit parameters
+ * @param[out] hit      Hit object to be modified
+ * @param[in] t         Time
+ * @param[in] args      Simulation arguments
+ 
+ 
+ 
+ * @brief Finds the highest power of 2 that is less than or equal to a given number.
+ *
+ * This function iterates through all possible powers of 2 to find the largest one
+ * that does not exceed the input number.
+ *
+ * @param[in] n     Input number
+ * @return The highest power of 2 less than or equal to n
+ */
+// The above comment was written by an LLM. 
 __DEVICE__ void HitCellMappingWiggle_g_d(Acc const& acc, HitParams hp, Hit &hit,
                                          unsigned long t, Sim_Args args) {
 #else

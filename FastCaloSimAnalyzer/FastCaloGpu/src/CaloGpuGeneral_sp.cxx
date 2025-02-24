@@ -21,6 +21,14 @@ using namespace CaloGpuGeneral_fnc;
 
 namespace CaloGpuGeneral_stdpar {
 
+/**
+
+ * @brief Tests the functionality of std::atomic<int> with multiple threads accessing it concurrently.
+ *
+ * This function creates an instance of std::atomic<int> initialized to 0 and increments it from multiple threads using a parallel loop.
+ * The results are printed to the console to verify that the increments were executed correctly.
+ */
+// The above comment was written by an LLM. 
 void test_atomicAdd_int() {
   std::cout << "---------- test_atomic<int>_add -------------\n";
   std::atomic<int> *ii = new std::atomic<int>{ 0 };
